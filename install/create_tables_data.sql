@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS  `_DATABASE_NAME_`.`ContactRoleProfile` (
   `contactID` int(10) unsigned NOT NULL,
   `contactRoleID` int(10) unsigned NOT NULL,
   PRIMARY KEY  (`contactID`,`contactRoleID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 
 CREATE TABLE IF NOT EXISTS  `_DATABASE_NAME_`.`Country` (
