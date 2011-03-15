@@ -180,6 +180,7 @@ if ($step == "3"){
 	$licensingModule = $_POST['licensingModule'];
 	$cancellationModule = $_POST['cancellationModule'];
 	$usageModule = $_POST['usageModule'];
+	$resourcesModule = $_POST['resourcesModule'];
 	$licensingDatabaseName = trim($_POST['licensingDatabaseName']);
 
 	$database_host = $_POST['database_host'];
@@ -232,6 +233,7 @@ if ($step == "3"){
 			$iniData[] = "licensingDatabaseName=" . $licensingDatabaseName;
 			$iniData[] = "cancellationModule=" . $cancellationModule;
 			$iniData[] = "usageModule=" . $usageModule;
+			$iniData[] = "resourcesModule=" . $resourcesModule;
 			$iniData[] = "remoteAuthVariableName=\"" . $remoteAuthVariableName . "\"";
 
 			$iniData[] = "\n[database]";
@@ -297,12 +299,12 @@ if ($step == "3"){
 		<li>Know your host, username and password for MySQL with permissions to create tables</li>
 		<li>It is recommended for security to have a different username and password for CORAL with only select, insert, update and delete privileges to CORAL schemas</li>
 		<li>The server variable to access your external auth system via PHP - for example $HTTP_SERVER_VARS['REMOTE_USER'] or $SERVER['AUTH_USER']</li>
-		<li>Know what other systems you will be using operating with - you will be asked whether you are using the Licensing Module.  If you are using the Licensing module you will need to provide the name of the database used for Licensing for inter-operability.  Recommended name is coral_licensing_prod.  For more information about inter-operability refer to the user guide or technical documentation.</li>
+		<li>Know what other systems you will be using operating with - you will be asked whether you are using the Licensing, Usage Statistics or Resources modules.  If you are using the Licensing module you will need to provide the name of the database used for Licensing for inter-operability.  Recommended name is coral_licensing_prod.  For more information about inter-operability refer to the user guide or technical documentation.</li>
 		<li>Verify that your /admin/ directory is writable by server during the installation process (chmod 777).  After installation you should chmod it back.</li>
 	</ul>
 
 
-	<form action="<?=$_SERVER['PHP_SELF']?>" method="post">
+	<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
 	<input type='hidden' name='step' value='1'>
 	<input type="submit" value="Continue" name="submit">
 	</form>
@@ -331,9 +333,9 @@ if ($step == "3"){
 
 	<h3>Getting system info and verifying php version</h3>
 	<ul>
-	<li>System: <?=$phpinfo['phpinfo']['System'];?></li>
-    <li>PHP version: <?=phpversion();?></li>
-    <li>Server API: <?=$phpinfo['phpinfo']['Server API'];?></li>
+	<li>System: <?php echo $phpinfo['phpinfo']['System'];?></li>
+    <li>PHP version: <?php echo phpversion();?></li>
+    <li>Server API: <?php echo $phpinfo['phpinfo']['Server API'];?></li>
 	</ul>
 
 	<br />
@@ -343,7 +345,7 @@ if ($step == "3"){
 
 	if (phpversion() >= 5){
 	?>
-		<form action="<?=$_SERVER['PHP_SELF']?>" method="post">
+		<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
 		<input type='hidden' name='step' value='2'>
 		<input type="submit" value="Continue" name="submit">
 		</form>
@@ -358,7 +360,7 @@ if ($step == "3"){
 	if (!$database_host) $database_host='localhost';
 	if (!$database_name) $database_name='coral_organizations_prod';
 	?>
-		<form method="post" action="<?=$_SERVER['PHP_SELF']?>">
+		<form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
 		<h3>MySQL info with permissions to create tables</h3>
 		<?php
 			if (count($errorMessage) > 0){
@@ -373,25 +375,25 @@ if ($step == "3"){
 			<tr>
 				<td>&nbsp;Database Host</td>
 				<td>
-					<input type="text" name="database_host" value='<?=$database_host?>' size="30">
+					<input type="text" name="database_host" value='<?php echo $database_host?>' size="30">
 				</td>
 			</tr>
 			<tr>
 				<td>&nbsp;Database Schema Name</td>
 				<td>
-					<input type="text" name="database_name" size="30" value="<?=$database_name?>">
+					<input type="text" name="database_name" size="30" value="<?php echo $database_name?>">
 				</td>
 			</tr>
 			<tr>
 				<td>&nbsp;Database Username</td>
 				<td>
-					<input type="text" name="database_username" size="30" value="<?=$database_username?>">
+					<input type="text" name="database_username" size="30" value="<?php echo $database_username?>">
 				</td>
 			</tr>
 			<tr>
 				<td>&nbsp;Database Password</td>
 				<td>
-					<input type="text" name="database_password" size="30" value="<?=$database_password?>">
+					<input type="text" name="database_password" size="30" value="<?php echo $database_password?>">
 				</td>
 			</tr>
 			<tr>
@@ -414,7 +416,7 @@ if ($step == "3"){
 } else if ($step == '3') {
 
 	?>
-		<form method="post" action="<?=$_SERVER['PHP_SELF']?>">
+		<form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
 		<h3>MySQL user for CORAL web application - with select, insert, update, delete privileges to CORAL schemas</h3>
 		*It's recommended but not required that this user is different than the one used on the prior step
 		<?php
@@ -425,21 +427,21 @@ if ($step == "3"){
 				echo "</ul></span>";
 			}
 		?>
-		<input type="hidden" name="database_host" value='<?=$database_host?>'>
-		<input type="hidden" name="database_name" value="<?=$database_name?>">
+		<input type="hidden" name="database_host" value='<?php echo $database_host?>'>
+		<input type="hidden" name="database_name" value="<?php echo $database_name?>">
 
 		<table width="100%" border="0" cellspacing="0" cellpadding="2">
 		<tr>
 			<tr>
 				<td>&nbsp;Database Username</td>
 				<td>
-					<input type="text" name="database_username" size="30" value="<?=$database_username?>">
+					<input type="text" name="database_username" size="30" value="<?php echo $database_username?>">
 				</td>
 			</tr>
 			<tr>
 				<td>&nbsp;Database Password</td>
 				<td>
-					<input type="text" name="database_password" size="30" value="<?=$database_password?>">
+					<input type="text" name="database_password" size="30" value="<?php echo $database_password?>">
 				</td>
 			</tr>
 
@@ -449,7 +451,7 @@ if ($step == "3"){
 			<tr>
 				<td>&nbsp;Your Login ID</td>
 				<td>
-					<input type="text" name="admin_login" size="30" value="<?=$admin_login?>">
+					<input type="text" name="admin_login" size="30" value="<?php echo $admin_login?>">
 				</td>
 			</tr>
 			<tr>
@@ -474,8 +476,9 @@ if ($step == "3"){
 	if ($_POST['licensingModule']) $licensingChecked = "checked";
 	if ($_POST['cancellationModule']) $cancellationChecked = "checked";
 	if ($_POST['usageModule']) $usageChecked = "checked";
+	if ($_POST['resourcesModule']) $resourcesChecked = "checked";
 	?>
-		<form method="post" action="<?=$_SERVER['PHP_SELF']?>">
+		<form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
 		<h3>Inter-operability and other config settings</h3>
 		<?php
 			if (count($errorMessage) > 0){
@@ -485,41 +488,47 @@ if ($step == "3"){
 				echo "</ul></span>";
 			}
 		?>
-		<input type="hidden" name="database_host" value='<?=$database_host?>'>
-		<input type="hidden" name="database_name" value="<?=$database_name?>">
-		<input type="hidden" name="database_username" value='<?=$database_username?>'>
-		<input type="hidden" name="database_password" value="<?=$database_password?>">
+		<input type="hidden" name="database_host" value='<?php echo $database_host?>'>
+		<input type="hidden" name="database_name" value="<?php echo $database_name?>">
+		<input type="hidden" name="database_username" value='<?php echo $database_username?>'>
+		<input type="hidden" name="database_password" value="<?php echo $database_password?>">
 
 		<table width="100%" border="0" cellspacing="0" cellpadding="2">
 		<tr>
 			<tr>
+				<td>&nbsp;Are you using resources module?</td>
+				<td>
+					<input type="checkbox" name="resourcesModule" value="Y" <?php echo $resourcesChecked?>>
+				</td>
+			</tr>
+			<tr>
 				<td>&nbsp;Are you using licensing module?</td>
 				<td>
-					<input type="checkbox" name="licensingModule" value="Y" <?=$licensingChecked?>>
+					<input type="checkbox" name="licensingModule" value="Y" <?php echo $licensingChecked?>>
 				</td>
 			</tr>
 			<tr>
 				<td>&nbsp;If so, enter licensing database schema name</td>
 				<td>
-					<input type="text" name="licensingDatabaseName" size="30" value="<?=$licensingDatabaseName?>">
+					<input type="text" name="licensingDatabaseName" size="30" value="<?php echo $licensingDatabaseName?>">
 				</td>
 			</tr>
 			<tr>
 				<td>&nbsp;Are you using cancellation module?</td>
 				<td>
-					<input type="checkbox" name="cancellationModule" value="Y" <?=$cancellationChecked?>>
+					<input type="checkbox" name="cancellationModule" value="Y" <?php echo $cancellationChecked?>>
 				</td>
 			</tr>
 			<tr>
 				<td>&nbsp;Are you using usage module?</td>
 				<td>
-					<input type="checkbox" name="usageModule" value="Y" <?=$usageChecked?>>
+					<input type="checkbox" name="usageModule" value="Y" <?php echo $usageChecked?>>
 				</td>
 			</tr>
 			<tr>
 				<td>&nbsp;Remote Auth Variable Name</td>
 				<td>
-					<input type="text" name="remoteAuthVariableName" size="30" value="<?=$remoteAuthVariableName?>">
+					<input type="text" name="remoteAuthVariableName" size="30" value="<?php echo $remoteAuthVariableName?>">
 				</td>
 			</tr>
 			<tr>
@@ -528,31 +537,31 @@ if ($step == "3"){
 			<tr>
 				<td>&nbsp;LDAP Host</td>
 				<td>
-					<input type="text" name="ldap_host" size="30" value="<?=$ldap_host?>">
+					<input type="text" name="ldap_host" size="30" value="<?php echo $ldap_host?>">
 				</td>
 			</tr>
 			<tr>
 				<td>&nbsp;Search Key</td>
 				<td>
-					<input type="text" name="search_key" size="30" value="<?=$search_key?>">
+					<input type="text" name="search_key" size="30" value="<?php echo $search_key?>">
 				</td>
 			</tr>
 			<tr>
 				<td>&nbsp;Base DSN</td>
 				<td>
-					<input type="text" name="base_dn" size="30" value="<?=$base_dn?>">
+					<input type="text" name="base_dn" size="30" value="<?php echo $base_dn?>">
 				</td>
 			</tr>
 			<tr>
 				<td>&nbsp;Name of First Name Field</td>
 				<td>
-					<input type="text" name="fname_field" size="30" value="<?=$fname_field?>">
+					<input type="text" name="fname_field" size="30" value="<?php echo $fname_field?>">
 				</td>
 			</tr>
 			<tr>
 				<td>&nbsp;Name of Last Name Field</td>
 				<td>
-					<input type="text" name="lname_field" size="30" value="<?=$lname_field?>">
+					<input type="text" name="lname_field" size="30" value="<?php echo $lname_field?>">
 				</td>
 			</tr>
 

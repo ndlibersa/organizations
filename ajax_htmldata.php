@@ -2,7 +2,7 @@
 
 /*
 **************************************************************************************************************************
-** CORAL Organizations Module v. 1.0
+** CORAL Organizations Module v. 1.1
 **
 ** Copyright (c) 2010 University of Notre Dame
 **
@@ -31,6 +31,16 @@ switch ($_GET['action']) {
 
 		$createUser = new User(new NamedArguments(array('primaryKey' => $organization->createLoginID)));
 		$updateUser = new User(new NamedArguments(array('primaryKey' => $organization->updateLoginID)));
+
+		//fix company url in case http is missing
+		if ($organization->companyURL){
+			if (strpos(strtolower($organization->companyURL), 'http:') === false){
+				$companyURL = "http://" . $organization->companyURL;
+			}else{
+				$companyURL = $organization->companyURL;
+			}
+
+		}
 
 		//get parent organizations
 		$sanitizedInstance = array();
@@ -111,7 +121,7 @@ switch ($_GET['action']) {
 		if ($organization->companyURL){ ?>
 			<tr>
 			<td style='vertical-align:top;text-align:right;width:140px;'>Company URL:</td>
-			<td style='width:320px;'><b><a href='<?php echo $organization->companyURL; ?>' target='_blank'><?php echo $organization->companyURL; ?></a></b></td>
+			<td style='width:320px;'><b><a href='<?php echo $companyURL; ?>' target='_blank'><?php echo $organization->companyURL; ?></a></b></td>
 			</tr>
 		<?php
 		}
@@ -302,20 +312,15 @@ switch ($_GET['action']) {
 				<th>
 				<?php
 
-					if ($contact['name']){
-						echo $contact['name'] . "&nbsp;&nbsp;";
-						if ($user->canEdit()){
-							echo "<a href='ajax_forms.php?action=getContactForm&height=433&width=345&modal=true&type=named&organizationID=" . $organizationID . "&contactID=" . $contact['contactID'] . "' class='thickbox'>edit</a>";
-							echo "&nbsp;&nbsp;<a href='javascript:removeContact(" . $contact['contactID'] . ")'>remove</a>";
-						}
-					}else{
-						if ($user->canEdit()){
-							echo "<a href='ajax_forms.php?action=getContactForm&height=389&width=345&modal=true&type=general&organizationID=" . $organizationID . "&contactID=" . $contact['contactID'] . "' class='thickbox'>edit</a>";
-							echo "&nbsp;&nbsp;<a href='javascript:removeContact(" . $contact['contactID'] . ")'>remove</a>";
-						}else{
-							echo "&nbsp;";
-						}
-					}
+				if ($contact['name']){
+					echo $contact['name'] . "&nbsp;&nbsp;";
+				}
+
+				if ($user->canEdit()){
+					echo "<a href='ajax_forms.php?action=getContactForm&height=463&width=345&modal=true&organizationID=" . $organizationID . "&contactID=" . $contact['contactID'] . "' class='thickbox'>edit</a>";
+					echo "&nbsp;&nbsp;<a href='javascript:removeContact(" . $contact['contactID'] . ")'>remove</a>";
+				}
+
 				?>
 				</th>
 				</tr>
@@ -336,20 +341,11 @@ switch ($_GET['action']) {
 				<?php
 				}
 
-				if (($contact['state']) || ($contact['country'])){ ?>
-					<tr>
-					<td style='vertical-align:top;text-align:right'>Location:</td>
-					<td><?php
-						if (!($contact['state'])) {
-							echo $contact['country'];
-						}else if (!($contact['country'])) {
-							echo $contact['state'];
-						}else{
-							echo $contact['state'] . ", " . $contact['country'];
-						}
-						?>
-					</td>
-					</tr>
+				if ($contact['addressText']) { ?>
+				<tr>
+				<td style='vertical-align:top;text-align:right'>Address:</td>
+				<td><?php echo nl2br($contact['addressText']); ?></td>
+				</tr>
 				<?php
 				}
 
@@ -560,6 +556,8 @@ switch ($_GET['action']) {
  			array_push($issueLogArray, $sanitizedInstance);
 		}
 
+		$charsToRemove = array("*", "_");
+
 		if (count($issueLogArray) > 0){
 		?>
 		<table class='verticalFormTable' style='width:460px;'>
@@ -580,11 +578,11 @@ switch ($_GET['action']) {
 			}
 			?>
 			<tr>
-			<td style='width:100px;'><?php echo date("m/d/Y", strtotime($issueLog['updateDate'])); ?><br />by <i><?php echo $issueLog['updateUser']; ?></i></td>
+			<td style='width:80px;'><?php echo date("m/d/Y", strtotime($issueLog['updateDate'])); ?><br />by <i><?php echo $issueLog['updateUser']; ?></i></td>
 			<td><?php echo $issueDate ?></td>
-			<td><?php echo nl2br($issueLog['noteText']); ?></td>
+			<td style='width:360px;'><?php echo nl2br(str_replace($charsToRemove, "", $issueLog['noteText'])); ?></td>
 			<?php if ($user->canEdit()){ ?>
-				<td><a href='ajax_forms.php?action=getIssueLogForm&height=166&width=265&modal=true&organizationID=<?php echo $organizationID; ?>&issueLogID=<?php echo $issueLog['issueLogID']; ?>' class='thickbox'>edit</a>&nbsp;&nbsp;<a href='javascript:removeIssueLog(<?php echo $issueLog['issueLogID']; ?>)'>remove</a></td>
+				<td><a href='ajax_forms.php?action=getIssueLogForm&height=166&width=265&modal=true&organizationID=<?php echo $organizationID; ?>&issueLogID=<?php echo $issueLog['issueLogID']; ?>' class='thickbox'>edit</a><br /><a href='javascript:removeIssueLog(<?php echo $issueLog['issueLogID']; ?>)'>remove</a></td>
 			<?php } ?>
 			</tr>
 		<?php } ?>
@@ -683,7 +681,7 @@ switch ($_GET['action']) {
 		$totalRecords = count($totalOrgObj->search($whereAdd, $orderBy, ""));
 
 		//reset pagestart to 1 - happens when a new search is run but it kept the old page start
-		if ($totalRecords <= $pageStart){
+		if ($totalRecords < $pageStart){
 			$pageStart=1;
 		}
 
@@ -708,6 +706,7 @@ switch ($_GET['action']) {
 					echo "<a href='javascript:setPageStart(1);' class='smallLink'><<</a>&nbsp;";
 				}
 
+				//don't want to print out too many page selectors!!
 				$maxDisplay=41;
 				if ((($totalRecords/$numberOfRecords)+1) < $maxDisplay){
 					$maxDisplay = ($totalRecords/$numberOfRecords)+1;

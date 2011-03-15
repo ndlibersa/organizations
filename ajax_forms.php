@@ -2,7 +2,7 @@
 
 /*
 **************************************************************************************************************************
-** CORAL Organizations Module v. 1.0
+** CORAL Organizations Module v. 1.1
 **
 ** Copyright (c) 2010 University of Notre Dame
 **
@@ -99,7 +99,7 @@ switch ($_GET['action']) {
 
 		<tr>
 		<td style='vertical-align:top;text-align:right;'><label for='companyURL'><b>Company URL:</b></label></td>
-		<td><input type='text' id='companyURL' name='companyURL' value = '<?php if (!$organizationID) { echo "http://"; } else { echo $organization->companyURL; } ?>' style='width:220px' /><br /><a href='javascript:void(0);' id='openOrganizationURL' name='openOrganizationURL' class='smallLink'>test link</a>
+		<td><input type='text' id='companyURL' name='companyURL' value = '<?php if (!$organizationID) { echo "http://"; } else { echo $organization->companyURL; } ?>' style='width:220px' />
 		</td>
 		</tr>
 
@@ -290,7 +290,6 @@ switch ($_GET['action']) {
 		<form id='contactForm'>
 		<input type='hidden' name='editOrganizationID' id='editOrganizationID' value='<?php echo $organizationID; ?>'>
 		<input type='hidden' name='editContactID' id='editContactID' value='<?php echo $contactID; ?>'>
-		<input type='hidden' name='contactType' id='contactType' value='<?php echo $_GET['type']; ?>'>
 
 		<table class="thickboxTable" style="background-image:url('images/title.gif');background-repeat:no-repeat;width:340px;">
 		<tr>
@@ -299,7 +298,6 @@ switch ($_GET['action']) {
 		</td>
 		</tr>
 
-		<?php if ($_GET['type'] == 'named') { ?>
 		<tr>
 		<td style='text-align:right'><label for='contactName'><b>Name:</b></label></td>
 		<td>
@@ -313,7 +311,6 @@ switch ($_GET['action']) {
 		<input type='text' id='contactTitle' name='contactTitle' value = '<?php echo $contact->title; ?>' style='width:150px' />
 		</td>
 		</tr>
-		<?php } ?>
 
 		<tr>
 		<td style='text-align:right'><label for='phoneNumber'><b>Phone:</b></label></td>
@@ -352,40 +349,10 @@ switch ($_GET['action']) {
 
 
 		<tr>
-		<td style='text-align:right'><label for='state'><b>State:</b></label></td>
-		<td>
-		<select name='state' id='state' style='width:155px'>
-		<option value=''></option>
-		<?php
-		foreach ($stateArray as $state){
-			if ((trim(strval($state['state'])) == trim(strval($contact->state)))){
-				echo "<option value='" . $state['state'] . "' selected>" . $state['state'] . "</option>\n";
-			}else{
-				echo "<option value='" . $state['state'] . "'>" . $state['state'] . "</option>\n";
-			}
-		}
-		?>
-		</select>
-		</td>
+		<td style='vertical-align:top;text-align:right'><label for='addressText'><b>Address:</b></label></td>
+		<td><textarea rows='3' id='addressText' name='addressText' style='width:150px;'><?php echo $contact->addressText; ?></textarea></td>
 		</tr>
 
-		<tr>
-		<td style='text-align:right'><label for='country'><b>Country:</b></label></td>
-		<td>
-		<select name='country' id='country' style='width:155px'>
-		<option value=''></option>
-		<?php
-		foreach ($countryArray as $country){
-			if ((trim(strval($country['country'])) == trim(strval($contact->country)))){
-				echo "<option value='" . $country['country'] . "' selected>" . $country['country'] . "</option>\n";
-			}else{
-				echo "<option value='" . $country['country'] . "'>" . $country['country'] . "</option>\n";
-			}
-		}
-		?>
-		</select>
-		</td>
-		</tr>
 
 
 		<tr>
@@ -428,7 +395,6 @@ switch ($_GET['action']) {
 		<tr>
 		<td style='vertical-align:top;text-align:right'><label for='noteText'><b>Notes:</b></label></td>
 		<td><textarea cols='36' rows='6' id='noteText' name='noteText' style='width:250px;'><?php echo $contact->noteText; ?></textarea></td>
-		</td>
 		</tr>
 
 		<tr style="vertical-align:middle;">

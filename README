@@ -1,11 +1,10 @@
 **************************
 Installation
-Copy this entire directory to your web server under a directory named '/coral/organizations/', then point your web browser to:
+After copying this directory to your web server, point your web browser to:
 http://your_server/coral/organizations/install/
 and follow instructions
 
 For the manual install, refer to the Technical Documentation available on http://erm.library.nd.edu
-
 
 **************************
 License / Copyright notices

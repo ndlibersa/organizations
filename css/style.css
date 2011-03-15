@@ -41,7 +41,7 @@ width:100%;
 
 a {color:#3D545D;}
 a:active {color:#94a9be;}
-a:focus {color:#94a9be; outline: none;}
+a:focus {color:#94a9be; outline: none; -moz-outline-style: none;}
 
 a.smallLink {font-size:85%; }
 

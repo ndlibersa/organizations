@@ -2,7 +2,7 @@
 
 /*
 **************************************************************************************************************************
-** CORAL Organizations Module v. 1.0
+** CORAL Organizations Module v. 1.1
 **
 ** Copyright (c) 2010 University of Notre Dame
 **
@@ -138,10 +138,9 @@ switch ($_GET['action']) {
 
 		$contact->lastUpdateDate		= date( 'Y-m-d H:i:s' );
 		$contact->organizationID 		= $_POST['organizationID'];
-		if ($_POST['name'] != "undefined") $contact->name = $_POST['name']; else $contact->name = '';
-		if ($_POST['title'] != "undefined") $contact->title = $_POST['title']; else $contact->title = '';
-		$contact->state					= $_POST['state'];
-		$contact->country				= $_POST['country'];
+		$contact->name 					= $_POST['name'];
+		$contact->title 				= $_POST['title'];
+		$contact->addressText			= $_POST['addressText'];
 		$contact->phoneNumber			= $_POST['phoneNumber'];
 		$contact->altPhoneNumber		= $_POST['altPhoneNumber'];
 		$contact->faxNumber				= $_POST['faxNumber'];

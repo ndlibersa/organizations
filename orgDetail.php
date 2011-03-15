@@ -2,7 +2,7 @@
 
 /*
 **************************************************************************************************************************
-** CORAL Organizations Module v. 1.0
+** CORAL Organizations Module v. 1.1
 **
 ** Copyright (c) 2010 University of Notre Dame
 **
@@ -151,8 +151,7 @@ if ($organization->name){
 						<div id='div_archivedContactDetails'></div>
 						<?php if ($user->canEdit()){ ?>
 						<br />
-						<a href='ajax_forms.php?action=getContactForm&height=429&width=345&modal=true&type=named&organizationID=<?php echo $organizationID; ?>' class='thickbox' id='newAlias'>add named contact</a><br />
-						<a href='ajax_forms.php?action=getContactForm&height=385&width=345&modal=true&type=general&organizationID=<?php echo $organizationID; ?>' class='thickbox' id='newAlias'>add unnamed contact</a>
+						<a href='ajax_forms.php?action=getContactForm&height=463&width=345&modal=true&type=named&organizationID=<?php echo $organizationID; ?>' class='thickbox'>add contact</a><br />
 						<?php } ?>
 
 					</td>
@@ -162,8 +161,11 @@ if ($organization->name){
 		</div>
 
 
-
+		<?php if ((isset($_GET['showTab'])) && ($_GET['showTab'] == 'accounts')){ ?>
+		<div style="width: 577px;" id ='div_account'>
+		<?php } else { ?>
 		<div style="display:none;width: 577px;" id ='div_account'>
+		<?php } ?>
 			<table cellpadding="0" cellspacing="0" style="width: 100%; table-layout: fixed;">
 				<tr>
 					<td class="sidemenu">
