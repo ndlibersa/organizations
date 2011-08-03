@@ -79,8 +79,8 @@ switch ($_GET['action']) {
 			<td>
 			<?php
 			foreach ($parentOrganizationArray as $parentOrganization){
-				echo "<input type='text' id='parentOrganization' name='parentOrganization'  value = '" . $parentOrganization['name'] . "' style='width:220px;' />";
-				echo "<input type='hidden' id='parentOrganizationID' name='parentOrganizationID' value='" . $parentOrganization['organizationID'] . "'>";
+				echo "<input type='text' id='parentOrganization' name='parentOrganization'  value = \"" . $parentOrganization['name'] . "\" style='width:220px;' />";
+				echo "<input type='hidden' id='parentOrganizationID' name='parentOrganizationID' value=\"" . $parentOrganization['organizationID'] . "\">";
 			}
 			?>
 			</td>
@@ -163,7 +163,7 @@ switch ($_GET['action']) {
 		</form>
 		</div>
 
-		<script type="text/javascript" src="js/forms/organizationSubmitForm.js"></script>
+		<script type="text/javascript" src="js/forms/organizationSubmitForm.js?random=<?php echo rand(); ?>"></script>
 
 		<?php
 
@@ -218,7 +218,7 @@ switch ($_GET['action']) {
 		<tr>
 		<td><label for='aliasName'><b>Name</b></label></td>
 		<td>
-		<input type='text' id='aliasName' name='aliasName' value = '<?php echo $alias->name; ?>' style='width:195px' /><span id='span_error_aliasName'</span>
+		<input type='text' id='aliasName' name='aliasName' value = "<?php echo $alias->name; ?>" style='width:195px' /><span id='span_error_aliasName'</span>
 		</td>
 		</tr>
 
@@ -241,7 +241,7 @@ switch ($_GET['action']) {
 		</form>
 		</div>
 
-		<script type="text/javascript" src="js/forms/aliasSubmitForm.js"></script>
+		<script type="text/javascript" src="js/forms/aliasSubmitForm.js?random=<?php echo rand(); ?>"></script>
 
 		<?php
 
@@ -291,7 +291,7 @@ switch ($_GET['action']) {
 		<tr>
 		<td style='text-align:right'><label for='contactName'><b>Name:</b></label></td>
 		<td>
-		<input type='text' id='contactName' name='contactName' value = '<?php echo $contact->name; ?>' style='width:150px' /><span id='span_error_contactName' style='color:red'>
+		<input type='text' id='contactName' name='contactName' value = "<?php echo $contact->name; ?>" style='width:150px' /><span id='span_error_contactName' style='color:red'>
 		</td>
 		</tr>
 
@@ -405,7 +405,7 @@ switch ($_GET['action']) {
 		</div>
 
 
-		<script type="text/javascript" src="js/forms/contactSubmitForm.js"></script>
+		<script type="text/javascript" src="js/forms/contactSubmitForm.js?random=<?php echo rand(); ?>"></script>
 
 		<?php
 
@@ -510,7 +510,7 @@ switch ($_GET['action']) {
 		</div>
 
 
-		<script type="text/javascript" src="js/forms/externalLoginSubmitForm.js"></script>
+		<script type="text/javascript" src="js/forms/externalLoginSubmitForm.js?random=<?php echo rand(); ?>"></script>
 
 		<?php
 
@@ -525,7 +525,7 @@ switch ($_GET['action']) {
     	$issueLog = new IssueLog(new NamedArguments(array('primaryKey' => $issueLogID)));
 
 		if (($issueLog->issueDate != '') && ($issueLog->issueDate != "0000-00-00")) {
-			$issueDate=date("m/d/Y", strtotime($issueLog->issueDate));
+			$issueDate=format_date($issueLog->issueDate);
 		}else{
 			$issueDate='';
 		}
@@ -573,7 +573,7 @@ switch ($_GET['action']) {
 		</form>
 		</div>
 
-		<script type="text/javascript" src="js/forms/issueLogSubmitForm.js"></script>
+		<script type="text/javascript" src="js/forms/issueLogSubmitForm.js?random=<?php echo rand(); ?>"></script>
 
 		<?php
 

@@ -160,7 +160,7 @@ switch ($_GET['action']) {
 		<br /><br />
 		<i>Created:
 		<?php
-			echo date("m/d/Y", strtotime($organization->createDate));
+			echo format_date($organization->createDate);
 			//since organizations can be created by other modules the user may or may not be set and may or may not have a user entry in this db
 			if ($createUser->primaryKey){
 				echo " by ";
@@ -177,7 +177,7 @@ switch ($_GET['action']) {
 
 		<?php
 		if (($organization->updateDate) && ($organization->updateDate != '0000-00-00')){
-			echo "<i>Last Update: " . date("m/d/Y", strtotime($organization->updateDate)); ?> by <?php echo $updateUser->firstName . " " . $updateUser->lastName . "</i>";
+			echo "<i>Last Update: " . format_date($organization->updateDate); ?> by <?php echo $updateUser->firstName . " " . $updateUser->lastName . "</i>";
 		}
 
         break;
@@ -328,7 +328,7 @@ switch ($_GET['action']) {
 				<?php if (($contact['archiveDate'] != '0000-00-00') && ($contact['archiveDate'])) { ?>
 				<tr>
 				<td style='vertical-align:top;text-align:right;background-color:#ebebeb'>No longer valid:</td>
-				<td style='background-color:#ebebeb'><i><?php echo date("m/d/Y", strtotime($contact['archiveDate'])); ?></i></td>
+				<td style='background-color:#ebebeb'><i><?php echo format_date($contact['archiveDate']); ?></i></td>
 				</tr>
 				<?php
 				}
@@ -392,7 +392,7 @@ switch ($_GET['action']) {
 				if ($contact['lastUpdateDate']) { ?>
 				<tr>
 				<td style='vertical-align:top;text-align:right'>Last Updated:</td>
-				<td><i><?php echo date("m/d/Y", strtotime($contact['lastUpdateDate'])); ?></i></td>
+				<td><i><?php echo format_date($contact['lastUpdateDate']); ?></i></td>
 				</tr>
 				<?php
 				}
@@ -494,7 +494,7 @@ switch ($_GET['action']) {
 				if ($externalLogin['updateDate']) { ?>
 				<tr>
 				<td style='vertical-align:top;text-align:right'>Last Updated:</td>
-				<td><i><?php echo date("m/d/Y", strtotime($externalLogin['updateDate'])); ?></i></td>
+				<td><i><?php echo format_date($externalLogin['updateDate']); ?></i></td>
 				</tr>
 				<?php
 				}
@@ -572,13 +572,13 @@ switch ($_GET['action']) {
 
 		<?php foreach ($issueLogArray as $issueLog){
 			if (($issueLog['issueDate'] != '') && ($issueLog['issueDate'] != "0000-00-00")) {
-				$issueDate=date("m/d/Y", strtotime($issueLog['issueDate']));
+				$issueDate= format_date($issueLog['issueDate']);
 			}else{
 				$issueDate='';
 			}
 			?>
 			<tr>
-			<td style='width:80px;'><?php echo date("m/d/Y", strtotime($issueLog['updateDate'])); ?><br />by <i><?php echo $issueLog['updateUser']; ?></i></td>
+			<td style='width:80px;'><?php echo format_date($issueLog['updateDate']); ?><br />by <i><?php echo $issueLog['updateUser']; ?></i></td>
 			<td><?php echo $issueDate ?></td>
 			<td style='width:360px;'><?php echo nl2br(str_replace($charsToRemove, "", $issueLog['noteText'])); ?></td>
 			<?php if ($user->canEdit()){ ?>
@@ -670,7 +670,7 @@ switch ($_GET['action']) {
 		//get where statements together (and escape single quotes)
 		if ($_GET['organizationName']) $whereAdd[] = "(UPPER(O.name) LIKE UPPER('%" . str_replace("'","''",$_GET['organizationName']) . "%') OR UPPER(Alias.name) LIKE UPPER('%" . str_replace("'","''",$_GET['organizationName']) . "%'))";
 		if ($_GET['organizationRoleID']) $whereAdd[] = "O.organizationID in (select OrganizationRoleProfile.organizationID from OrganizationRoleProfile WHERE OrganizationRoleProfile.organizationRoleID = '" . $_GET['organizationRoleID'] . "')";
-		if ($_GET['contactName']) $whereAdd[] = "UPPER(C.name) LIKE UPPER('%" . str_replace("'","\'",$_GET['contactName']) . "%')";
+		if ($_GET['contactName']) $whereAdd[] = "UPPER(C.name) LIKE UPPER('%" . str_replace("'","''",$_GET['contactName']) . "%')";
 		if ($_GET['startWith']) $whereAdd[] = "TRIM(LEADING 'THE ' FROM UPPER(O.name)) LIKE UPPER('" . $_GET['startWith'] . "%')";
 
 		$orderBy = $_GET['orderBy'];

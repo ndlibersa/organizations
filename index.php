@@ -56,7 +56,7 @@ $_SESSION['ref_script']=$currentPage;
 	<tr>
 	<td class='searchRow'><label for='searchName'><b>Name (contains)</b></label>
 	<br />
-	<input type='text' name='searchOrganizationName' id='searchOrganizationName' style='width:145px' value='<?php if ($reset != 'Y') echo $_SESSION['org_organizationName']; ?>' /><br />
+	<input type='text' name='searchOrganizationName' id='searchOrganizationName' style='width:145px' value="<?php if ($reset != 'Y') echo $_SESSION['org_organizationName']; ?>" /><br />
 	<div id='div_searchName' style='<?php if ((!$_SESSION['org_organizationName']) || ($reset == 'Y')) echo "display:none;"; ?>margin-left:123px;'><input type='button' name='btn_searchOrganizationName' value='go!' class='searchButton' /></div>
 	</td>
 	</tr>
@@ -90,7 +90,7 @@ $_SESSION['ref_script']=$currentPage;
 	<tr>
 	<td class='searchRow'><label for='searchContact'><b>Contact Name (contains)</b></label>
 	<br />
-	<input type='text' name='searchContactName' id='searchContactName' style='width:145px' value='<?php if ($reset != 'Y') echo $_SESSION['org_contactName']; ?>' /><br />
+	<input type='text' name='searchContactName' id='searchContactName' style='width:145px' value="<?php if ($reset != 'Y') echo $_SESSION['org_contactName']; ?>" /><br />
 	<div id='div_searchContact' style='<?php if ((!$_SESSION['org_contactName']) || ($reset == 'Y')) echo "display:none;"; ?>margin-left:123px;'><input type='button' name='btn_searchContactName' value='go!' class='searchButton' /></div>
 	</td>
 	</tr>
