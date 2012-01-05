@@ -472,7 +472,7 @@ if ($step == "3"){
 <?php
 //fourth step - ask for other settings in configuration.ini
 } else if ($step == '4') {
-	if (!$remoteAuthVariableName) $remoteAuthVariableName = "HTTP_SERVER_VARS['REMOTE_USER']";
+	if (!$remoteAuthVariableName) $remoteAuthVariableName = "_SERVER['REMOTE_USER']";
 	if ($_POST['licensingModule']) $licensingChecked = "checked";
 	if ($_POST['cancellationModule']) $cancellationChecked = "checked";
 	if ($_POST['usageModule']) $usageChecked = "checked";
