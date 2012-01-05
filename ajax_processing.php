@@ -45,7 +45,7 @@ switch ($_GET['action']) {
 			$organization->updateDate			= '';
 		}
 
-		$organization->name = $_POST['name'];
+		$organization->name = trim($_POST['name']);
 		if ($_POST['companyURL'] != 'http://'){
 			$organization->companyURL = $_POST['companyURL'];
 		}else{
