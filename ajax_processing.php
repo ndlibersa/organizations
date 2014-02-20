@@ -378,7 +378,7 @@ switch ($_GET['action']) {
 
 		foreach ($organization->allAsArray() as $orgArray) {
 			if ((strtoupper($orgArray['name']) == strtoupper($name)) && ($orgArray['organizationID'] != $organizationID)) {
-				$exists++;
+				$exists = $orgArray['organizationID']; break;
 			}
 		}
 
