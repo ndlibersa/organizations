@@ -79,13 +79,15 @@ if ($organization->name){
         <div style="width: 303px; float:right; border: 1px solid #DAD5C9; padding:5px;">
             <h3>Helpful Links</h3>
             <?php
-            $org_roles = $organization->getOrganizationRoles;
-            usort($org_roles, function ($a, $b) { return strcmp($a->shortName, $b->shortName); });
+            //get all possible roles, sort by name, get associated resources
+            $org_role_obj = new OrganizationRole();
+            $org_roles = $org_role_obj->allAsArray();
+            usort($org_roles, function ($a, $b) { return strcmp($a["shortName"], $b["shortName"]); });
             foreach ($org_roles as $role) {
-                $resources = $organization->getResources($role->organizationRoleID);
+                $resources = $organization->getResources($role["organizationRoleID"]);
                 if (count($resources) > 0) {
                     ?>
-            <h4 style="margin-top:8px"><?php echo $role->shortName ?> of:</h4>
+            <h4 style="margin-top:8px"><?php echo $role["shortName"] ?> of:</h4>
             <div style="padding-left:10px;">
             <?php
             foreach ($resources as $resource) {
