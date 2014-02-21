@@ -333,6 +333,44 @@ class Organization extends DatabaseObject {
 	}
 
 
+	//returns array of resources
+	public function getResources($organizationRoleID = null){
+		$resourceArray = array();
+
+		//make sure we have the resourcesModule
+		$config = new Configuration;
+		if ($config->settings->resourcesModule != 'Y') {
+			return $resourceArray;
+		}
+
+		if (isset($organizationRoleID)) {
+			$whereOptions = " AND organizationRoleID = '$organizationRoleID' ";
+		} else {
+			$whereOptions = '';
+		}
+		$dbName = $config->settings->resourcesDatabaseName;
+		if ($dbName == '') {
+			return $resourceArray;
+		}
+		$query = "SELECT R.resourceID, R.titleText
+								FROM " . $dbName . ".ResourceOrganizationLink ROL
+								NATURAL JOIN " . $dbName .".Resource R
+								WHERE ROL.organizationID = '" . $this->organizationID . "' "
+								. $whereOptions . "
+								ORDER BY 2;";
+
+		$result = $this->db->processQuery($query, 'assoc');
+		//this is because processQuery has a bad habit of mixed return values
+		//TODO: change this, maybe, someday
+		if ($result['resourceID']) {
+			$result = array($result);
+		}
+
+		return $result;
+
+	}
+
+
 	//returns array based on search
 	public function search($whereAdd, $orderBy, $limit){
 

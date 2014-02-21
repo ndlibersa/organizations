@@ -94,6 +94,10 @@ class Utility {
 		return $this->getCORALURL() . "licensing/license.php?licenseID=";
 	}
 
+	//returns page URL for resource record
+	public function getResourceRecordURL(){
+		return $this->getCORALURL() . "resources/resource.php?resourceID=";
+	}
 
 	public function getLoginCookie(){
 
