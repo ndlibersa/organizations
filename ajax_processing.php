@@ -37,7 +37,6 @@ switch ($_GET['action']) {
 			//set up new organization
 			$organization = new Organization();
 
-			$organization->organizationID 		= '';
 			$organization->createLoginID 		= $loginID;
 			$organization->createDate			= date( 'Y-m-d H:i:s' );
 
@@ -107,7 +106,6 @@ switch ($_GET['action']) {
 		}else{
 			//set up new alias
 			$alias = new Alias();
-			$alias->aliasID = '';
 		}
 
 		$alias->aliasTypeID = $_POST['aliasTypeID'];
@@ -133,7 +131,6 @@ switch ($_GET['action']) {
 		}else{
 			//set up new contact
 			$contact = new Contact();
-			$contact->contactID	= '';
 		}
 
 		$contact->lastUpdateDate		= date( 'Y-m-d H:i:s' );
@@ -192,7 +189,6 @@ switch ($_GET['action']) {
 		}else{
 			//set up new external login
 			$externalLogin = new ExternalLogin();
-			$externalLogin->externalLoginID =  '';
 		}
 
 		$externalLogin->updateDate				= date( 'Y-m-d H:i:s' );
@@ -222,7 +218,6 @@ switch ($_GET['action']) {
 		}else{
 			//set up new external login
 			$issueLog = new IssueLog();
-			$issueLog->issueLogID = '';
 		}
 
 		if ($_POST['issueDate']){
