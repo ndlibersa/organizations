@@ -91,7 +91,12 @@ if ($organization->name){
             <div style="padding-left:10px;">
             <?php
             foreach ($resources as $resource) {
-                echo "<a href='" . $util->getResourceRecordURL() . $resource['resourceID'] . "' target='_BLANK'>" . $resource['titleText'] . "&nbsp;&nbsp;<img src='images/arrow-up-right.gif' alt='view resource' title='View " . $resource['titleText'] . "' style='vertical-align:top;'></a><br />";
+                $temp_style = "";
+                if ($resource['archived']) {
+                    echo "<span style='color:grey; font-size:80%;'>(archived) </span>";
+                    $temp_style = "style='color:#888888'";
+                }
+                echo "<a href='" . $util->getResourceRecordURL() . $resource['resourceID'] . "' target='_BLANK' $temp_style>" . $resource['titleText'] . "&nbsp;&nbsp;<img src='images/arrow-up-right.gif' alt='view resource' title='View " . $resource['titleText'] . "' style='vertical-align:top;'></a><br />";
             }
             ?>
             </div>
