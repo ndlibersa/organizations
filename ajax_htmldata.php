@@ -462,7 +462,7 @@ switch ($_GET['action']) {
 				<?php if ($externalLogin['loginURL']) { ?>
 				<tr>
 				<td style='vertical-align:top;text-align:right'>Login URL:</td>
-				<td><?php echo $externalLogin['loginURL']; ?></td>
+				<td><?php echo $externalLogin['loginURL']; ?>&nbsp;&nbsp;<a href='<?php echo $externalLogin['loginURL']; ?>' target='_blank'><img src='images/arrow-up-right.gif' alt='Visit Login URL' title='Visit Login URL' style='vertical-align:top;'></a></td>
 				</tr>
 				<?php
 				}
