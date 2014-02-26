@@ -180,6 +180,7 @@ if ($step == "3"){
 	$licensingModule = $_POST['licensingModule'];
 	$usageModule = $_POST['usageModule'];
 	$resourcesModule = $_POST['resourcesModule'];
+	$resourcesDatabaseName = $_POST['resourcesDatabaseName'];
 	$licensingDatabaseName = trim($_POST['licensingDatabaseName']);
 	$authModule = $_POST['authModule'];
 	$authDatabaseName = trim($_POST['authDatabaseName']);
@@ -265,6 +266,7 @@ if ($step == "3"){
 			$iniData[] = "authDatabaseName=" . $authDatabaseName;
 			$iniData[] = "usageModule=" . $usageModule;
 			$iniData[] = "resourcesModule=" . $resourcesModule;
+			$iniData[] = "resourcesDatabaseName=" . $resourcesDatabaseName;
 			$iniData[] = "remoteAuthVariableName=\"" . $remoteAuthVariableName . "\"";
 
 			$iniData[] = "\n[database]";
@@ -544,6 +546,12 @@ if ($step == "3"){
 				<td>&nbsp;Are you using the resources module?</td>
 				<td>
 					<input type="checkbox" name="resourcesModule" value="Y" <?php echo $resourcesChecked?>>
+				</td>
+			</tr>
+			<tr>
+				<td>&nbsp;If so, enter resources database schema name</td>
+				<td>
+					<input type="text" name="resourcesDatabaseName" size="30" value="<?php echo $resourcesDatabaseName?>">
 				</td>
 			</tr>
 			<tr>
