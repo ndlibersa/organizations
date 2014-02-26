@@ -79,9 +79,12 @@ if ($config->settings->authModule == 'Y'){
 		$remoteAuth=eval("return \$$theVarStem;");
 
 		//use the split in case the remote login is supplied as an email address
-		list ($loginID,$restofAddr) = explode("@", $remoteAuth);
-
-
+		if ( strpos($remoteAuth, "@") > 0 ) {
+			list ($loginID,$restofAddr) = explode("@", $remoteAuth);
+		}
+		else {
+			$loginID = $remoteAuth;
+		}
 
 		session_start();
 		$_SESSION['loginID'] = $loginID;
