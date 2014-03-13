@@ -174,7 +174,7 @@ function updateContacts(){
 	 type:       "GET",
 	 url:        "ajax_htmldata.php",
 	 cache:      false,
-	 data:       "action=getContactDetails&organizationID=" + $("#organizationID").val(),
+	 data:       "action=getContactDetails&organizationID=" + $("#organizationID").val() + "&archiveInd=0",
 	 success:    function(html) {
 		$("#div_contactDetails").html(html);
 		tb_reinit();

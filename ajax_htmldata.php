@@ -284,7 +284,6 @@ switch ($_GET['action']) {
  			$contactObjArray = $organization->getUnarchivedContacts();
  		}
 
- 		print var_dump($contactObjArray);
 
  		foreach ($contactObjArray as $contact) {
  			foreach (array_keys($contact->attributeNames) as $attributeName) {
