@@ -192,7 +192,7 @@ class Organization extends DatabaseObject {
 	//returns array of contact objects
 	public function getUnarchivedContacts(){
 
-		$query = "SELECT * FROM Contact WHERE (archiveDate = '0000-00-00' || archiveDate = '') AND organizationID = '" . $this->organizationID . "' order by name";
+		$query = "SELECT * FROM Contact WHERE (archiveDate = '0000-00-00' || archiveDate = '' || archiveDate is null) AND organizationID = '" . $this->organizationID . "' order by name";
 
 		$result = $this->db->processQuery($query, 'assoc');
 
