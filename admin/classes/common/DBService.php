@@ -46,7 +46,6 @@ class DBService extends Object {
 		$password = $this->config->database->password;
 		$this->db = mysql_connect($host, $username, $password);
 		$this->checkForError();
-		mysql_set_charset('utf8', $this->db);
 
 		$databaseName = $this->config->database->name;
 		mysql_select_db($databaseName, $this->db);
@@ -57,12 +56,7 @@ class DBService extends Object {
 		//mysql_close($this->db);
 	}
 
-	public function escapeString($value) {
-		return mysql_real_escape_string($value);
-	}
-
 	public function processQuery($sql, $type = NULL) {
-    	//echo $sql. "<br />";
 		$result = mysql_query($sql, $this->db);
 		$this->checkForError();
 		$data = array();
@@ -90,3 +84,4 @@ class DBService extends Object {
 }
 
 ?>
+
