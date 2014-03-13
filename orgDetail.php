@@ -74,6 +74,38 @@ if ($organization->name){
 		<input type='hidden' name='organizationID' id='organizationID' value='<?php echo $organizationID; ?>'>
 		<input type='hidden' name='numLicenses' id='numLicenses' value='<?php echo $numLicenses; ?>'>
 
+        <?php
+        if ($config->settings->resourcesModule == 'Y'){ ?>
+        <div style="width: 303px; float:right; border: 1px solid #DAD5C9; padding:5px;">
+            <h3>Helpful Links</h3>
+            <?php
+            //get all possible roles, sort by name, get associated resources
+            $org_role_obj = new OrganizationRole();
+            $org_roles = $org_role_obj->allAsArray();
+            usort($org_roles, function ($a, $b) { return strcmp($a["shortName"], $b["shortName"]); });
+            foreach ($org_roles as $role) {
+                $resources = $organization->getResources($role["organizationRoleID"]);
+                if (count($resources) > 0) {
+                    ?>
+            <h4 style="margin-top:8px"><?php echo $role["shortName"] ?> of:</h4>
+            <div style="padding-left:10px;">
+            <?php
+            foreach ($resources as $resource) {
+                $temp_style = "";
+                if ($resource['archived']) {
+                    echo "<span style='color:grey; font-size:80%;'>(archived) </span>";
+                    $temp_style = "style='color:#888888'";
+                }
+                echo "<a href='" . $util->getResourceRecordURL() . $resource['resourceID'] . "' target='_BLANK' $temp_style>" . $resource['titleText'] . "&nbsp;&nbsp;<img src='images/arrow-up-right.gif' alt='view resource' title='View " . $resource['titleText'] . "' style='vertical-align:top;'></a><br />";
+            }
+            ?>
+            </div>
+            <?php
+                }
+            }
+            ?>
+        </div>
+        <?php } ?>
 		<?php if (!isset($_GET['showTab'])){ ?>
 		<div style="width: 577px;" id ='div_organization'>
 		<?php } else { ?>

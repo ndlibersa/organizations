@@ -116,16 +116,16 @@ function submitContact(){
 	
  	if (contactRolesList == ''){
  	    $("#span_error_contactRole").html('Please choose at least one role.');
- 	    myReturn="1";
+ 	    myReturn=1;
  	} else {
  	    $("#span_error_contactRole").html('');
 	}
 
 	if ($("#contactType").val() == "named"){
- 		if (!validateRequired('contactName','<br />Name must be entered to continue.')) myReturn="1";	
+ 		if (!validateRequired('contactName','<br />Name must be entered to continue.')) myReturn=1;	
  	}
  
- 	if (myReturn == "1"){
+ 	if (myReturn == 1){
 		return false; 	
  	}else{
  		return true;

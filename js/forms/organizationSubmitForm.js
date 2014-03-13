@@ -26,7 +26,7 @@
 			 async:	     true,
 			 data:       "action=getExistingOrganizationName&name=" + $("#organizationName").val(),
 			 success:    function(exists) {
-				if ((exists == "0") || (exists == $("#editOrganizationID").val())){
+				if ((exists == 0) || (exists == $("#editOrganizationID").val())){
 					$("#span_errors").html("");
 					$("#submitOrganizationChanges").removeAttr("disabled");
 				}else{
@@ -106,10 +106,10 @@
  
  function validateForm (){
  	myReturn=0;
- 	if (!validateRequired('organizationName','<br />Name must be entered to continue.')) myReturn="1";
+ 	if (!validateRequired('organizationName','<br />Name must be entered to continue.')) myReturn=1;
  	
  
- 	if (myReturn == "1"){
+ 	if (myReturn == 1){
 		return false; 	
  	}else{
  		return true;

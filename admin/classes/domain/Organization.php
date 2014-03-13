@@ -333,6 +333,76 @@ class Organization extends DatabaseObject {
 	}
 
 
+	//returns array of resources
+	public function getResources($organizationRoleID = null){
+		$resourceArray = array();
+
+		//make sure we have the resourcesModule
+		$config = new Configuration;
+		if ($config->settings->resourcesModule != 'Y') {
+			return $resourceArray;
+		}
+
+		if (isset($organizationRoleID)) {
+			$whereOptions = " AND organizationRoleID = '$organizationRoleID' ";
+		} else {
+			$whereOptions = '';
+		}
+		$dbName = $config->settings->resourcesDatabaseName;
+		if ($dbName == '') {
+			return $resourceArray;
+		}
+		$query = "SELECT R.resourceID, R.titleText, R.statusID, CASE
+									WHEN UPPER(S.shortName) LIKE '%ARCHIVE%' THEN 1 ELSE 0 END as archived
+								FROM " . $dbName . ".ResourceOrganizationLink ROL
+								NATURAL JOIN " . $dbName .".Resource R
+								NATURAL JOIN " . $dbName .".Status S
+								WHERE ROL.organizationID = '" . $this->organizationID . "' "
+								. $whereOptions . "
+								ORDER BY 4,2;";
+
+		$result = $this->db->processQuery($query, 'assoc');
+		//this is because processQuery has a bad habit of mixed return values
+		//TODO: change this, maybe, someday
+		if ($result['resourceID']) {
+			$result = array($result);
+		}
+
+		return $result;
+
+	}
+
+
+	//returns array of statuses from resources database
+	public function getResourceStatuses(){
+		$statusArray = array();
+
+		//make sure we have the resourcesModule
+		$config = new Configuration;
+		if ($config->settings->resourcesModule != 'Y') {
+			return $statusArray;
+		}
+
+		$dbName = $config->settings->resourcesDatabaseName;
+		if ($dbName == '') {
+			return $statusArray;
+		}
+		$query = "SELECT S.statusID, S.shortName FROM " . $dbName . ".Status S;";
+
+		$result = $this->db->processQuery($query, 'assoc');
+		//this is because processQuery has a bad habit of mixed return values
+		//TODO: change this, maybe, someday
+		if ($result['statusID']) {
+			$result = array($result);
+		}
+		foreach ($result as $row) {
+			$ids_by_name[$row["shortName"]] = $row["statusID"];
+		}
+
+		return $ids_by_name;
+	}
+
+
 	//returns array based on search
 	public function search($whereAdd, $orderBy, $limit){
 

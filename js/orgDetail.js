@@ -26,10 +26,10 @@
  
 
 
-	viewAll="0";
+	viewAll=0;
 
 	 $(".showOrganization").click(function () {
-		if (viewAll == "0"){
+		if (viewAll == 0){
 			$('#div_organization').show();
 			$('#div_aliases').hide();
 			$('#div_contacts').hide();
@@ -42,7 +42,7 @@
 
 
 	 $(".showAliases").click(function () {
-		if (viewAll == "0"){
+		if (viewAll == 0){
 			$('#div_organization').hide();
 			$('#div_aliases').show();
 			$('#div_contacts').hide();
@@ -55,7 +55,7 @@
 	 });
 
 	  $(".showContacts").click(function () {
-		if (viewAll == "0"){
+		if (viewAll == 0){
 			$('#div_organization').hide();
 			$('#div_aliases').hide();
 			$('#div_contacts').show();
@@ -67,7 +67,7 @@
 	 });
 
 	  $(".showAccount").click(function () {
-		if (viewAll == "0"){
+		if (viewAll == 0){
 			$('#div_organization').hide();
 			$('#div_aliases').hide();
 			$('#div_contacts').hide();
@@ -79,7 +79,7 @@
 	 });
 
 	  $(".showIssues").click(function () {
-		if (viewAll == "0"){
+		if (viewAll == 0){
 			$('#div_organization').hide();
 			$('#div_aliases').hide();
 			$('#div_contacts').hide();
@@ -92,7 +92,7 @@
 
 
 	  $(".showLicenses").click(function () {
-		if (viewAll == "0"){
+		if (viewAll == 0){
 			$('#div_organization').hide();
 			$('#div_aliases').hide();
 			$('#div_contacts').hide();
@@ -265,7 +265,7 @@ function updateLicenses(){
 
    function removeOrganization(){
 
-	if (($("#numLicenses").val() == "0") || ($("#numLicenses").val() == "")){
+	if (($("#numLicenses").val() == 0) || ($("#numLicenses").val() == "")){
 
 	  if (confirm("Do you really want to delete this organization?") == true) {
 		  $.ajax({

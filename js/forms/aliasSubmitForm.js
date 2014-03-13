@@ -40,10 +40,10 @@
  
  function validateForm (){
  	myReturn=0;
- 	if (!validateRequired('aliasName','<br />Name must be entered to continue.')) myReturn="1";
+ 	if (!validateRequired('aliasName','<br />Name must be entered to continue.')) myReturn=1;
  	
  
- 	if (myReturn == "1"){
+ 	if (myReturn == 1){
 		return false; 	
  	}else{
  		return true;
