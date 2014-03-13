@@ -125,11 +125,9 @@ switch ($_GET['action']) {
     case 'submitContact':
 		//if this is an existing contact
 		if (isset($_POST['contactID'])) $contactID=$_POST['contactID']; else $contactID='';
-
+echo "wtf";
 
 		if ($contactID){
-
-			echo "here";
 			$contact = new Contact(new NamedArguments(array('primaryKey' => $contactID)));
 		}else{
 			//set up new contact

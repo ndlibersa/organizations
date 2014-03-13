@@ -127,10 +127,12 @@ class DatabaseObject extends DynamicObject {
 		if (isset($this->primaryKey)) {
 			// Update object
 			$query = "UPDATE `$this->tableName` SET $set WHERE `$this->primaryKeyName` = '$this->primaryKey'";
+			echo $query;
 			$this->db->processQuery($query);
 		} else {
 			// Insert object
 			$query = "INSERT INTO `$this->tableName` SET $set";
+			echo $query;
 			$this->primaryKey = $this->db->processQuery($query);
 		}
 	}
