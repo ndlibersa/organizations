@@ -134,7 +134,7 @@ echo "wtf";
 			$contact = new Contact();
 		}
 
-		$contact->lastUpdateDate		= date( 'Y-m-d H:i:s' );
+		$contact->lastUpdateDate		= date( 'Y-m-d' );
 		$contact->organizationID 		= $_POST['organizationID'];
 		$contact->name 					= $_POST['name'];
 		$contact->title 				= $_POST['title'];
@@ -146,7 +146,7 @@ echo "wtf";
 		$contact->noteText				= $_POST['noteText'];
 
 		if (((!$contact->archiveDate) || ($contact->archiveDate == '0000-00-00')) && ($_POST['archiveInd'] == "1")){
-			$contact->archiveDate = date( 'Y-m-d H:i:s' );
+			$contact->archiveDate = date( 'Y-m-d' );
 		}else if ($_POST['archiveInd'] == "0"){
 			$contact->archiveDate = '';
 		}
