@@ -27,7 +27,7 @@ $(document).ready(function(){
 			 cache:      false,
 			 data:       { issueLogID: $("#editIssueLogID").val(), organizationID: $("#editOrganizationID").val(), issueDate: $("#issueDate").val(), noteText: $("#noteText").val() },
 			 success:    function(html) {
-				if (html){
+				if (html.length > 1){
 					$("#span_errors").html(html);
 					$("#submitIssueLogForm").removeAttr("disabled");
 				}else{

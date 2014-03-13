@@ -140,7 +140,7 @@ function submitOrganization(){
 					return false;	
 				//if this was an edit for an existing organization
 				}else{
-					if (html){
+					if (html.length > 1){
 						$("#span_errors").html(html);
 						$("#submitOrganizationChanges").removeAttr("disabled");
 					}else{

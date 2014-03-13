@@ -63,7 +63,7 @@ function submitExternalLogin(){
 		 cache:      false,
 		 data:       { externalLoginID: $("#editExternalLoginID").val(), organizationID: $("#editOrganizationID").val(), externalLoginTypeID: $("#externalLoginTypeID").val(), loginURL: $("#loginURL").val(), emailAddress: $("#emailAddress").val(), username: $("#username").val(), password: $("#password").val(), noteText: $("#noteText").val() },
 		 success:    function(html) {
-			if (html){
+			if (html.length > 1){
 				$("#span_errors").html(html);
 				$("#submitExternalLoginForm").removeAttr("disabled");
 			}else{
