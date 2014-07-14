@@ -631,7 +631,7 @@ if ($organization->name){
 
 
 	<input type='hidden' name='organizationID' id='organizationID' value='<?php echo $organizationID; ?>'>
-	<script type="text/javascript" src="js/summary.js"></script>
+
 
 
 	</body>
