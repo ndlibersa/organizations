@@ -99,9 +99,6 @@ if ($config->settings->authModule == 'Y'){
 }
 
 
-$loginID = 'rmalott';
-
-
 if (isset($loginID) && ($loginID != "")){
 	include_once('setuser.php');
 }else{
