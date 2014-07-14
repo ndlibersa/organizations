@@ -1,4 +1,4 @@
-getContactDetails<?php
+<?php
 
 /*
 **************************************************************************************************************************
@@ -81,19 +81,23 @@ switch ($_GET['action']) {
 		}
 
 		?>
-		<table class='verticalFormTable' style='width:460px;'>
+		<table class='linedFormTable' style='width:440px;'>
 		<tr>
-		<th colspan='2' style='height:30px; vertical-align:middle'><span style='font-size:105%'>&nbsp;<?php echo $organization->name; ?></span></th>
+		<th colspan='2' style='height:30px; margin-top: 7px; margin-bottom: 5px; vertical-align:middle'>
+
+			<span style='float:left; font-size:115%; max-width:400px;'>&nbsp;<?php echo $organization->name; ?></span>
+			<span style='float:right; vertical-align:top;'><?php if ($user->canEdit()){ ?><a href='ajax_forms.php?action=getOrganizationForm&height=363&width=345&modal=true&organizationID=<?php echo $organizationID; ?>' class='thickbox' id='editOrganization'><img src='images/edit.gif' alt='edit' title='edit resource'></a><?php } ?>  <?php if ($user->isAdmin){ ?><a href='javascript:removeOrganization(<?php echo $organizationID; ?>);'><img src='images/cross.gif' alt='remove resource' title='remove resource'></a><?php } ?></span>
+		</th>
 		</tr>
 
 		<?php if (count($parentOrganizationArray) > 0){ ?>
 			<tr>
-			<td style='vertical-align:top;text-align:right;width:140px;'>Parent Organization:</td>
+			<td style='vertical-align:top;text-align:left;width:140px;'>Parent Organization:</td>
 			<td style='width:320px;'>
 			<?php
 			foreach ($parentOrganizationArray as $parentOrganization){
-				echo "<b>" . $parentOrganization['name'] . "</b>&nbsp;&nbsp;";
-				echo "<a href='orgDetail.php?organizationID=" . $parentOrganization['organizationID'] . "'>view</a><br />";
+				echo $parentOrganization['name'] . "&nbsp;&nbsp;";
+				echo "<a href='orgDetail.php?organizationID=" . $parentOrganization['organizationID'] . "'><img src='images/arrow-up-right.gif' alt='view organization' title='View' style='vertical-align:top;'></a><br />";
 			}
 			?>
 			</td>
@@ -104,12 +108,12 @@ switch ($_GET['action']) {
 
 		if (count($childOrganizationArray) > 0){ ?>
 			<tr>
-			<td style='vertical-align:top;text-align:right;width:140px;'>Child Organizations:</td>
+			<td style='vertical-align:top;text-align:left;width:140px;'>Child Organizations:</td>
 			<td style='width:320px;'>
 			<?php
 			foreach ($childOrganizationArray as $childOrganization){
-				echo "<b>" . $childOrganization['name'] . "</b>&nbsp;&nbsp;";
-				echo "<a href='orgDetail.php?organizationID=" . $childOrganization['organizationID'] . "'>view</a><br />";
+				echo $childOrganization['name'] . "&nbsp;&nbsp;";
+				echo "<a href='orgDetail.php?organizationID=" . $childOrganization['organizationID'] . "'><img src='images/arrow-up-right.gif' alt='view organization' title='View' style='vertical-align:top;'></a><br />";
 			}
 			?>
 			</td>
@@ -120,41 +124,38 @@ switch ($_GET['action']) {
 
 		if ($organization->companyURL){ ?>
 			<tr>
-			<td style='vertical-align:top;text-align:right;width:140px;'>Company URL:</td>
-			<td style='width:320px;'><b><a href='<?php echo $companyURL; ?>' target='_blank'><?php echo $organization->companyURL; ?></a></b></td>
+			<td style='vertical-align:top;text-align:left;width:140px;'>Company URL:</td>
+			<td style='width:320px;'><a href='<?php echo $companyURL; ?>' target='_blank'><?php echo $organization->companyURL; ?></a></td>
 			</tr>
 		<?php
 		}
 
 		if (count($organizationRoleArray) > 0){ ?>
 			<tr>
-			<td style='vertical-align:top;text-align:right;width:140px;'>Role(s):</td>
-			<td style='width:320px;'><b><?php echo implode(", ", $organizationRoleArray); ?></b></td>
+			<td style='vertical-align:top;text-align:left;width:140px;'>Role(s):</td>
+			<td style='width:320px;'><?php echo implode(", ", $organizationRoleArray); ?></td>
 			</tr>
 		<?php
 		}
 
 		if ($organization->accountDetailText){ ?>
 			<tr>
-			<td style='vertical-align:top;text-align:right;width:140px;'>Account Details:</td>
-			<td style='width:320px;'><b><?php echo nl2br($organization->accountDetailText); ?></b></td>
+			<td style='vertical-align:top;text-align:left;width:140px;'>Account Details:</td>
+			<td style='width:320px;'><?php echo nl2br($organization->accountDetailText); ?></td>
 			</tr>
 		<?php
 		}
 
 		if ($organization->noteText){ ?>
 			<tr>
-			<td style='vertical-align:top;text-align:right;width:140px;'>Notes:</td>
-			<td style='width:320px;'><b><?php echo nl2br($organization->noteText); ?></b></td>
+			<td style='vertical-align:top;text-align:left;width:140px;'>Notes:</td>
+			<td style='width:320px;'><?php echo nl2br($organization->noteText); ?></td>
 			</tr>
 		<?php
 		}
 
 		?>
 		</table>
-		<?php if ($user->canEdit()){ ?>
-		<a href='ajax_forms.php?action=getOrganizationForm&height=363&width=345&modal=true&organizationID=<?php echo $organizationID; ?>' class='thickbox' id='editOrganization'>edit organization details</a><br />
-		<?php } ?>
 
 
 		<br /><br />
@@ -217,24 +218,23 @@ switch ($_GET['action']) {
 
 		?>
 		<?php if (count($aliasArray) > 0){ ?>
-			<table class='verticalFormTable' style='width:460px;'>
+			<table class='linedFormTable' style='width:440px;'>
 			<tr>
 			<th>Alias</th>
 			<th>Alias Type</th>
-			<?php if ($user->canEdit()){ ?>
-			<th>&nbsp;</th>
-			<?php } ?>
 			</tr>
 
 			<?php
 			foreach ($aliasArray as $organizationAlias){
 				echo "<tr>\n";
 				echo "<td>" . $organizationAlias['name'] . "</td>\n";
-				echo "<td>" . $organizationAlias['aliasTypeShortName'] . "</td>\n";
+				echo "<td>" . $organizationAlias['aliasTypeShortName'];
 				if ($user->canEdit()){
-					echo "<td><a href='ajax_forms.php?action=getAliasForm&height=124&width=285&modal=true&organizationID=" .  $organizationID . "&aliasID=" . $organizationAlias['aliasID'] . "' class='thickbox'>edit</a>&nbsp;&nbsp;<a href='javascript:removeAlias(" . $organizationAlias['aliasID'] . ")'>remove</a></td>\n";
+					echo "<span style='float:right; vertical-align:top;'><a href='ajax_forms.php?action=getAliasForm&height=124&width=285&modal=true&organizationID=" .  $organizationID . "&aliasID=" . $organizationAlias['aliasID'] . "' class='thickbox'><img src='images/edit.gif' alt='edit' title='edit alias'></a>";
+					echo "&nbsp;<a href='javascript:removeAlias(" . $organizationAlias['aliasID'] . ")'><img src='images/cross.gif' alt='remove alias' title='remove alias'></a>";
+					echo "</span>";
 				}
-				echo "</tr>\n";
+				echo "</td>\n</tr>\n";
 			}
 			?>
 
@@ -248,7 +248,7 @@ switch ($_GET['action']) {
 		?>
 
 		<?php if ($user->canEdit()){ ?>
-			<a href='ajax_forms.php?action=getAliasForm&height=124&width=285&modal=true&organizationID=<?php echo $organizationID; ?>' class='thickbox' id='newAlias'>add new alias</a>
+			<a href='ajax_forms.php?action=getAliasForm&height=124&width=285&modal=true&organizationID=<?php echo $organizationID; ?>' class='thickbox' id='newAlias'>add a new alias</a>
 		<?php } ?>
 
 		<?php
@@ -307,9 +307,9 @@ switch ($_GET['action']) {
 		if (count($contactArray) > 0){
 			foreach ($contactArray as $contact){
 			?>
-				<table class='verticalFormTable' style='width:460px;'>
+				<table class='linedFormTable' style='width:440px;'>
 				<tr>
-				<th style='width:150px;vertical-align:top;text-align:right'><?php echo $contact['contactRoles']; ?></th>
+				<th style='width:150px;vertical-align:top;text-align:left'><?php echo $contact['contactRoles']; ?></th>
 				<th>
 				<?php
 
@@ -318,8 +318,9 @@ switch ($_GET['action']) {
 				}
 
 				if ($user->canEdit()){
-					echo "<a href='ajax_forms.php?action=getContactForm&height=463&width=345&modal=true&organizationID=" . $organizationID . "&contactID=" . $contact['contactID'] . "' class='thickbox'>edit</a>";
-					echo "&nbsp;&nbsp;<a href='javascript:removeContact(" . $contact['contactID'] . ")'>remove</a>";
+					echo "<span style='float:right; vertical-align:top;'><a href='ajax_forms.php?action=getContactForm&height=463&width=345&modal=true&organizationID=" . $organizationID . "&contactID=" . $contact['contactID'] . "' class='thickbox'><img src='images/edit.gif' alt='edit' title='edit contact'></a>";
+					echo "&nbsp;<a href='javascript:removeContact(" . $contact['contactID'] . ")'><img src='images/cross.gif' alt='remove contact' title='remove contact'></a>";
+					echo "</span>";
 				}
 
 				?>
@@ -328,7 +329,7 @@ switch ($_GET['action']) {
 
 				<?php if (($contact['archiveDate'] != '0000-00-00') && ($contact['archiveDate'])) { ?>
 				<tr>
-				<td style='vertical-align:top;text-align:right;background-color:#ebebeb'>No longer valid:</td>
+				<td style='vertical-align:top;text-align:left;background-color:#ebebeb'>No longer valid:</td>
 				<td style='background-color:#ebebeb'><i><?php echo format_date($contact['archiveDate']); ?></i></td>
 				</tr>
 				<?php
@@ -336,7 +337,7 @@ switch ($_GET['action']) {
 
 				if ($contact['title']) { ?>
 				<tr>
-				<td style='vertical-align:top;text-align:right'>Title:</td>
+				<td style='vertical-align:top;text-align:left;'>Title:</td>
 				<td><?php echo $contact['title']; ?></td>
 				</tr>
 				<?php
@@ -344,7 +345,7 @@ switch ($_GET['action']) {
 
 				if ($contact['addressText']) { ?>
 				<tr>
-				<td style='vertical-align:top;text-align:right'>Address:</td>
+				<td style='vertical-align:top;text-align:left;'>Address:</td>
 				<td><?php echo nl2br($contact['addressText']); ?></td>
 				</tr>
 				<?php
@@ -352,7 +353,7 @@ switch ($_GET['action']) {
 
 				if ($contact['phoneNumber']) { ?>
 				<tr>
-				<td style='vertical-align:top;text-align:right'>Phone:</td>
+				<td style='vertical-align:top;text-align:left;'>Phone:</td>
 				<td><?php echo $contact['phoneNumber']; ?></td>
 				</tr>
 				<?php
@@ -360,7 +361,7 @@ switch ($_GET['action']) {
 
 				if ($contact['altPhoneNumber']) { ?>
 				<tr>
-				<td style='vertical-align:top;text-align:right'>Alt Phone:</td>
+				<td style='vertical-align:top;text-align:left;'>Alt Phone:</td>
 				<td><?php echo $contact['altPhoneNumber']; ?></td>
 				</tr>
 				<?php
@@ -368,7 +369,7 @@ switch ($_GET['action']) {
 
 				if ($contact['faxNumber']) { ?>
 				<tr>
-				<td style='vertical-align:top;text-align:right'>Fax:</td>
+				<td style='vertical-align:top;text-align:left;'>Fax:</td>
 				<td><?php echo $contact['faxNumber']; ?></td>
 				</tr>
 				<?php
@@ -376,7 +377,7 @@ switch ($_GET['action']) {
 
 				if ($contact['emailAddress']) { ?>
 				<tr>
-				<td style='vertical-align:top;text-align:right'>Email:</td>
+				<td style='vertical-align:top;text-align:left;'>Email:</td>
 				<td><a href='mailto:<?php echo $contact['emailAddress']; ?>'><?php echo $contact['emailAddress']; ?></a></td>
 				</tr>
 				<?php
@@ -384,15 +385,15 @@ switch ($_GET['action']) {
 
 				if ($contact['noteText']) { ?>
 				<tr>
-				<td style='vertical-align:top;text-align:right'>Notes:</td>
-				<td><b><?php echo nl2br($contact['noteText']); ?></b></td>
+				<td style='vertical-align:top;text-align:left;'>Notes:</td>
+				<td><?php echo nl2br($contact['noteText']); ?></td>
 				</tr>
 				<?php
 				}
 
 				if ($contact['lastUpdateDate']) { ?>
 				<tr>
-				<td style='vertical-align:top;text-align:right'>Last Updated:</td>
+				<td style='vertical-align:top;text-align:left;'>Last Updated:</td>
 				<td><i><?php echo format_date($contact['lastUpdateDate']); ?></i></td>
 				</tr>
 				<?php
@@ -446,15 +447,15 @@ switch ($_GET['action']) {
 		if (count($externalLoginArray) > 0){
 			foreach ($externalLoginArray as $externalLogin){
 			?>
-				<table class='verticalFormTable' style='width:460px;max-width:460px;'>
+				<table class='linedFormTable' style='width:440px;max-width:440px;'>
 				<tr>
-				<th style='width:150px;vertical-align:top;text-align:right'><?php echo $externalLogin['externalLoginTypeShortName']; ?></th>
+				<th style='width:150px;vertical-align:top;text-align:left;'><?php echo $externalLogin['externalLoginTypeShortName']; ?></th>
 				<th>
 				<?php
 					if ($user->canEdit()){
-						echo "<a href='ajax_forms.php?action=getAccountForm&height=254&width=342&modal=true&organizationID=" . $organizationID . "&externalLoginID=" . $externalLogin['externalLoginID'] . "' class='thickbox'>edit</a>&nbsp;&nbsp;<a href='javascript:removeExternalLogin(" . $externalLogin['externalLoginID'] . ")'>remove</a>";
-					}else{
-						echo "&nbsp;";
+						echo "<span style='float:right; vertical-align:top;'><a href='ajax_forms.php?action=getAccountForm&height=254&width=342&modal=true&organizationID=" . $organizationID . "&externalLoginID=" . $externalLogin['externalLoginID'] . "' class='thickbox'><img src='images/edit.gif' alt='edit' title='edit external login'></a>";
+						echo "&nbsp;<a href='javascript:removeExternalLogin(" . $externalLogin['externalLoginID'] . ")'><img src='images/cross.gif' alt='remove external login' title='remove external login'></a>";
+						echo "</span>";
 					}
 				?>
 				</th>
@@ -462,7 +463,7 @@ switch ($_GET['action']) {
 
 				<?php if ($externalLogin['loginURL']) { ?>
 				<tr>
-				<td style='vertical-align:top;text-align:right'>Login URL:</td>
+				<td style='vertical-align:top;text-align:left;'>Login URL:</td>
 				<td><?php echo $externalLogin['loginURL']; 
 					if (strpos($externalLogin['loginURL'], 'http') !== 0) {
 						$externalLogin['loginURL'] = "http://" . $externalLogin['loginURL'];
@@ -474,7 +475,7 @@ switch ($_GET['action']) {
 
 				if ($externalLogin['emailAddress']) { ?>
 				<tr>
-				<td style='vertical-align:top;text-align:right'>Local email on account:</td>
+				<td style='vertical-align:top;text-align:left;'>Local email on account:</td>
 				<td><?php echo $externalLogin['emailAddress']; ?></td>
 				</tr>
 				<?php
@@ -482,7 +483,7 @@ switch ($_GET['action']) {
 
 				if ($externalLogin['username']) { ?>
 				<tr>
-				<td style='vertical-align:top;text-align:right'>User Name:</td>
+				<td style='vertical-align:top;text-align:left;'>User Name:</td>
 				<td><?php echo $externalLogin['username']; ?></td>
 				</tr>
 				<?php
@@ -490,7 +491,7 @@ switch ($_GET['action']) {
 
 				if ($externalLogin['password']) { ?>
 				<tr>
-				<td style='vertical-align:top;text-align:right'>Password:</td>
+				<td style='vertical-align:top;text-align:left;'>Password:</td>
 				<td><?php echo $externalLogin['password']; ?></td>
 				</tr>
 				<?php
@@ -498,7 +499,7 @@ switch ($_GET['action']) {
 
 				if ($externalLogin['updateDate']) { ?>
 				<tr>
-				<td style='vertical-align:top;text-align:right'>Last Updated:</td>
+				<td style='vertical-align:top;text-align:left;'>Last Updated:</td>
 				<td><i><?php echo format_date($externalLogin['updateDate']); ?></i></td>
 				</tr>
 				<?php
@@ -506,7 +507,7 @@ switch ($_GET['action']) {
 
 				if ($externalLogin['noteText']) { ?>
 				<tr>
-				<td style='vertical-align:top;text-align:right'>Notes:</td>
+				<td style='vertical-align:top;text-align:left;'>Notes:</td>
 				<td><?php echo nl2br($externalLogin['noteText']); ?></td>
 				</tr>
 				<?php
@@ -565,14 +566,11 @@ switch ($_GET['action']) {
 
 		if (count($issueLogArray) > 0){
 		?>
-		<table class='verticalFormTable' style='width:460px;'>
+		<table class='linedFormTable' style='width:440px;'>
 		<tr>
 		<th>Date Added</th>
 		<th>Issue Date</th>
 		<th>Notes</th>
-		<?php if ($user->canEdit()){ ?>
-		<th>&nbsp;</th>
-		<?php } ?>
 		</tr>
 
 		<?php foreach ($issueLogArray as $issueLog){
@@ -585,11 +583,15 @@ switch ($_GET['action']) {
 			<tr>
 			<td style='width:80px;'><?php echo format_date($issueLog['updateDate']); ?><br />by <i><?php echo $issueLog['updateUser']; ?></i></td>
 			<td><?php echo $issueDate ?></td>
-			<td style='width:360px;'><?php echo nl2br(str_replace($charsToRemove, "", $issueLog['noteText'])); ?></td>
-			<?php if ($user->canEdit()){ ?>
-				<td><a href='ajax_forms.php?action=getIssueLogForm&height=166&width=265&modal=true&organizationID=<?php echo $organizationID; ?>&issueLogID=<?php echo $issueLog['issueLogID']; ?>' class='thickbox'>edit</a><br /><a href='javascript:removeIssueLog(<?php echo $issueLog['issueLogID']; ?>)'>remove</a></td>
-			<?php } ?>
-			</tr>
+			<td style='width:360px;'><?php echo nl2br(str_replace($charsToRemove, "", $issueLog['noteText'])); ?>
+			<?php 
+			if ($user->canEdit()){
+				echo "<span style='float:right; vertical-align:top;'><a href='ajax_forms.php?action=getAccountForm&height=166&width=265&modal=true&organizationID=" . $organizationID . "&issueLogID=" . $issueLog['issueLogID'] . "' class='thickbox'><img src='images/edit.gif' alt='edit' title='edit issue'></a>";
+				echo "&nbsp;<a href='javascript:removeIssueLog(" . $issueLog['issueLogID'] . ")'><img src='images/cross.gif' alt='remove issue' title='remove issue'></a>";
+				echo "</span>";
+			} 
+			?>
+			</td></tr>
 		<?php } ?>
 
 		</table>
@@ -628,7 +630,7 @@ switch ($_GET['action']) {
 				$licenseArray = $organization->getLicenses();
 
 				if (count($licenseArray) > 0){ ?>
-					<table class='verticalFormTable' style='width:460px;'>
+					<table class='linedFormTable' style='width:440px;'>
 					<tr>
 					<th>License</th>
 					<th>Consortium</th>

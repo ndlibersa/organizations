@@ -90,6 +90,15 @@ span.searchLetterSelected a:active{color:#3D545D;}
     margin: 3px 4px 0 0;
 }
 
+/* following is for the right panel (helpful links) in the organizations page
+*************************/
+div.rightPanel a {color:#3D545D;text-decoration:none;}
+div.rightPanel a:active {color:#526972;}
+div.rightPanel a:hover {color:#526972;text-decoration:underline;}
+div.rightPanel a:focus {color:#526972;outline: none;}
+div.rightPanelHeader{font-weight:bold; color:#526972; margin-bottom:2px; }
+div.rightPanelLink{margin-bottom:4px; margin-left:5px; font-size:90%; }
+
 
 
 /* Coral Change Module Menu  -  tabs
@@ -284,39 +293,61 @@ table.sample td.bottom {
 }
 
 
+
 .sidemenu{
     background-color: white;
-    border-right: 1px solid #dad5c9;
-    border-top: 1px solid #dad5c9;
-    width: 99px;
+    border-right: 1px solid #d2d2d5;
+    border-top: 1px solid #d2d2d5;
+    width: 108px;
     vertical-align: top;
     text-align: left;
-    font-size:92%;
 }
+
+.sidemenu a:link{text-decoration: none;}
+.sidemenu a:hover {text-decoration: underline;}
+.sidemenu img{vertical-align: top;}
+
+.sidemenu span.icon{
+  float:left;
+  vertical-align: top;
+  text-align:center;
+  height:16px;
+  width:20px;
+} 
+ 
 .sidemenu div{
-    padding: 8px 0px 8px 8px;
-    border-bottom: 1px solid #dad5c9;
-    font-weight:bold;
+    padding: 6px 0px 6px 9px;
+    border-bottom: 1px solid #d2d2d5;
+    font-weight:normal;
 }
 .sidemenuselected{
-    padding: 8px 0px 8px 8px;
-    border-bottom: 1px solid #dad5c9;
-    border-left: 1px solid #dad5c9;
+    padding: 6px 0px 6px 6px;
+    border-bottom: 1px solid #d2d2d5;
+    border-left: 1px solid #d2d2d5;
     background-color: white;
 }
 .sidemenuunselected{
-    padding: 8px 0px 8px 8px;
-    border-bottom: 1px solid #dad5c9;
-    border-left: 1px solid #dad5c9;
+    padding: 6px 0px 6px 6px;
+    border-bottom: 1px solid #d2d2d5;
+    border-left: 1px solid #d2d2d5;
     background-color: #f2f5f7;
+    background-image:url('../images/tab.gif');
+    background-repeat:no-repeat;
+    min-height:16px;
 }
+
+.sidemenuunselected span.link{
+	float:left;
+	clear:right;
+}
+
 .mainContent{
-    padding: 8px; 
+    padding: 8px 14px 14px 14px; 
     background-color: white; 
     text-align:left;
-    border-top: 1px solid #dad5c9;
-    border-right: 1px solid #dad5c9;
-    border-bottom: 1px solid #dad5c9;
+    border-top: 1px solid #d2d2d5;
+    border-right: 1px solid #d2d2d5;
+    border-bottom: 1px solid #d2d2d5;
     background-color: white;
     vertical-align: top;
     
@@ -472,6 +503,70 @@ table.borderedHeadTable tr {
 }
 
 
+table.linedFormTable {	
+	border-width: 0 1px 1px 1px;
+	border-style: solid;
+	border-color: #e6e5e9;
+	border-collapse: collapse;
+	border-spacing: 0;
+	font-size:90%;
+}
+
+table.linedFormTable td {
+	margin: 0;
+	padding: 3px 3px 3px 3px;
+	border-width: 1px 0 0 0;
+	border-style: solid;
+	border-color: #e6e5e9;
+	background-color: white;
+	-moz-border-radius: 0px;
+}
+
+
+table.linedFormTable td.bottom {
+	margin: 0;
+	padding: 3px 3px 3px 3px;
+	border-width: 1px 0 0 0;
+	border-style: solid;
+	border-color: #e6e5e9;
+	background-color: white;
+	-moz-border-radius: 0px;
+}
+
+table.linedFormTable th {
+	margin: 0;
+	padding: 2px 3px 2px 2px;
+	border-width: 1px 0 0 0;
+	border-style: solid;
+	border-color: #e6e5e9;
+	background-color: #e9edf0;
+	-moz-border-radius: 0px;
+}
+
+
+table.linedFormTable tr {	
+	vertical-align:top;
+}
+
+
+table.linedFormTable tr.lightGrayBackground td {	
+	background-color:#ebebeb;
+}
+
+table.linedFormTable td.outstanding {	
+	background-color:#fdf2e7;
+}
+
+
+
+.printContent{
+    padding: 24px 24px 24px 24px; 
+    background-color: white; 
+    text-align:left;
+    background-color: white;
+    vertical-align: top;
+    
+}
 
 table.noBorder td { border:0; }
 
