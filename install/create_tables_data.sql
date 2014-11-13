@@ -82,13 +82,23 @@ CREATE TABLE IF NOT EXISTS  `_DATABASE_NAME_`.`ExternalLoginType` (
 CREATE TABLE IF NOT EXISTS  `_DATABASE_NAME_`.`IssueLog` (
   `issueLogID` int(11) NOT NULL auto_increment,
   `organizationID` int(11) default NULL,
+  `issueLogTypeID` int(11) default NULL,
   `updateDate` date default NULL,
   `updateLoginID` varchar(50) default NULL,
-  `issueDate` date default NULL,
+  `issueStartDate` date default NULL,
+  `issueEndDate` date default NULL,
   `noteText` text,
   PRIMARY KEY  (`issueLogID`),
   UNIQUE KEY `issueLogID` (`issueLogID`),
   KEY `organizationID` (`organizationID`)
+  KEY `issueLogTypeID` (`issueLogTypeID`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS  `_DATABASE_NAME_`.`IssueLogType` (
+  `issueLogTypeID` int(11) NOT NULL auto_increment,
+  `shortName` varchar(50) default NULL,
+  PRIMARY KEY  (`issueLogTypeID`),
+  UNIQUE KEY `issueLogTypeID` (`issueLogTypeID`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 

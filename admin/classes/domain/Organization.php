@@ -267,7 +267,9 @@ class Organization extends DatabaseObject {
 	//returns array of issue log objects
 	public function getIssueLog(){
 
-		$query = "SELECT * FROM IssueLog WHERE organizationID = '" . $this->organizationID . "' order by issueDate desc";
+		$query = "SELECT * FROM IssueLog
+              LEFT JOIN IssueLogType ON IssueLogType.issueLogTypeID = IssueLog.issueLogTypeID
+              WHERE organizationID = '" . $this->organizationID . "' order by issueStartDate desc";
 
 		$result = $this->db->processQuery($query, 'assoc');
 

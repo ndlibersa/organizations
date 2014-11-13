@@ -23,6 +23,15 @@ class IssueLog extends DatabaseObject {
 
 	protected function overridePrimaryKeyName() {}
 
+  public function getTypeShortName() {
+     $query = "SELECT shortName 
+            FROM IssueLogType
+            WHERE issueLogTypeID = '" . $this->issueLogTypeID . "'";
+    $result = $this->db->processQuery($query, 'assoc');
+    return $result['shortName'];
+ 
+  }
+
 
 }
 

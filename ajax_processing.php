@@ -220,13 +220,20 @@ switch ($_GET['action']) {
 			$issueLog = new IssueLog();
 		}
 
-		if ($_POST['issueDate']){
-			$issueLog->issueDate = date("Y-m-d", strtotime($_POST['issueDate']));
+		if ($_POST['issueStartDate']){
+			$issueLog->issueStartDate = date("Y-m-d", strtotime($_POST['issueStartDate']));
 		}else{
-			$issueLog->issueDate = '';
+			$issueLog->issueStartDate = '';
+		}
+
+    if ($_POST['issueEndDate']){
+			$issueLog->issueEndDate = date("Y-m-d", strtotime($_POST['issueEndDate']));
+		}else{
+			$issueLog->issueEndDate = '';
 		}
 
 		$issueLog->organizationID 		= $_POST['organizationID'];
+		$issueLog->issueLogTypeID 		= $_POST['issueLogTypeID'];
 		$issueLog->updateLoginID 		= $loginID;
 		$issueLog->updateDate			= date( 'Y-m-d H:i:s' );
 		$issueLog->noteText				= $_POST['noteText'];
