@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS  `_DATABASE_NAME_`.`IssueLog` (
   `noteText` text,
   PRIMARY KEY  (`issueLogID`),
   UNIQUE KEY `issueLogID` (`issueLogID`),
-  KEY `organizationID` (`organizationID`)
+  KEY `organizationID` (`organizationID`),
   KEY `issueLogTypeID` (`issueLogTypeID`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
