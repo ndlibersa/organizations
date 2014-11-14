@@ -17,31 +17,11 @@
 **************************************************************************************************************************
 */
 
-class IssueLog extends DatabaseObject {
+class IssueLogType extends DatabaseObject {
 
 	protected function defineRelationships() {}
 
 	protected function overridePrimaryKeyName() {}
-
-  public function getTypeShortName() {
-     $query = "SELECT shortName 
-            FROM IssueLogType
-            WHERE issueLogTypeID = '" . $this->issueLogTypeID . "'";
-    $result = $this->db->processQuery($query, 'assoc');
-    return $result['shortName'];
- 
-  }
-
-  public function allExpandedAsArray() {
-
-    $query = "SELECT IssueLog.*, Organization.name, IssueLogType.shortName from IssueLog
-          LEFT JOIN IssueLogType ON IssueLogType.issueLogTypeID = IssueLog.issueLogTypeID
-          LEFT JOIN Organization ON Organization.organizationID = IssueLog.organizationID";
-
-          $result = $this->db->processQuery($query, 'assoc');
-          return $result;
-
-  }
 
 
 }
