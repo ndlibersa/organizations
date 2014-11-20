@@ -622,10 +622,12 @@ switch ($_GET['action']) {
 
 		if ($user->canEdit()){
 		?>
-			<a href='ajax_forms.php?action=getIssueLogForm&height=250&width=265&modal=true&organizationID=<?php echo $organizationID; ?>' class='thickbox' id='newIssue'>add new issue</a>
+			<a href='ajax_forms.php?action=getIssueLogForm&height=250&width=265&modal=true&organizationID=<?php echo $organizationID; ?>' class='thickbox' id='newIssue'>add new issue</a> - 
 		<?php
 		}
-
+    ?>
+      <a href='issues_export.php'>export all issues</a>
+    <?php
         break;
 
 
