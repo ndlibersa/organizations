@@ -69,7 +69,7 @@ foreach($issues as $issue) {
     $issue['shortName'],
     $issue['issueStartDate'],
     $issue['issueEndDate'],
-    $issue['noteText']
+    preg_replace('/\s+/', ' ', trim($issue['noteText'])),
   );
 	
 	echo array_to_csv_row($issueValues);
