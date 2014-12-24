@@ -32,14 +32,25 @@ class IssueLog extends DatabaseObject {
  
   }
 
-  public function allExpandedAsArray() {
+  public function allExpandedAsArray($organizationID) {
 
     $query = "SELECT IssueLog.*, Organization.name, IssueLogType.shortName from IssueLog
           LEFT JOIN IssueLogType ON IssueLogType.issueLogTypeID = IssueLog.issueLogTypeID
           LEFT JOIN Organization ON Organization.organizationID = IssueLog.organizationID";
 
-          $result = $this->db->processQuery($query, 'assoc');
-          return $result;
+    if ($organizationID) {
+      $query .= " WHERE Organization.OrganizationID = $organizationID";
+    }
+    $result = $this->db->processQuery($query, 'assoc');
+    $results = array();
+    if (isset($result['issueLogID'])) {
+      array_push($results, $result);
+    } else {
+      foreach ($result as $row) {
+        array_push($results, $row);
+      }
+    }
+    return $results;
 
   }
 

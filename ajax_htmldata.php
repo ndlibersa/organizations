@@ -626,7 +626,7 @@ switch ($_GET['action']) {
 		<?php
 		}
     ?>
-      <a href='issues_export.php'>export all issues</a>
+      <a href='issues_export.php?organizationID=<?php echo $organizationID; ?>'>export these issues</a> - <a href='issues_export.php'>export all issues</a>
     <?php
         break;
 

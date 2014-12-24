@@ -22,6 +22,8 @@ session_start();
 
 include_once 'directory.php';
 
+$organizationID = $_GET['organizationID'];
+
 function escape_csv($value) {
   // replace \n with \r\n
   $value = preg_replace("/(?<!\r)\n/", "\r\n", $value);
@@ -36,8 +38,7 @@ function array_to_csv_row($array) {
 }
 
 $issueLogObj = new IssueLog();
-$issues = $issueLogObj->allExpandedAsArray();
-
+$issues = $issueLogObj->allExpandedAsArray($organizationID);
 
 $replace = array("/", "-");
 $excelfile = "issues_export_" . str_replace( $replace, "_", format_date( date( 'Y-m-d' ) ) ).".csv";
