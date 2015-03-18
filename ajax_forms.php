@@ -536,7 +536,6 @@ switch ($_GET['action']) {
 			$issueEndDate='';
 		}
 
-    $issueLogArray = 
     $issueLogTypeObj = new IssueLogType();
     $issueLogTypeArray = $issueLogTypeObj->allAsArray();
 

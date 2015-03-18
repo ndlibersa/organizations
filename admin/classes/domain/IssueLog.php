@@ -39,7 +39,7 @@ class IssueLog extends DatabaseObject {
           LEFT JOIN Organization ON Organization.organizationID = IssueLog.organizationID";
 
     if ($organizationID) {
-      $query .= " WHERE Organization.OrganizationID = $organizationID";
+      $query .= " WHERE Organization.OrganizationID = " . $this->db->escapeString($organizationID);
     }
     $result = $this->db->processQuery($query, 'assoc');
     $results = array();
