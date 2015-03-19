@@ -97,6 +97,19 @@ if ($user->isAdmin()){
 	</td></tr>
 	</table>
 
+  <table class="headerTable">
+    <tr><td align='left'>
+      <span class="headerText">Issue Type</span>&nbsp;&nbsp;<span id='span_IssueLogType_response'></span>
+      <br /><span id='span_newIssueLogType' class='adminAddInput'><a href='javascript:showAdd("IssueLogType");'>add new issue type</a></span>
+      <br />
+      <div id='div_IssueLogType'>
+        <img src = "images/circle.gif">Loading...
+      </div>
+    </td></tr>
+  </table>
+  <br />
+  <br />
+
 	<script type="text/javascript" src="js/admin.js"></script>
 	<?php
 

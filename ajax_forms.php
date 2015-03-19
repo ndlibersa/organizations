@@ -524,11 +524,21 @@ switch ($_GET['action']) {
     	if (isset($_GET['issueLogID'])) $issueLogID = $_GET['issueLogID']; else $issueLogID = '';
     	$issueLog = new IssueLog(new NamedArguments(array('primaryKey' => $issueLogID)));
 
-		if (($issueLog->issueDate != '') && ($issueLog->issueDate != "0000-00-00")) {
-			$issueDate=format_date($issueLog->issueDate);
+		if (($issueLog->issueStartDate != '') && ($issueLog->issueStartDate != "0000-00-00")) {
+			$issueStartDate=format_date($issueLog->issueStartDate);
 		}else{
-			$issueDate='';
+			$issueStartDate='';
 		}
+
+    if (($issueLog->issueEndDate != '') && ($issueLog->issueEndDate != "0000-00-00")) {
+			$issueEndDate=format_date($issueLog->issueEndDate);
+		}else{
+			$issueEndDate='';
+		}
+
+    $issueLogTypeObj = new IssueLogType();
+    $issueLogTypeArray = $issueLogTypeObj->allAsArray();
+
 
 		?>
 		<div id='div_issueForm'>
@@ -542,13 +552,39 @@ switch ($_GET['action']) {
 		<span id='span_errors' style='color:red;'></span><br />
 		</td>
 		</tr>
+    <tr>
+
+		<td style='vertical-align:top;text-align:right;'><label for='issueLogTypeID'><b>Type:</b></label></td>
+    <td>
+      <select name='issueLogTypeID' id='issueLogTypeID'>
+      <option value=''></option>
+      <?php
+      foreach ($issueLogTypeArray as $issueLogType){
+        if (!(trim(strval($issueLogType['issueLogTypeID'])) != trim(strval($issueLog->issueLogTypeID)))){
+          echo "<option value='" . $issueLogType['issueLogTypeID'] . "' selected>" . $issueLogType['shortName'] . "</option>\n";
+        }else{
+          echo "<option value='" . $issueLogType['issueLogTypeID'] . "'>" . $issueLogType['shortName'] . "</option>\n";
+        }
+      }
+      ?>
+      </select>
+    </td>
+    </tr>
 
 		<tr>
-		<td style='vertical-align:top;text-align:right;'><label for='issueDate'><b>Date:</b></label></td>
+		<td style='vertical-align:top;text-align:right;'><label for='issueStartDate'><b>Start date:</b></label></td>
 		<td>
-		<input class='date-pick' id='issueDate' name='issueDate' style='width:80px' value='<?php echo $issueDate; ?>' />
+		<input class='date-pick' id='issueStartDate' name='issueStartDate' style='width:80px' value='<?php echo $issueStartDate; ?>' />
 		</td>
 		</tr>
+
+    <tr>
+		<td style='vertical-align:top;text-align:right;'><label for='issueDate'><b>End date:</b></label></td>
+		<td>
+		<input class='date-pick' id='issueEndDate' name='issueEndDate' style='width:80px' value='<?php echo $issueEndDate; ?>' />
+		</td>
+		</tr>
+
 
 		<tr>
 		<td style='vertical-align:top;text-align:right;'><label for='noteText'><b>Notes:</b></label></td>

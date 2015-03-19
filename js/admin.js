@@ -22,6 +22,7 @@
       updateForm('ContactRole');
       updateForm('AliasType');
       updateForm('ExternalLoginType');
+      updateForm('IssueLogType');
       
  });
  

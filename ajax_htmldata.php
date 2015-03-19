@@ -548,6 +548,8 @@ switch ($_GET['action']) {
  				$sanitizedInstance[$attributeName] = $instance->$attributeName;
  			}
 
+ 			$sanitizedInstance['issueLogType'] = $instance->getTypeShortName();
+
  			$sanitizedInstance[$instance->primaryKeyName] = $instance->primaryKey;
 
 			$updateUser = new User(new NamedArguments(array('primaryKey' => $instance->updateLoginID)));
@@ -568,25 +570,42 @@ switch ($_GET['action']) {
 		?>
 		<table class='linedFormTable' style='width:440px;'>
 		<tr>
-		<th>Date Added</th>
-		<th>Issue Date</th>
+		<th>Added</th>
+		<th>Date</th>
+		<th>Type</th>
 		<th>Notes</th>
 		</tr>
 
 		<?php foreach ($issueLogArray as $issueLog){
-			if (($issueLog['issueDate'] != '') && ($issueLog['issueDate'] != "0000-00-00")) {
-				$issueDate= format_date($issueLog['issueDate']);
+			if (($issueLog['issueStartDate'] != '') && ($issueLog['issueStartDate'] != "0000-00-00")) {
+				$issueStartDate= format_date($issueLog['issueStartDate']);
 			}else{
-				$issueDate='';
+				$issueStartDate='';
 			}
+      if (($issueLog['issueEndDate'] != '') && ($issueLog['issueEndDate'] != "0000-00-00")) {
+				$issueEndDate= format_date($issueLog['issueEndDate']);
+			}else{
+				$issueEndDate='';
+			}
+
 			?>
 			<tr>
 			<td style='width:80px;'><?php echo format_date($issueLog['updateDate']); ?><br />by <i><?php echo $issueLog['updateUser']; ?></i></td>
-			<td><?php echo $issueDate ?></td>
+			<td><?php 
+        if ($issueStartDate && $issueEndDate) {
+          echo "$issueStartDate to $issueEndDate";
+        } elseif ($issueStartDate) {
+          echo "start: $issueStartDate";
+        } elseif ($issueEndDate) {
+          echo "end: $issueEndDate";
+        }
+      ?>
+      </td>
+      <td><?php echo $issueLog['issueLogType'] ?></td>
 			<td style='width:360px;'><?php echo nl2br(str_replace($charsToRemove, "", $issueLog['noteText'])); ?>
 			<?php 
 			if ($user->canEdit()){
-				echo "<span style='float:right; vertical-align:top;'><a href='ajax_forms.php?action=getAccountForm&height=166&width=265&modal=true&organizationID=" . $organizationID . "&issueLogID=" . $issueLog['issueLogID'] . "' class='thickbox'><img src='images/edit.gif' alt='edit' title='edit issue'></a>";
+				echo "<span style='float:right; vertical-align:top;'><a href='ajax_forms.php?action=getIssueLogForm&height=250&width=265&modal=true&organizationID=" . $organizationID . "&issueLogID=" . $issueLog['issueLogID'] . "' class='thickbox'><img src='images/edit.gif' alt='edit' title='edit issue'></a>";
 				echo "&nbsp;<a href='javascript:removeIssueLog(" . $issueLog['issueLogID'] . ")'><img src='images/cross.gif' alt='remove issue' title='remove issue'></a>";
 				echo "</span>";
 			} 
@@ -603,10 +622,12 @@ switch ($_GET['action']) {
 
 		if ($user->canEdit()){
 		?>
-			<a href='ajax_forms.php?action=getIssueLogForm&height=166&width=265&modal=true&organizationID=<?php echo $organizationID; ?>' class='thickbox' id='newIssue'>add new issue</a>
+			<a href='ajax_forms.php?action=getIssueLogForm&height=250&width=265&modal=true&organizationID=<?php echo $organizationID; ?>' class='thickbox' id='newIssue'>add new issue</a> - 
 		<?php
 		}
-
+    ?>
+      <a href='issues_export.php?organizationID=<?php echo $organizationID; ?>'>export these issues</a> - <a href='issues_export.php'>export all issues</a>
+    <?php
         break;
 
 
