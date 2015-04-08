@@ -56,7 +56,7 @@ $coralURL = $util->getCORALURL();
 <script type="text/javascript" src="js/common.js"></script>
 </head>
 <body>
-<noscript><font face=arial>JavaScript must be enabled in order for you to use CORAL. However, it seems JavaScript is either disabled or not supported by your browser. To use CORAL, enable JavaScript by changing your browser options, then <a href="">try again</a>. </font></noscript>
+<noscript><font face='arial'><?= _("JavaScript must be enabled in order for you to use CORAL. However, it seems JavaScript is either disabled or not supported by your browser. To use CORAL, enable JavaScript by changing your browser options, then ");?><a href=""><?= _("try again");?></a>. </font></noscript>
 
 <div class="wrapper">
 <center>
@@ -75,7 +75,7 @@ $coralURL = $util->getCORALURL();
 <div style='margin-top:1px;'>
 <span class='smallText' style='color:#526972;'>
 <?php
-	echo "Hello, ";
+	echo _("Hello, ");
 	//user may not have their first name / last name set up
 	if ($user->lastName){
 		echo $user->firstName . " " . $user->lastName;
@@ -85,7 +85,7 @@ $coralURL = $util->getCORALURL();
 
 ?>
 </span>
-<br /><?php if($config->settings->authModule == 'Y'){ echo "<a href='" . $coralURL . "auth/?logout'>logout</a>"; } ?>
+<br /><?php if($config->settings->authModule == 'Y'){ echo "<a href='" . $coralURL . "auth/?logout'>"._("logout")."</a>"; } ?>
 </div>
 </td>
 </tr>
@@ -102,7 +102,7 @@ $coralURL = $util->getCORALURL();
 <?php } ?>
 </td>
 
-<td style='width:130px;height:19px;' align='right'>
+<td style='width:230px;height:19px;' align='right'>
 <?php
 
 //only show the 'Change Module' if there are other modules installed or if there is an index to the main CORAL page
@@ -113,7 +113,7 @@ if ((file_exists($util->getCORALPath() . "index.php")) || ($config->settings->li
 
 	<div style='text-align:left;'>
 		<ul class="tabs">
-		<li style="background: url('images/change/coral-change.gif') no-repeat right;">&nbsp;
+		<li class="changeMod"><?= _("Change Module");?>&nbsp;▼
 			<ul class="coraldropdown">
 				<?php if (file_exists($util->getCORALPath() . "index.php")) {?>
 				<li><a href="<?php echo $coralURL; ?>" target='_blank'><img src='images/change/coral-main.gif'></a></li>
@@ -141,8 +141,42 @@ if ((file_exists($util->getCORALPath() . "index.php")) || ($config->settings->li
 			</ul>
 		</li>
 		</ul>
+        <select name="lang" id="lang" class="dropDownLang">
+               <?php
+                $fr="<option value='fr' selected='selected'>Français</option><option value='en'>English</option>";
+                $en="<option value='fr'>Français</option><option value='en' selected='selected'>English</option>";
+                if(isset($_COOKIE["lang"])){
+                    if($_COOKIE["lang"]=='fr'){
+                        echo $fr;
+                    }else{
+                        echo $en;
+                    }
+                }else{
+                    $defLang = substr($_SERVER["HTTP_ACCEPT_LANGUAGE"],0,2);
+                    if($defLang=='fr'){
+                        echo $fr;
+                    }else{
+                        echo $en;
+                    }
+                }
+                ?>
 
-	</div>
+            </select>
+        </div>
+        <script>
+            $("#lang").change(function() {
+                setLanguage($("#lang").val());
+                location.reload();
+            });
+
+            function setLanguage(lang) {
+                var wl = window.location, now = new Date(), time = now.getTime();
+                var cookievalid=86400000; // 1 jour (1000*60*60*24)
+                time += cookievalid;
+                now.setTime(time);
+                document.cookie ='lang='+lang+';path=/'+';domain='+wl.host+';expires='+now;
+            }
+        </script>
 	<?php
 
 } else {
