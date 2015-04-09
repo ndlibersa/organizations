@@ -64,7 +64,7 @@ if ($organization->name){
 		</td>
 		<td style='text-align:right;width:50px;'>
 		<div id="search_box">
-				<input type="text" id="search_organization" name="search_organization" value="<?php if (isset($_GET['search_organization'])) { echo $_GET['search_organization']; } else { echo 'Organization Search'; } ?>" class='swap_value' />
+				<input type="text" id="search_organization" name="search_organization" value="<?php if (isset($_GET['search_organization'])) { echo $_GET['search_organization']; } else { echo _('Organization Search'); } ?>" class='swap_value' />
 				<input type='hidden' id='search_organizationID' name='search_organizationID' value='' />
 		</div>
 		</td>
@@ -95,10 +95,10 @@ if ($organization->name){
             foreach ($resources as $resource) {
                 $temp_style = "";
                 if ($resource['archived']) {
-                    echo "<span style='color:grey; font-size:80%;'>(archived) </span>";
+                    echo "<span style='color:grey; font-size:80%;'>"._("(archived)")." </span>";
                     $temp_style = "style='color:#888888'";
                 }
-                echo "<a href='" . $util->getResourceRecordURL() . $resource['resourceID'] . "' target='_BLANK' $temp_style>" . $resource['titleText'] . "&nbsp;&nbsp;<img src='images/arrow-up-right.gif' alt='view resource' title='View " . $resource['titleText'] . "' style='vertical-align:top;'></a><br />";
+                echo "<a href='" . $util->getResourceRecordURL() . $resource['resourceID'] . "' target='_BLANK' $temp_style>" . $resource['titleText'] . "&nbsp;&nbsp;<img src='images/arrow-up-right.gif' alt='"._("view resource")."' title='"._("View ") . $resource['titleText'] . "' style='vertical-align:top;'></a><br />";
             }
             ?>
             </div>
@@ -116,12 +116,12 @@ if ($organization->name){
 			<table cellpadding="0" cellspacing="0" style="width: 100%; table-layout: fixed;">
 				<tr>
 					<td class="sidemenu">
-						<div class="sidemenuselected" style='position: relative; width: 99px'><span class='link'>Organization</span></div>
-						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showAliases'>Aliases</a></span></div>
-						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showContacts'>Contacts</a></span></div>
-						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showAccount'>Accounts</a></span></div>
-						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showIssues'>Issues</a></span></div>
-						<?php if ($showLicensing == "Y") { ?><div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showLicenses'>Licenses</a></span><br /><span class='smallGreyText' style='clear:right; margin-left:8px;'>&nbsp;(<?php if ($numLicenses == "1") { echo $numLicenses . " record"; }else{ echo $numLicenses . " records"; } ?>)</span></div><?php } ?>
+						<div class="sidemenuselected" style='position: relative; width: 99px'><span class='link'><?= _("Organization");?></span></div>
+						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showAliases'><?= _("Aliases");?></a></span></div>
+						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showContacts'><?= _("Contacts");?></a></span></div>
+						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showAccount'><?= _("Accounts");?></a></span></div>
+						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showIssues'><?= _("Issues");?></a></span></div>
+						<?php if ($showLicensing == "Y") { ?><div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showLicenses'><?= _("Licenses");?></a></span><br /><span class='smallGreyText' style='clear:right; margin-left:8px;'>&nbsp;(<?php if ($numLicenses == "1") { echo $numLicenses . _(" record"); }else{ echo $numLicenses . _(" records"); } ?>)</span></div><?php } ?>
 					</td>
 					<td class='mainContent'>
 
@@ -141,12 +141,12 @@ if ($organization->name){
 			<table cellpadding="0" cellspacing="0" style="width: 100%; table-layout: fixed;">
 				<tr>
 					<td class="sidemenu">
-						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showOrganization'>Organization</a></span></div>
-						<div class="sidemenuselected" style='position: relative; width: 99px'><span class='link'>Aliases</span></div>
-						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showContacts'>Contacts</a></span></div>
-						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showAccount'>Accounts</a></span></div>
-						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showIssues'>Issues</a></span></div>
-						<?php if ($showLicensing == "Y") { ?><div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showLicenses'>Licenses</a></span><br /><span class='smallGreyText' style='clear:right; margin-left:8px;'>&nbsp;(<?php if ($numLicenses == "1") { echo $numLicenses . " record"; }else{ echo $numLicenses . " records"; } ?>)</span></div><?php } ?>
+						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showOrganization'><?= _("Organization");?></a></span></div>
+						<div class="sidemenuselected" style='position: relative; width: 99px'><span class='link'><?= _("Aliases");?></span></div>
+						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showContacts'><?= _("Contacts");?></a></span></div>
+						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showAccount'><?= _("Accounts");?></a></span></div>
+						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showIssues'><?= _("Issues");?></a></span></div>
+						<?php if ($showLicensing == "Y") { ?><div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showLicenses'><?= _("Licenses");?></a></span><br /><span class='smallGreyText' style='clear:right; margin-left:8px;'>&nbsp;(<?php if ($numLicenses == "1") { echo $numLicenses . _(" record"); }else{ echo $numLicenses . _(" records"); } ?>)</span></div><?php } ?>
 					</td>
 					<td class='mainContent'>
 
@@ -172,12 +172,12 @@ if ($organization->name){
 			<table cellpadding="0" cellspacing="0" style="width: 100%; table-layout: fixed;">
 				<tr>
 					<td class="sidemenu">
-						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showOrganization'>Organization</a></span></div>
-						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showAliases'>Aliases</a></span></div>
-						<div class="sidemenuselected" style='position: relative; width: 99px'><span class='link'>Contacts</span></div>
-						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showAccount'>Accounts</a></span></div>
-						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showIssues'>Issues</a></span></div>
-						<?php if ($showLicensing == "Y") { ?><div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showLicenses'>Licenses</a></span><br /><span class='smallGreyText' style='clear:right; margin-left:8px;'>&nbsp;(<?php if ($numLicenses == "1") { echo $numLicenses . " record"; }else{ echo $numLicenses . " records"; } ?>)</span></div><?php } ?>
+						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showOrganization'><?= _("Organization");?></a></span></div>
+						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showAliases'><?= _("Aliases");?></a></span></div>
+						<div class="sidemenuselected" style='position: relative; width: 99px'><span class='link'><?= _("Contacts");?></span></div>
+						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showAccount'><?= _("Accounts");?></a></span></div>
+						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showIssues'><?= _("Issues");?></a></span></div>
+						<?php if ($showLicensing == "Y") { ?><div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showLicenses'><?= _("Licenses");?></a></span><br /><span class='smallGreyText' style='clear:right; margin-left:8px;'>&nbsp;(<?php if ($numLicenses == "1") { echo $numLicenses . _(" record"); }else{ echo $numLicenses . _(" records"); } ?>)</span></div><?php } ?>
 					</td>
 					<td class='mainContent'>
 
@@ -185,7 +185,7 @@ if ($organization->name){
 						<div id='div_archivedContactDetails'></div>
 						<?php if ($user->canEdit()){ ?>
 						<br />
-						<a href='ajax_forms.php?action=getContactForm&height=463&width=345&modal=true&type=named&organizationID=<?php echo $organizationID; ?>' class='thickbox'>add contact</a><br />
+						<a href='ajax_forms.php?action=getContactForm&height=463&width=345&modal=true&type=named&organizationID=<?php echo $organizationID; ?>' class='thickbox'><?= _("add contact");?></a><br />
 						<?php } ?>
 
 					</td>
@@ -203,12 +203,12 @@ if ($organization->name){
 			<table cellpadding="0" cellspacing="0" style="width: 100%; table-layout: fixed;">
 				<tr>
 					<td class="sidemenu">
-						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showOrganization'>Organization</a></span></div>
-						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showAliases'>Aliases</a></span></div>
-						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showContacts'>Contacts</a></span></div>
-						<div class="sidemenuselected" style='position: relative; width: 99px'><span class='link'>Accounts</span></div>
-						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showIssues'>Issues</a></span></div>
-						<?php if ($showLicensing == "Y") { ?><div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showLicenses'>Licenses</a></span><br /><span class='smallGreyText' style='clear:right; margin-left:8px;'>&nbsp;(<?php if ($numLicenses == "1") { echo $numLicenses . " record"; }else{ echo $numLicenses . " records"; } ?>)</span></div><?php } ?>
+						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showOrganization'><?= _("Organization");?></a></span></div>
+						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showAliases'><?= _("Aliases");?></a></span></div>
+						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showContacts'><?= _("Contacts");?></a></span></div>
+						<div class="sidemenuselected" style='position: relative; width: 99px'><span class='link'><?= _("Accounts");?></span></div>
+						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showIssues'><?= _("Issues");?></a></span></div>
+						<?php if ($showLicensing == "Y") { ?><div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showLicenses'><?= _("Licenses");?></a></span><br /><span class='smallGreyText' style='clear:right; margin-left:8px;'>&nbsp;(<?php if ($numLicenses == "1") { echo $numLicenses . _(" record"); }else{ echo $numLicenses . _(" records"); } ?>)</span></div><?php } ?>
 					</td>
 					<td class='mainContent'>
 
@@ -226,12 +226,12 @@ if ($organization->name){
 			<table cellpadding="0" cellspacing="0" style="width: 100%; table-layout: fixed;">
 				<tr>
 					<td class="sidemenu">
-						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showOrganization'>Organization</a></span></div>
-						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showAliases'>Aliases</a></span></div>
-						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showContacts'>Contacts</a></span></div>
-						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showAccount'>Accounts</a></span></div>
-						<div class="sidemenuselected" style='position: relative; width: 99px'><span class='link'>Issues</span></div>
-						<?php if ($showLicensing == "Y") { ?><div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showLicenses'>Licenses</a></span><br /><span class='smallGreyText' style='clear:right; margin-left:8px;'>&nbsp;(<?php if ($numLicenses == "1") { echo $numLicenses . " record"; }else{ echo $numLicenses . " records"; } ?>)</span></div><?php } ?>
+						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showOrganization'><?= _("Organization");?></a></span></div>
+						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showAliases'><?= _("Aliases");?></a></span></div>
+						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showContacts'><?= _("Contacts");?></a></span></div>
+						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showAccount'><?= _("Accounts");?></a></span></div>
+						<div class="sidemenuselected" style='position: relative; width: 99px'><span class='link'><?= _("Issues");?></span></div>
+						<?php if ($showLicensing == "Y") { ?><div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showLicenses'><?= _("Licenses");?></a></span><br /><span class='smallGreyText' style='clear:right; margin-left:8px;'>&nbsp;(<?php if ($numLicenses == "1") { echo $numLicenses . _(" record"); }else{ echo $numLicenses . _(" records"); } ?>)</span></div><?php } ?>
 					</td>
 					<td class='mainContent'>
 
@@ -251,12 +251,12 @@ if ($organization->name){
 				<table cellpadding="0" cellspacing="0" style="width: 100%; table-layout: fixed;">
 					<tr>
 						<td class="sidemenu">
-							<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showOrganization'>Organization</a></span></div>
-							<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showAliases'>Aliases</a></span></div>
-							<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showContacts'>Contacts</a></span></div>
-							<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showAccount'>Accounts</a></span></div>
-							<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showIssues'>Issues</a></span></div>
-							<div class="sidemenuselected" style='position: relative; width: 99px'><span class='link'>Licenses</span><br /><span class='smallGreyText' style='clear:right; margin-left:8px;'>&nbsp;(<?php if ($numLicenses == "1") { echo $numLicenses . " record"; }else{ echo $numLicenses . " records"; } ?>)</span></div>
+							<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showOrganization'><?= _("Organization");?></a></span></div>
+							<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showAliases'><?= _("Aliases");?></a></span></div>
+							<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showContacts'><?= _("Contacts");?></a></span></div>
+							<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showAccount'><?= _("Accounts");?></a></span></div>
+							<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showIssues'><?= _("Issues");?></a></span></div>
+							<div class="sidemenuselected" style='position: relative; width: 99px'><span class='link'><?= _("Licenses");?></span><br /><span class='smallGreyText' style='clear:right; margin-left:8px;'>&nbsp;(<?php if ($numLicenses == "1") { echo $numLicenses . _(" record"); }else{ echo $numLicenses . _(" records"); } ?>)</span></div>
 							
 						</td>
 						<td class='mainContent'>
@@ -280,7 +280,7 @@ if ($organization->name){
 	<?php
 //end if organization valid
 }else{
-	echo "invalid organization";
+	echo _("invalid organization");
 }
 
 
