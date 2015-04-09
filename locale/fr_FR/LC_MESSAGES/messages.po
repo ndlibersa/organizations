@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
-"POT-Creation-Date: 2015-04-08 17:28+0100\n"
-"PO-Revision-Date: 2015-04-08 17:28+0100\n"
+"POT-Creation-Date: 2015-04-09 12:09+0100\n"
+"PO-Revision-Date: 2015-04-09 12:09+0100\n"
 "Last-Translator: Cesar <hernandez.antonio.cesar19@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -17,254 +17,254 @@ msgstr ""
 
 #: admin.php:33
 msgid "Users"
-msgstr ""
+msgstr "Utilisateurs"
 
 #: admin.php:34
 msgid "add new user"
-msgstr ""
+msgstr "Ajouter un nouveau utilisateur"
 
 #: admin.php:37 admin.php:52 admin.php:66 admin.php:81 admin.php:95
 #: admin.php:106
 msgid "Loading..."
-msgstr ""
+msgstr "Chargement..."
 
 #: admin.php:48
 msgid "Organization Role"
-msgstr ""
+msgstr "Rôle dans l'organisation"
 
 #: admin.php:49
 msgid "add new organization role"
-msgstr ""
+msgstr "Ajouter un nouveau rôle dans l'organisation"
 
 #: admin.php:62
 msgid "Contact Role"
-msgstr ""
+msgstr "Rôle du contact"
 
 #: admin.php:63
 msgid "add new contact role"
-msgstr ""
+msgstr "Ajouter un nouveau rôle du contact"
 
 #: admin.php:77 ajax_forms.php:202
 msgid "Alias Type"
-msgstr ""
+msgstr "Type d'alias"
 
 #: admin.php:78
 msgid "add new alias type"
-msgstr ""
+msgstr "Ajouter un nouveau type d'alias"
 
 #: admin.php:91
 msgid "External Login Type"
-msgstr ""
+msgstr "Type de connexion externe"
 
 #: admin.php:92
 msgid "add new external login type"
-msgstr ""
+msgstr "Ajouter un nouveau type de connexion externe"
 
 #: admin.php:102
 msgid "Issue Type"
-msgstr ""
+msgstr "Type de question"
 
 #: admin.php:103
 msgid "add new issue type"
-msgstr ""
+msgstr "Ajouter un nouveau type de question"
 
 #: admin.php:118
 msgid "You do not have permissions to access this screen."
-msgstr ""
+msgstr "Vous n'avez pas la permission d'accèder dans cette page."
 
 #: admin/classes/common/DBService.php:39
 msgid "There was a problem with the database: "
-msgstr ""
+msgstr "Il y avait un problème avec la base de données: "
 
 #: admin/classes/common/Object.php:63
 msgid "Cannot set value for undefined key ("
-msgstr ""
+msgstr "Ne peut pas asigner une clé indefini ("
 
 #: admin/classes/common/Object.php:72
 msgid "Cannot get value for undefined key ("
-msgstr ""
+msgstr "Ne peut pas récupérer une clé indefini ("
 
 #: ajax_forms.php:67
 msgid "Update Organization"
-msgstr ""
+msgstr "Mise à jour l'organisation"
 
 #: ajax_forms.php:67
 msgid "Add New Organization"
-msgstr ""
+msgstr "Ajouter une nouvelle organisation"
 
 #: ajax_forms.php:72 ajax_forms.php:292
 msgid "Name:"
-msgstr ""
+msgstr "Nom:"
 
 #: ajax_forms.php:78 ajax_forms.php:92
 msgid "Parent:"
-msgstr ""
+msgstr "Père:"
 
 #: ajax_forms.php:101
 msgid "Company URL:"
-msgstr ""
+msgstr "URL de l'entreprise:"
 
 #: ajax_forms.php:107 ajax_forms.php:349
 msgid "Role(s):"
-msgstr ""
+msgstr "Rôle(s):"
 
 #: ajax_forms.php:139
 msgid "Account Details:"
-msgstr ""
+msgstr "Détails de la compte:"
 
 #: ajax_forms.php:144 ajax_forms.php:386 ajax_forms.php:489 ajax_forms.php:590
 msgid "Notes:"
-msgstr ""
+msgstr "Notes:"
 
 #: ajax_forms.php:154 ajax_forms.php:231 ajax_forms.php:395 ajax_forms.php:500
 #: ajax_forms.php:600
 msgid "submit"
-msgstr ""
+msgstr "Confirmer"
 
 #: ajax_forms.php:155 ajax_forms.php:232 ajax_forms.php:396 ajax_forms.php:501
 #: ajax_forms.php:601 ajax_forms.php:809
 msgid "cancel"
-msgstr ""
+msgstr "Annuler"
 
 #: ajax_forms.php:196
 msgid "Update Alias"
-msgstr ""
+msgstr "Mise à jour l'alias"
 
 #: ajax_forms.php:196
 msgid "Add Alias"
-msgstr ""
+msgstr "Ajouter un alias"
 
 #: ajax_forms.php:219
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #: ajax_forms.php:286
 msgid "Update Contact"
-msgstr ""
+msgstr "Mise àa jour le contact"
 
 #: ajax_forms.php:286
 msgid "Add Contact"
-msgstr ""
+msgstr "Ajouter un contact"
 
 #: ajax_forms.php:299
 msgid "Title:"
-msgstr ""
+msgstr "Titre:"
 
 #: ajax_forms.php:306
 msgid "Phone:"
-msgstr ""
+msgstr "Téléphone:"
 
 #: ajax_forms.php:313
 msgid "Alt Phone:"
-msgstr ""
+msgstr "Téléphone Alt:"
 
 #: ajax_forms.php:334
 msgid "Archived:"
-msgstr ""
+msgstr "Archivé:"
 
 #: ajax_forms.php:342
 msgid "Address:"
-msgstr ""
+msgstr "Adresse:"
 
 #: ajax_forms.php:438
 msgid "Update Login"
-msgstr ""
+msgstr "Mise à jour la connexion"
 
 #: ajax_forms.php:438
 msgid "Add Login"
-msgstr ""
+msgstr "Ajouter une connexion"
 
 #: ajax_forms.php:444
 msgid "Login Type:"
-msgstr ""
+msgstr "Type de connexion:"
 
 #: ajax_forms.php:468
 msgid "Local Account Email:"
-msgstr ""
+msgstr "Compte local d'email"
 
 #: ajax_forms.php:475
 msgid "Username:"
-msgstr ""
+msgstr "Nom d'utilisateur:"
 
 #: ajax_forms.php:482
 msgid "Password:"
-msgstr ""
+msgstr "Mot de passe:"
 
 #: ajax_forms.php:551
 msgid "Update Issue"
-msgstr ""
+msgstr "Mise àa jour la question"
 
 #: ajax_forms.php:551
 msgid "Add Issue"
-msgstr ""
+msgstr "Ajouter une question"
 
 #: ajax_forms.php:557
 msgid "Type:"
-msgstr ""
+msgstr "Type:"
 
 #: ajax_forms.php:575
 msgid "Start date:"
-msgstr ""
+msgstr "Date de début:"
 
 #: ajax_forms.php:582
 msgid "End date:"
-msgstr ""
+msgstr "Date de fin:"
 
 #: ajax_forms.php:641
 msgid "edit"
-msgstr ""
+msgstr "Modifier"
 
 #: ajax_forms.php:642 ajax_forms.php:746
 msgid "remove"
-msgstr ""
+msgstr "Supprimer"
 
 #: ajax_forms.php:669 ajax_forms.php:766
 msgid "Update"
-msgstr ""
+msgstr "Mise à jour"
 
 #: ajax_forms.php:675 ajax_forms.php:745
 msgid "update"
-msgstr ""
+msgstr "mise à jour"
 
 #: ajax_forms.php:683
 msgid "close"
-msgstr ""
+msgstr "Fermer"
 
 #: ajax_forms.php:730 ajax_forms.php:783
 msgid "Login ID"
-msgstr ""
+msgstr "Identifiant de connexion"
 
 #: ajax_forms.php:731 ajax_forms.php:784
 msgid "First Name"
-msgstr ""
+msgstr "Prènom"
 
 #: ajax_forms.php:732 ajax_forms.php:785
 msgid "Last Name"
-msgstr ""
+msgstr "Nom"
 
 #: ajax_forms.php:733 ajax_forms.php:786
 msgid "Privilege"
-msgstr ""
+msgstr "Privilège"
 
 #: ajax_forms.php:755
 msgid "(none found)"
-msgstr ""
+msgstr "(non trouvé)"
 
 #: ajax_forms.php:768
 msgid "Add New"
-msgstr ""
+msgstr "Ajouter nouveau"
 
 #: ajax_forms.php:782
 msgid " User"
-msgstr ""
+msgstr " Utilisateur"
 
 #: ajax_forms.php:824
 msgid "Action "
-msgstr ""
+msgstr "Action"
 
 #: ajax_forms.php:824
 msgid " not set up!"
-msgstr ""
+msgstr " ne pas etabli!"
 
 #: templates/header.php:59
 msgid ""
@@ -272,19 +272,23 @@ msgid ""
 "JavaScript is either disabled or not supported by your browser. To use "
 "CORAL, enable JavaScript by changing your browser options, then "
 msgstr ""
+"JavaScript doit être activé pour utiliser CORAL. Cependant, on semble qui "
+"JavaScript est desactivé ou n'est pas supporté par votre navigateur. Pour "
+"utiliser CORAL, activez JavaScript en modifiant la configuration de votre "
+"navigateur, après "
 
 #: templates/header.php:59
 msgid "try again"
-msgstr ""
+msgstr "réessayez"
 
 #: templates/header.php:78
 msgid "Hello, "
-msgstr ""
+msgstr "Bonjour, "
 
 #: templates/header.php:88
 msgid "logout"
-msgstr ""
+msgstr "Se déconnecter"
 
 #: templates/header.php:116
 msgid "Change Module"
-msgstr ""
+msgstr "Changer le module"
