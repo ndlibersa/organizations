@@ -94,11 +94,15 @@ $coralURL = $util->getCORALURL();
 <td style='width:870px;height:19px;'>
 
 <?php if ($user->isAdmin()){ ?>
-<a href='index.php'><img src="images/menu/menu-home<?php if ($currentPage == 'index.php') { echo "-on"; } ?>.gif" hover="images/menu/menu-home-over.gif" class="rollover" /></a><img src='images/menu/menu-bar.gif'><a href='ajax_forms.php?action=getOrganizationForm&height=364&width=345&modal=true' class='thickbox' id='newLicense'><img src='images/menu/menu-neworganization.gif' hover="images/menu/menu-neworganization-over.gif" class="rollover"></a><img src='images/menu/menu-bar.gif'><a href='admin.php'><img src='images/menu/menu-admin<?php if ($currentPage == 'admin.php') { echo "-on"; } ?>.gif' hover="images/menu/menu-admin-over.gif" id="menu-last" class="rollover" /></a><img src='images/menu/menu-end<?php if ($currentPage == 'admin.php') { echo "-on"; } ?>.gif' hover="images/menu/menu-end-over.gif" id="menu-end" />
+<a href='index.php'><span class="menubtn<?php if ($currentPage == 'index.php') { echo " active"; } ?>" id="firstmenubtn"><?= _("Home");?></span></a><a href='ajax_forms.php?action=getOrganizationForm&height=364&width=345&modal=true' class='thickbox' id='newLicense'><span class="menubtn"><?= _("New Organization");?></span></a><a href='admin.php'><span class="menubtn<?php if ($currentPage == 'admin.php') { echo " active"; } ?>" id="lastmenubtn"><?= _("Admin");?></span></a>
+
+
 <?php }else if ($user->canEdit()){?>
-<a href='index.php'><img src="images/menu/menu-home<?php if ($currentPage == 'index.php') { echo "-on"; } ?>.gif" hover="images/menu/menu-home-over.gif" class="rollover" /></a><img src='images/menu/menu-bar.gif'><a href='ajax_forms.php?action=getOrganizationForm&height=364&width=345&modal=true' class='thickbox' id='newLicense'><img src='images/menu/menu-neworganization.gif' hover="images/menu/menu-neworganization-over.gif" class="rollover" id="menu-last" /></a><img src='images/menu/menu-end.gif' hover="images/menu/menu-end-over.gif" id="menu-end" />
+<a href='index.php'><span class="menubtn<?php if ($currentPage == 'index.php') { echo " active"; } ?>" id="firstmenubtn"><?= _("Home");?></span></a><a href='ajax_forms.php?action=getOrganizationForm&height=364&width=345&modal=true' class='thickbox' id='newLicense'><span class="menubtn" id="lastmenubtn"><?= _("New Organization");?></span></a>
+
+
 <?php }else{ ?>
-<a href='index.php'><img src="images/menu/menu-home.gif" hover="images/menu/menu-home-over.gif" id="menu-last" class="rollover" /></a><img src='images/menu/menu-end.gif' hover="images/menu/menu-end-over.gif" id="menu-end" />
+<a href='index.php'><span class="menubtn<?php if ($currentPage == 'index.php') { echo " active"; } ?>" id="onlyButton"><?= _("Home");?></span></a>
 <?php } ?>
 </td>
 

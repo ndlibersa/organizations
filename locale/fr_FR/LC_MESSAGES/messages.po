@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
-"POT-Creation-Date: 2015-04-09 15:47+0100\n"
-"PO-Revision-Date: 2015-04-09 16:15+0100\n"
+"POT-Creation-Date: 2015-04-09 17:08+0100\n"
+"PO-Revision-Date: 2015-04-09 17:08+0100\n"
 "Last-Translator: Cesar <hernandez.antonio.cesar19@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -543,7 +543,8 @@ msgstr "L'organisation a été effacé avec succès."
 msgid "User successfully saved."
 msgstr "L'utilisateur a été enregistré avec succès."
 
-#: index.php:26
+#: index.php:26 templates/header.php:97 templates/header.php:101
+#: templates/header.php:105
 msgid "Home"
 msgstr "Accueil"
 
@@ -694,7 +695,15 @@ msgstr "Bonjour, "
 msgid "logout"
 msgstr "Se déconnecter"
 
-#: templates/header.php:116
+#: templates/header.php:97 templates/header.php:101
+msgid "New Organization"
+msgstr "Nouvelle organisation"
+
+#: templates/header.php:97
+msgid "Admin"
+msgstr "Admin"
+
+#: templates/header.php:120
 msgid "Change Module"
 msgstr "Changer le module"
 
