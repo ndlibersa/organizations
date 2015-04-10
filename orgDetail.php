@@ -78,7 +78,7 @@ if ($organization->name){
         if ($config->settings->resourcesModule == 'Y'){ ?>
         <div style="width: 303px; float:right; border: 1px solid #DAD5C9; padding:5px;">
             <h3>Helpful Links</h3>
-	    	<div class='rightPanelLink' style='padding-left:10px;'><a href='summary.php?organizationID=<?php echo $organizationID; ?>' target='_blank' class='helpfulLink'>Print View</a></div>
+	    	<div class='rightPanelLink' style='padding-left:10px;'><a href='summary.php?organizationID=<?php echo $organizationID; ?>' target='_blank' class='helpfulLink'><?= _("Print View");?></a></div>
 
             <?php
             //get all possible roles, sort by name, get associated resources

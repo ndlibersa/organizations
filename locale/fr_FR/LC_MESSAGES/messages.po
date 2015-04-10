@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
-"POT-Creation-Date: 2015-04-09 17:08+0100\n"
-"PO-Revision-Date: 2015-04-09 17:43+0100\n"
+"POT-Creation-Date: 2015-04-10 16:51+0100\n"
+"PO-Revision-Date: 2015-04-10 16:51+0100\n"
 "Last-Translator: Cesar <hernandez.antonio.cesar19@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -427,7 +427,7 @@ msgstr "Fin: "
 
 #: ajax_htmldata.php:608
 msgid "edit issue"
-msgstr "Modifier le problème"
+msgstr "Modifier ce problème"
 
 #: ajax_htmldata.php:609
 msgid "remove issue"
@@ -442,8 +442,12 @@ msgid "add new issue"
 msgstr "Ajouter un nouveau problème"
 
 #: ajax_htmldata.php:629
+msgid "export these issues"
+msgstr "exporter ces problèmes"
+
+#: ajax_htmldata.php:629
 msgid "export all issues"
-msgstr "experter tous les problèmes"
+msgstr "exporter tous les problèmes"
 
 #: ajax_htmldata.php:656
 msgid "License"
@@ -583,6 +587,10 @@ msgstr "Commence avec"
 #: orgDetail.php:67
 msgid "Organization Search"
 msgstr "Recherche d'une organisation"
+
+#: orgDetail.php:81
+msgid "Print View"
+msgstr "Imprimer cet écran"
 
 #: orgDetail.php:98
 msgid "(archived)"
