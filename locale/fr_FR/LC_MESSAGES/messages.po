@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
-"POT-Creation-Date: 2015-04-10 16:51+0100\n"
-"PO-Revision-Date: 2015-04-10 16:51+0100\n"
+"POT-Creation-Date: 2015-04-15 14:04+0100\n"
+"PO-Revision-Date: 2015-04-15 14:04+0100\n"
 "Last-Translator: Cesar <hernandez.antonio.cesar19@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -714,6 +714,14 @@ msgstr "Admin"
 #: templates/header.php:120
 msgid "Change Module"
 msgstr "Changer le module"
+
+#: templates/header.php:150 templates/header.php:151
+msgid "French"
+msgstr "Français"
+
+#: templates/header.php:150 templates/header.php:151
+msgid "English"
+msgstr "Anglais"
 
 #: user.php:106
 msgid ""
