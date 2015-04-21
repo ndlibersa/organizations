@@ -1,7 +1,7 @@
-ALTER TABLE  `IssueLog` ADD  `issueLogTypeId` INT NULL AFTER  `organizationID` ;
+ALTER TABLE  `IssueLog` ADD  `issueLogTypeID` INT NULL AFTER  `organizationID` ;
 ALTER TABLE  `IssueLog` CHANGE  `issueDate`  `issueStartDate` DATE NULL DEFAULT NULL ;
 ALTER TABLE  `IssueLog` ADD  `issueEndDate` DATE NULL AFTER  `issueStartDate` ;
-CREATE INDEX `issueLogTypeId` ON `IssueLog` (`issueLogTypeId` ) ;
+CREATE INDEX `issueLogTypeId` ON `IssueLog` (`issueLogTypeID` ) ;
 
 CREATE TABLE IF NOT EXISTS  `IssueLogType` (
   `issueLogTypeID` int(11) NOT NULL auto_increment,
