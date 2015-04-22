@@ -78,7 +78,7 @@
  function addData(className){
 
        if ($('#new' + className).val()) {
-       	       $('#span_' + className + "_response").html('<img src = "images/circle.gif">&nbsp;&nbsp;Processing...');
+       	       $('#span_' + className + "_response").html("<img src = 'images/circle.gif'>&nbsp;&nbsp;"+_("Processing..."));
        	       
 	       $.ajax({
 		  type:       "GET",
@@ -117,9 +117,9 @@
 
  function deleteData(className, deleteId){
  
- 	if (confirm("Do you really want to delete this data?") == true) {
+ 	if (confirm(_("Do you really want to delete this data?")) == true) {
 
-	       $('#span_' + className + "_response").html('<img src = "images/circle.gif">&nbsp;&nbsp;Processing...');
+	       $('#span_' + className + "_response").html("<img src = 'images/circle.gif'>&nbsp;&nbsp;"+_("Processing..."));
 	       $.ajax({
 		  type:       "GET",
 		  url:        "ajax_processing.php",
@@ -143,7 +143,7 @@
 
  function deleteUser(deleteId){
  
- 	if (confirm("Do you really want to delete this user?") == true) {
+ 	if (confirm(_("Do you really want to delete this user?")) == true) {
 
 	       $('#span_User_response').html('<img src = "images/circle.gif">&nbsp;&nbsp;Processing...');
 	       $.ajax({
@@ -167,7 +167,7 @@
  
  
 function showAdd(className){
-       $('#span_new' + className).html("<input type='text' name='new" + className + "' id='new" + className + "' class='adminAddInput' />  <a href='javascript:addData(\"" + className + "\");'>add</a>");
+       $('#span_new' + className).html("<input type='text' name='new" + className + "' id='new" + className + "' class='adminAddInput' />  <a href='javascript:addData(\"" + className + "\");'>"+_("add")+"</a>");
 
        //attach enter key event to new input and call add data when hit
        $('#new' + className).keyup(function(e) {
@@ -186,7 +186,7 @@ function emptyResponse(className){
 
 
 function updateOrderGroups(){
-       $('#span_CancelReason_response').html('<img src = "images/circle.gif">&nbsp;&nbsp;Processing...');
+       $('#span_CancelReason_response').html("<img src = 'images/circle.gif'>&nbsp;&nbsp;"+_("Processing..."));
        
        
        $.ajax({

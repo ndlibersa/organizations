@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
-"POT-Creation-Date: 2015-04-15 14:04+0100\n"
-"PO-Revision-Date: 2015-04-15 14:04+0100\n"
+"POT-Creation-Date: 2015-04-22 12:31+0100\n"
+"PO-Revision-Date: 2015-04-22 12:31+0100\n"
 "Last-Translator: Cesar <hernandez.antonio.cesar19@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -14,6 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: /var/www/Coral/organizations/js/plugins\n"
 
 #: admin.php:33
 msgid "Users"
@@ -547,8 +548,8 @@ msgstr "L'organisation a été effacé avec succès."
 msgid "User successfully saved."
 msgstr "L'utilisateur a été enregistré avec succès."
 
-#: index.php:26 templates/header.php:97 templates/header.php:101
-#: templates/header.php:105
+#: index.php:26 templates/header.php:110 templates/header.php:114
+#: templates/header.php:118
 msgid "Home"
 msgstr "Accueil"
 
@@ -680,7 +681,7 @@ msgstr "Date ajoutée"
 msgid "Issue Date"
 msgstr "Date du problème"
 
-#: templates/header.php:59
+#: templates/header.php:72
 msgid ""
 "JavaScript must be enabled in order for you to use CORAL. However, it seems "
 "JavaScript is either disabled or not supported by your browser. To use "
@@ -691,35 +692,35 @@ msgstr ""
 "utiliser CORAL, activez JavaScript en modifiant la configuration de votre "
 "navigateur, après "
 
-#: templates/header.php:59
+#: templates/header.php:72
 msgid "try again"
 msgstr "réessayez"
 
-#: templates/header.php:78
+#: templates/header.php:91
 msgid "Hello, "
 msgstr "Bonjour, "
 
-#: templates/header.php:88
+#: templates/header.php:101
 msgid "logout"
 msgstr "Se déconnecter"
 
-#: templates/header.php:97 templates/header.php:101
+#: templates/header.php:110 templates/header.php:114
 msgid "New Organization"
 msgstr "Nouvelle organisation"
 
-#: templates/header.php:97
+#: templates/header.php:110
 msgid "Admin"
 msgstr "Admin"
 
-#: templates/header.php:120
+#: templates/header.php:133
 msgid "Change Module"
 msgstr "Changer le module"
 
-#: templates/header.php:150 templates/header.php:151
+#: templates/header.php:163 templates/header.php:164
 msgid "French"
 msgstr "Français"
 
-#: templates/header.php:150 templates/header.php:151
+#: templates/header.php:163 templates/header.php:164
 msgid "English"
 msgstr "Anglais"
 
@@ -730,3 +731,74 @@ msgid ""
 msgstr ""
 "La connexion ne marche pas. Vérifiez le fichier .htaccess et "
 "remoteAuthVariableName specifié en /admin/configuration.ini"
+
+#: js/admin.js:81 js/admin.js:122 js/admin.js:189 js/index.js:46
+msgid "Processing..."
+msgstr "En traitement ..."
+
+#: js/admin.js:120
+msgid "Do you really want to delete this data?"
+msgstr "Voulez-vous vraiment supprimer cette donnée?"
+
+#: js/admin.js:146
+msgid "Do you really want to delete this user?"
+msgstr "Voulez-vous vraiment supprimer cet utilisateur?"
+
+#: js/admin.js:170
+msgid "add"
+msgstr "Ajouter"
+
+#: js/common.js:113
+msgid "No match!"
+msgstr "Pas des coincidences!"
+
+#: js/common.js:113
+msgid "Selected: "
+msgstr "Sélectionné: "
+
+#: js/forms/aliasSubmitForm.js:43 js/forms/contactSubmitForm.js:125
+#: js/forms/organizationSubmitForm.js:109
+msgid "Name must be entered to continue."
+msgstr "Le nom du doit être écrit avant de continuer."
+
+#: js/forms/contactSubmitForm.js:118
+msgid "Please choose at least one role."
+msgstr "S'il vous plaît, choisissez au moins un rôle."
+
+#: js/forms/organizationSubmitForm.js:33
+msgid "This organization already exists!"
+msgstr "Cette organisation est déjà existant!"
+
+#: js/orgDetail.js:119 js/orgDetail.js:153 js/orgDetail.js:172
+#: js/orgDetail.js:196 js/orgDetail.js:214 js/orgDetail.js:232
+#: js/orgDetail.js:250
+msgid "Refreshing Contents..."
+msgstr "Rechargements des contenus..."
+
+#: js/orgDetail.js:270
+msgid "Do you really want to delete this organization?"
+msgstr "Voulez-vous vraiment supprimer cette organisation?"
+
+#: js/orgDetail.js:288
+msgid ""
+"This Organization cannot be deleted because it has at least one License "
+"Record associated."
+msgstr ""
+"Cette organisation ne peut pas être supprimé  parce qu'il  au moins une "
+"licence associé."
+
+#: js/orgDetail.js:296
+msgid "Do you really want to delete this alias?"
+msgstr "Voulez-vous vraiment enlever cette alias?"
+
+#: js/orgDetail.js:314
+msgid "Do you really want to delete this contact?"
+msgstr "Voulez-vous vraiment supprimer cette contact?"
+
+#: js/orgDetail.js:332
+msgid "Do you really want to delete this account?"
+msgstr "Voulez-vous vraiment supprimer cette compte?"
+
+#: js/orgDetail.js:351
+msgid "Do you really want to delete this issue?"
+msgstr "Voulez-vous vraiment supprimer cette problème?"
