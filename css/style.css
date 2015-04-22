@@ -10,7 +10,6 @@ body {
  color:  #2c3c42;
  font-family: "arial";
  font-size: 10pt;
- font-weight: heavy;
  background: #FFFFFF;
  margin: 0; /* it's good practice to zero the margin and padding of the body element to account for differing browser defaults */
  padding: 0;
@@ -49,18 +48,18 @@ a.bigLink {font-size:103%; }
 
 span.smallText{color:#3D545D;font-size:92%;}
 span.smallerText{color:#3D545D;font-size:85%;}
-span.redText{color:red}
-span.normalText{color:#3D545D}
-span.smallGreyText{font-size:95%;font-weight:normal; color:gray}
+span.redText{color:red;}
+span.normalText{color:#3D545D;}
+span.smallGreyText{font-size:95%;font-weight:normal; color:gray;}
 
 img {border:0;}
 fieldset {border:0;}
 
-select option { color: #3D545D; font-family: "arial"; font-size: 8pt; font-weight: medium; }
-.optionStyle { color: #3D545D; font-family: "arial"; font-size: 8pt; font-weight: medium; }
+select option { color: #3D545D; font-family: "arial"; font-size: 8pt; }
+.optionStyle { color: #3D545D; font-family: "arial"; font-size: 8pt; }
 .errorText { color: red;font-size:95%; }
 
-input, select, multiple, textarea{color: #3D545D; font-family: "arial"; font-size: 8pt; font-weight: medium;}
+input, select, multiple, textarea{color: #3D545D; font-family: "arial"; font-size: 8pt;}
 
 table#title {padding:0px; background-image:url('../images/organizationstitle.gif');background-repeat:no-repeat;height:84px;width:900px;}
 table.headerTable {padding:1px;width:900px;min-height:40px;background-image:url('../images/header.gif');background-repeat:no-repeat;}
@@ -243,18 +242,18 @@ table.sample {
 	margin:0px;
 	border-width: 0px;
 	border-spacing: 0px;
-	border-style: inset inset inset inset;
+	border-style: inset;
 	border-color: white;
 	border-collapse: collapse;
 	background-color: white;
 }
 
 table.sample td.main {
-	border-width: 1px 1px 1px 1px;
-	padding: 3px 3px 3px 3px;
-	border-style: solid solid solid solid;
+	border-width: 1px;
+	padding: 3px;
+	border-style: solid;
 	border-color: gray gray gray white;
-	-moz-border-radius: 0px 0px 0px 0px;
+	-moz-border-radius: 0px;
 }
 
 table.sample td.selected {
@@ -262,21 +261,21 @@ table.sample td.selected {
 	height:15px;
 	border-width: 1px 0px 1px 1px;
 	padding: 8px 3px 8px 3px;
-	border-style: solid solid solid solid;
+	border-style: solid;
 	border-color: gray white gray gray;
-	-moz-border-radius: 0px 0px 0px 0px;
+	-moz-border-radius: 0px;
 
 }
 
 table.sample td.unselected {
 	width:110px;
 	height:15px;
-	border-width: 1px 1px 1px 1px;
+	border-width: 1px;
 	padding: 8px 3px 8px 3px;
-	border-style: solid solid solid solid;
-	border-color: gray gray gray gray;
+	border-style: solid;
+	border-color: gray;
 	background-color: #adc6de;
-	-moz-border-radius: 0px 0px 0px 0px;
+	-moz-border-radius: 0px;
 
 }
 
@@ -284,11 +283,11 @@ table.sample td.unselected {
 table.sample td.bottom {
 	width:90px;
 	height:auto;
-	border-width: 1px 1px 1px 1px;
-	padding: 3px 3px 3px 3px;
-	border-style: solid solid solid solid;
+	border-width: 1px;
+	padding: 3px;
+	border-style: solid;
 	border-color: white gray white white;
-	-moz-border-radius: 0px 0px 0px 0px;
+	-moz-border-radius: 0px;
 
 }
 
@@ -382,7 +381,7 @@ table.verticalFormTable {
 
 table.verticalFormTable td {
 	margin: 0;
-	padding: 3px 3px 3px 3px;
+	padding: 3px;
 	border-width: 1px 1px 0 0;
 	border-style: solid;
 	border-color: #e0dfe3;
@@ -525,7 +524,7 @@ table.linedFormTable td {
 
 table.linedFormTable td.bottom {
 	margin: 0;
-	padding: 3px 3px 3px 3px;
+	padding: 3px;
 	border-width: 1px 0 0 0;
 	border-style: solid;
 	border-color: #e6e5e9;
@@ -560,10 +559,9 @@ table.linedFormTable td.outstanding {
 
 
 .printContent{
-    padding: 24px 24px 24px 24px; 
+    padding: 24px; 
     background-color: white; 
     text-align:left;
-    background-color: white;
     vertical-align: top;
     
 }
@@ -571,7 +569,7 @@ table.linedFormTable td.outstanding {
 table.noBorder td { border:0; }
 
 table.noMargin { border:0px;margin:0px; padding:0px;text-align:center; }
-table.noMargin tr { border:0px;margin:0px; padding:0px; vertical-align:center; }
+table.noMargin tr { border:0px;margin:0px; padding:0px; vertical-align:middle; }
 table.noMargin td { border:0px;margin:0px; padding:0px; }
 
 
@@ -586,7 +584,6 @@ table.thickboxTable{
  color:  #2c3c42;
  font-family: "arial";
  font-size: 8pt;
- font-weight: heavy;
 }
 
 table.thickboxTable td{
@@ -595,9 +592,9 @@ table.thickboxTable td{
 
 .smallText{font-size:small;}
 
-.infoText{font-size:small;font-weight:normal; color:gray}
-.span_CancellationNumber{font-size:small;font-weight:normal; color:gray}
-.span_CurrentQueue{font-size:small;font-weight:normal; color:gray}
+.infoText{font-size:small;font-weight:normal; color:gray;}
+.span_CancellationNumber{font-size:small;font-weight:normal; color:gray;}
+.span_CurrentQueue{font-size:small;font-weight:normal; color:gray;}
 
 .arrowContainer{text-align:right;}
 
