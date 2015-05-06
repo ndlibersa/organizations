@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
-"POT-Creation-Date: 2015-04-23 12:28+0100\n"
-"PO-Revision-Date: 2015-04-23 12:28+0100\n"
+"POT-Creation-Date: 2015-05-06 17:14+0100\n"
+"PO-Revision-Date: 2015-05-06 17:14+0100\n"
 "Last-Translator: Cesar <hernandez.antonio.cesar19@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -15,6 +15,10 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: /var/www/Coral/organizations/js/plugins\n"
+
+#: admin.php:22
+msgid "Administration"
+msgstr "Administration"
 
 #: admin.php:33
 msgid "Users"
@@ -161,6 +165,14 @@ msgstr "Téléphone:"
 msgid "Alt Phone:"
 msgstr "Téléphone Alt:"
 
+#: ajax_forms.php:320 ajax_htmldata.php:372 summary.php:377
+msgid "Fax:"
+msgstr "Fax:"
+
+#: ajax_forms.php:327 ajax_htmldata.php:380 summary.php:385
+msgid "Email:"
+msgstr "Email:"
+
 #: ajax_forms.php:334
 msgid "Archived:"
 msgstr "Archivé:"
@@ -180,6 +192,10 @@ msgstr "Ajouter une connexion"
 #: ajax_forms.php:444
 msgid "Login Type:"
 msgstr "Type de connexion:"
+
+#: ajax_forms.php:461
+msgid "URL:"
+msgstr "URL:"
 
 #: ajax_forms.php:468
 msgid "Local Account Email:"
@@ -222,6 +238,10 @@ msgstr "Modifier"
 msgid "remove"
 msgstr "Supprimer"
 
+#: ajax_forms.php:651 ajax_forms.php:755
+msgid "(none found)"
+msgstr "(non trouvé)"
+
 #: ajax_forms.php:669 ajax_forms.php:766
 msgid "Update"
 msgstr "Mise à jour"
@@ -249,10 +269,6 @@ msgstr "Nom"
 #: ajax_forms.php:733 ajax_forms.php:786
 msgid "Privilege"
 msgstr "Privilège"
-
-#: ajax_forms.php:755
-msgid "(none found)"
-msgstr "(non trouvé)"
 
 #: ajax_forms.php:768
 msgid "Add New"
@@ -589,9 +605,17 @@ msgstr "Commence avec"
 msgid "Organization Search"
 msgstr "Recherche d'une organisation"
 
+#: orgDetail.php:80
+msgid "Helpful Links"
+msgstr "Liens d'aide"
+
 #: orgDetail.php:81
 msgid "Print View"
 msgstr "Imprimer cet écran"
+
+#: orgDetail.php:92
+msgid " of:"
+msgstr " de:"
 
 #: orgDetail.php:98
 msgid "(archived)"
@@ -732,7 +756,8 @@ msgstr ""
 "La connexion ne marche pas. Vérifiez le fichier .htaccess et "
 "remoteAuthVariableName specifié en /admin/configuration.ini"
 
-#: js/admin.js:81 js/admin.js:122 js/admin.js:189 js/index.js:46
+#: js/admin.js:81 js/admin.js:122 js/admin.js:148 js/admin.js:189
+#: js/index.js:46
 msgid "Processing..."
 msgstr "En traitement ..."
 
