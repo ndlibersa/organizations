@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS  `_DATABASE_NAME_`.`Alias` (
   UNIQUE KEY `aliasID` (`aliasID`),
   KEY `organizationID` (`organizationID`),
   KEY `aliasTypeID` (`aliasTypeID`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE IF NOT EXISTS  `_DATABASE_NAME_`.`AliasType` (
@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS  `_DATABASE_NAME_`.`AliasType` (
   `shortName` varchar(50) default NULL,
   PRIMARY KEY  (`aliasTypeID`),
   UNIQUE KEY `aliasTypeID` (`aliasTypeID`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE IF NOT EXISTS  `_DATABASE_NAME_`.`Contact` (
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS  `_DATABASE_NAME_`.`Contact` (
   PRIMARY KEY  (`contactID`),
   UNIQUE KEY `contactID` (`contactID`),
   KEY `organizationID` (`organizationID`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE IF NOT EXISTS  `_DATABASE_NAME_`.`ContactRole` (
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS  `_DATABASE_NAME_`.`ContactRole` (
   `shortName` varchar(50) default NULL,
   PRIMARY KEY  (`contactRoleID`),
   UNIQUE KEY `contactRoleID` (`contactRoleID`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS  `_DATABASE_NAME_`.`ContactRoleProfile` (
   `contactID` int(10) unsigned NOT NULL,
   `contactRoleID` int(10) unsigned NOT NULL,
   PRIMARY KEY  (`contactID`,`contactRoleID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
 
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS  `_DATABASE_NAME_`.`ExternalLogin` (
   UNIQUE KEY `externalLoginID` (`externalLoginID`),
   KEY `organizationID` (`organizationID`),
   KEY `externalLoginTypeID` (`externalLoginTypeID`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE IF NOT EXISTS  `_DATABASE_NAME_`.`ExternalLoginType` (
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS  `_DATABASE_NAME_`.`ExternalLoginType` (
   `shortName` varchar(50) default NULL,
   PRIMARY KEY  (`externalLoginTypeID`),
   UNIQUE KEY `externalLoginTypeID` (`externalLoginTypeID`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE IF NOT EXISTS  `_DATABASE_NAME_`.`IssueLog` (
@@ -92,14 +92,14 @@ CREATE TABLE IF NOT EXISTS  `_DATABASE_NAME_`.`IssueLog` (
   UNIQUE KEY `issueLogID` (`issueLogID`),
   KEY `organizationID` (`organizationID`),
   KEY `issueLogTypeID` (`issueLogTypeID`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS  `_DATABASE_NAME_`.`IssueLogType` (
   `issueLogTypeID` int(11) NOT NULL auto_increment,
   `shortName` varchar(50) default NULL,
   PRIMARY KEY  (`issueLogTypeID`),
   UNIQUE KEY `issueLogTypeID` (`issueLogTypeID`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE IF NOT EXISTS  `_DATABASE_NAME_`.`Organization` (
@@ -114,14 +114,14 @@ CREATE TABLE IF NOT EXISTS  `_DATABASE_NAME_`.`Organization` (
   `accountDetailText` text,
   PRIMARY KEY  (`organizationID`),
   UNIQUE KEY `organizationID` (`organizationID`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE IF NOT EXISTS  `_DATABASE_NAME_`.`OrganizationHierarchy` (
   `organizationID` int(11) NOT NULL,
   `parentOrganizationID` int(11) NOT NULL,
   PRIMARY KEY  (`organizationID`,`parentOrganizationID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE IF NOT EXISTS  `_DATABASE_NAME_`.`OrganizationRole` (
@@ -129,7 +129,7 @@ CREATE TABLE IF NOT EXISTS  `_DATABASE_NAME_`.`OrganizationRole` (
   `shortName` varchar(50) default NULL,
   PRIMARY KEY  (`organizationRoleID`),
   UNIQUE KEY `organizationRoleID` (`organizationRoleID`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE IF NOT EXISTS  `_DATABASE_NAME_`.`OrganizationRoleProfile` (
@@ -137,14 +137,14 @@ CREATE TABLE IF NOT EXISTS  `_DATABASE_NAME_`.`OrganizationRoleProfile` (
   `organizationRoleID` int(11) NOT NULL,
   PRIMARY KEY  (`organizationID`,`organizationRoleID`),
   KEY `organizationRoleID` (`organizationRoleID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE IF NOT EXISTS  `_DATABASE_NAME_`.`Privilege` (
   `privilegeID` int(10) unsigned NOT NULL auto_increment,
   `shortName` varchar(50) default NULL,
   PRIMARY KEY  USING BTREE (`privilegeID`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE IF NOT EXISTS  `_DATABASE_NAME_`.`User` (
@@ -155,7 +155,7 @@ CREATE TABLE IF NOT EXISTS  `_DATABASE_NAME_`.`User` (
   `accountTabIndicator` int(1) unsigned default '0',
   PRIMARY KEY  USING BTREE (`loginID`),
   KEY `roleID` USING BTREE (`privilegeID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
 DELETE FROM `_DATABASE_NAME_`.Alias;
