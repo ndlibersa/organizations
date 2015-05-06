@@ -145,7 +145,7 @@
  
  	if (confirm(_("Do you really want to delete this user?")) == true) {
 
-	       $('#span_User_response').html('<img src = "images/circle.gif">&nbsp;&nbsp;Processing...');
+	       $('#span_User_response').html("<img src = 'images/circle.gif'>&nbsp;&nbsp;"+_("Processing..."));
 	       $.ajax({
 		  type:       "GET",
 		  url:        "ajax_processing.php",

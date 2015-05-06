@@ -86,13 +86,13 @@ switch ($_GET['action']) {
 		<th colspan='2' style='height:30px; margin-top: 7px; margin-bottom: 5px; vertical-align:middle'>
 
 			<span style='float:left; font-size:115%; max-width:400px;'>&nbsp;<?php echo $organization->name; ?></span>
-			<span style='float:right; vertical-align:top;'><?php if ($user->canEdit()){ ?><a href='ajax_forms.php?action=getOrganizationForm&height=363&width=345&modal=true&organizationID=<?php echo $organizationID; ?>' class='thickbox' id='editOrganization'><img src='images/edit.gif' alt='<?= _("edit");?>' title='<?= _("edit resource");?>'></a><?php } ?>  <?php if ($user->isAdmin){ ?><a href='javascript:removeOrganization(<?php echo $organizationID; ?>);'><img src='images/cross.gif' alt='<?= _("remove resource");?>' title='<?= _("remove resource");?>'></a><?php } ?></span>
+			<span style='float:right; vertical-align:top;'><?php if ($user->canEdit()){ ?><a href='ajax_forms.php?action=getOrganizationForm&height=363&width=345&modal=true&organizationID=<?php echo $organizationID; ?>' class='thickbox' id='editOrganization'><img src='images/edit.gif' alt='<?php echo _("edit");?>' title='<?php echo _("edit resource");?>'></a><?php } ?>  <?php if ($user->isAdmin){ ?><a href='javascript:removeOrganization(<?php echo $organizationID; ?>);'><img src='images/cross.gif' alt='<?php echo _("remove resource");?>' title='<?php echo _("remove resource");?>'></a><?php } ?></span>
 		</th>
 		</tr>
 
 		<?php if (count($parentOrganizationArray) > 0){ ?>
 			<tr>
-			<td style='vertical-align:top;text-align:left;width:140px;'><?= _("Parent Organization:");?></td>
+			<td style='vertical-align:top;text-align:left;width:140px;'><?php echo _("Parent Organization:");?></td>
 			<td style='width:320px;'>
 			<?php
 			foreach ($parentOrganizationArray as $parentOrganization){
@@ -108,7 +108,7 @@ switch ($_GET['action']) {
 
 		if (count($childOrganizationArray) > 0){ ?>
 			<tr>
-			<td style='vertical-align:top;text-align:left;width:140px;'><?= _("Child Organizations:");?></td>
+			<td style='vertical-align:top;text-align:left;width:140px;'><?php echo _("Child Organizations:");?></td>
 			<td style='width:320px;'>
 			<?php
 			foreach ($childOrganizationArray as $childOrganization){
@@ -124,7 +124,7 @@ switch ($_GET['action']) {
 
 		if ($organization->companyURL){ ?>
 			<tr>
-			<td style='vertical-align:top;text-align:left;width:140px;'><?= _("Company URL:");?></td>
+			<td style='vertical-align:top;text-align:left;width:140px;'><?php echo _("Company URL:");?></td>
 			<td style='width:320px;'><a href='<?php echo $companyURL; ?>' target='_blank'><?php echo $organization->companyURL; ?></a></td>
 			</tr>
 		<?php
@@ -132,7 +132,7 @@ switch ($_GET['action']) {
 
 		if (count($organizationRoleArray) > 0){ ?>
 			<tr>
-			<td style='vertical-align:top;text-align:left;width:140px;'><?= _("Role(s):");?></td>
+			<td style='vertical-align:top;text-align:left;width:140px;'><?php echo _("Role(s):");?></td>
 			<td style='width:320px;'><?php echo implode(", ", $organizationRoleArray); ?></td>
 			</tr>
 		<?php
@@ -140,7 +140,7 @@ switch ($_GET['action']) {
 
 		if ($organization->accountDetailText){ ?>
 			<tr>
-			<td style='vertical-align:top;text-align:left;width:140px;'><?= _("Account Details:");?></td>
+			<td style='vertical-align:top;text-align:left;width:140px;'><?php echo _("Account Details:");?></td>
 			<td style='width:320px;'><?php echo nl2br($organization->accountDetailText); ?></td>
 			</tr>
 		<?php
@@ -148,7 +148,7 @@ switch ($_GET['action']) {
 
 		if ($organization->noteText){ ?>
 			<tr>
-			<td style='vertical-align:top;text-align:left;width:140px;'><?= _("Notes:");?></td>
+			<td style='vertical-align:top;text-align:left;width:140px;'><?php echo _("Notes:");?></td>
 			<td style='width:320px;'><?php echo nl2br($organization->noteText); ?></td>
 			</tr>
 		<?php
@@ -159,7 +159,7 @@ switch ($_GET['action']) {
 
 
 		<br /><br />
-		<i><?= _("Created:");?>
+		<i><?php echo _("Created:");?>
 		<?php
 			echo format_date($organization->createDate);
 			//since organizations can be created by other modules the user may or may not be set and may or may not have a user entry in this db
@@ -220,8 +220,8 @@ switch ($_GET['action']) {
 		<?php if (count($aliasArray) > 0){ ?>
 			<table class='linedFormTable' style='width:440px;'>
 			<tr>
-			<th><?= _("Alias");?></th>
-			<th><?= _("Alias Type");?></th>
+			<th><?php echo _("Alias");?></th>
+			<th><?php echo _("Alias Type");?></th>
 			</tr>
 
 			<?php
@@ -248,7 +248,7 @@ switch ($_GET['action']) {
 		?>
 
 		<?php if ($user->canEdit()){ ?>
-			<a href='ajax_forms.php?action=getAliasForm&height=124&width=285&modal=true&organizationID=<?php echo $organizationID; ?>' class='thickbox' id='newAlias'><?= _("add a new alias");?></a>
+			<a href='ajax_forms.php?action=getAliasForm&height=124&width=285&modal=true&organizationID=<?php echo $organizationID; ?>' class='thickbox' id='newAlias'><?php echo _("add a new alias");?></a>
 		<?php } ?>
 
 		<?php
@@ -329,7 +329,7 @@ switch ($_GET['action']) {
 
 				<?php if (($contact['archiveDate'] != '0000-00-00') && ($contact['archiveDate'])) { ?>
 				<tr>
-				<td style='vertical-align:top;text-align:left;background-color:#ebebeb'><?= _("No longer valid:");?></td>
+				<td style='vertical-align:top;text-align:left;background-color:#ebebeb'><?php echo _("No longer valid:");?></td>
 				<td style='background-color:#ebebeb'><i><?php echo format_date($contact['archiveDate']); ?></i></td>
 				</tr>
 				<?php
@@ -337,7 +337,7 @@ switch ($_GET['action']) {
 
 				if ($contact['title']) { ?>
 				<tr>
-				<td style='vertical-align:top;text-align:left;'><?= _("Title:");?></td>
+				<td style='vertical-align:top;text-align:left;'><?php echo _("Title:");?></td>
 				<td><?php echo $contact['title']; ?></td>
 				</tr>
 				<?php
@@ -345,7 +345,7 @@ switch ($_GET['action']) {
 
 				if ($contact['addressText']) { ?>
 				<tr>
-				<td style='vertical-align:top;text-align:left;'><?= _("Address:");?></td>
+				<td style='vertical-align:top;text-align:left;'><?php echo _("Address:");?></td>
 				<td><?php echo nl2br($contact['addressText']); ?></td>
 				</tr>
 				<?php
@@ -353,7 +353,7 @@ switch ($_GET['action']) {
 
 				if ($contact['phoneNumber']) { ?>
 				<tr>
-				<td style='vertical-align:top;text-align:left;'><?= _("Phone:");?></td>
+				<td style='vertical-align:top;text-align:left;'><?php echo _("Phone:");?></td>
 				<td><?php echo $contact['phoneNumber']; ?></td>
 				</tr>
 				<?php
@@ -361,7 +361,7 @@ switch ($_GET['action']) {
 
 				if ($contact['altPhoneNumber']) { ?>
 				<tr>
-				<td style='vertical-align:top;text-align:left;'><?= _("Alt Phone:");?></td>
+				<td style='vertical-align:top;text-align:left;'><?php echo _("Alt Phone:");?></td>
 				<td><?php echo $contact['altPhoneNumber']; ?></td>
 				</tr>
 				<?php
@@ -369,7 +369,7 @@ switch ($_GET['action']) {
 
 				if ($contact['faxNumber']) { ?>
 				<tr>
-				<td style='vertical-align:top;text-align:left;'>Fax:</td>
+				<td style='vertical-align:top;text-align:left;'><?php echo _("Fax:");?></td>
 				<td><?php echo $contact['faxNumber']; ?></td>
 				</tr>
 				<?php
@@ -377,7 +377,7 @@ switch ($_GET['action']) {
 
 				if ($contact['emailAddress']) { ?>
 				<tr>
-				<td style='vertical-align:top;text-align:left;'>Email:</td>
+				<td style='vertical-align:top;text-align:left;'><?php echo _("Email:");?></td>
 				<td><a href='mailto:<?php echo $contact['emailAddress']; ?>'><?php echo $contact['emailAddress']; ?></a></td>
 				</tr>
 				<?php
@@ -385,7 +385,7 @@ switch ($_GET['action']) {
 
 				if ($contact['noteText']) { ?>
 				<tr>
-				<td style='vertical-align:top;text-align:left;'><?= _("Notes:");?></td>
+				<td style='vertical-align:top;text-align:left;'><?php echo _("Notes:");?></td>
 				<td><?php echo nl2br($contact['noteText']); ?></td>
 				</tr>
 				<?php
@@ -393,7 +393,7 @@ switch ($_GET['action']) {
 
 				if ($contact['lastUpdateDate']) { ?>
 				<tr>
-				<td style='vertical-align:top;text-align:left;'><?= _("Last Updated:");?></td>
+				<td style='vertical-align:top;text-align:left;'><?php echo _("Last Updated:");?></td>
 				<td><i><?php echo format_date($contact['lastUpdateDate']); ?></i></td>
 				</tr>
 				<?php
@@ -463,19 +463,19 @@ switch ($_GET['action']) {
 
 				<?php if ($externalLogin['loginURL']) { ?>
 				<tr>
-				<td style='vertical-align:top;text-align:left;'><?= _("Login URL:");?></td>
+				<td style='vertical-align:top;text-align:left;'><?php echo _("Login URL:");?></td>
 				<td><?php echo $externalLogin['loginURL']; 
 					if (strpos($externalLogin['loginURL'], 'http') !== 0) {
 						$externalLogin['loginURL'] = "http://" . $externalLogin['loginURL'];
 					}
-				?>&nbsp;&nbsp;<a href='<?php echo $externalLogin['loginURL']; ?>' target='_blank'><img src='images/arrow-up-right.gif' alt='<?= _("Visit Login URL");?>' title='<?= _("Visit Login URL");?>' style='vertical-align:top;'></a></td>
+				?>&nbsp;&nbsp;<a href='<?php echo $externalLogin['loginURL']; ?>' target='_blank'><img src='images/arrow-up-right.gif' alt='<?php echo _("Visit Login URL");?>' title='<?php echo _("Visit Login URL");?>' style='vertical-align:top;'></a></td>
 				</tr>
 				<?php
 				}
 
 				if ($externalLogin['emailAddress']) { ?>
 				<tr>
-				<td style='vertical-align:top;text-align:left;'><?= _("Local email on account:");?></td>
+				<td style='vertical-align:top;text-align:left;'><?php echo _("Local email on account:");?></td>
 				<td><?php echo $externalLogin['emailAddress']; ?></td>
 				</tr>
 				<?php
@@ -483,7 +483,7 @@ switch ($_GET['action']) {
 
 				if ($externalLogin['username']) { ?>
 				<tr>
-				<td style='vertical-align:top;text-align:left;'><?= _("User Name:");?></td>
+				<td style='vertical-align:top;text-align:left;'><?php echo _("User Name:");?></td>
 				<td><?php echo $externalLogin['username']; ?></td>
 				</tr>
 				<?php
@@ -491,7 +491,7 @@ switch ($_GET['action']) {
 
 				if ($externalLogin['password']) { ?>
 				<tr>
-				<td style='vertical-align:top;text-align:left;'><?= _("Password:");?></td>
+				<td style='vertical-align:top;text-align:left;'><?php echo _("Password:");?></td>
 				<td><?php echo $externalLogin['password']; ?></td>
 				</tr>
 				<?php
@@ -499,7 +499,7 @@ switch ($_GET['action']) {
 
 				if ($externalLogin['updateDate']) { ?>
 				<tr>
-				<td style='vertical-align:top;text-align:left;'><?= _("Last Updated:");?></td>
+				<td style='vertical-align:top;text-align:left;'><?php echo _("Last Updated:");?></td>
 				<td><i><?php echo format_date($externalLogin['updateDate']); ?></i></td>
 				</tr>
 				<?php
@@ -507,7 +507,7 @@ switch ($_GET['action']) {
 
 				if ($externalLogin['noteText']) { ?>
 				<tr>
-				<td style='vertical-align:top;text-align:left;'><?= _("Notes:");?></td>
+				<td style='vertical-align:top;text-align:left;'><?php echo _("Notes:");?></td>
 				<td><?php echo nl2br($externalLogin['noteText']); ?></td>
 				</tr>
 				<?php
@@ -525,7 +525,7 @@ switch ($_GET['action']) {
 
 		if ($user->canEdit()){
 		?>
-		<a href='ajax_forms.php?action=getAccountForm&height=254&width=342&modal=true&organizationID=<?php echo $organizationID; ?>' class='thickbox' id='newAlias'><?= _("add new external login");?></a><br />
+		<a href='ajax_forms.php?action=getAccountForm&height=254&width=342&modal=true&organizationID=<?php echo $organizationID; ?>' class='thickbox' id='newAlias'><?php echo _("add new external login");?></a><br />
 		<?php
 		}
 
@@ -570,10 +570,10 @@ switch ($_GET['action']) {
 		?>
 		<table class='linedFormTable' style='width:440px;'>
 		<tr>
-		<th><?= _("Added");?></th>
-		<th><?= _("Date");?></th>
-		<th><?= _("Type");?></th>
-		<th><?= _("Notes");?></th>
+		<th><?php echo _("Added");?></th>
+		<th><?php echo _("Date");?></th>
+		<th><?php echo _("Type");?></th>
+		<th><?php echo _("Notes");?></th>
 		</tr>
 
 		<?php foreach ($issueLogArray as $issueLog){
@@ -590,7 +590,7 @@ switch ($_GET['action']) {
 
 			?>
 			<tr>
-			<td style='width:80px;'><?php echo format_date($issueLog['updateDate']); ?><br /><?= _("by ");?><i><?php echo $issueLog['updateUser']; ?></i></td>
+			<td style='width:80px;'><?php echo format_date($issueLog['updateDate']); ?><br /><?php echo _("by ");?><i><?php echo $issueLog['updateUser']; ?></i></td>
 			<td><?php 
         if ($issueStartDate && $issueEndDate) {
           echo $issueStartDate._(" to ").$issueEndDate;
@@ -622,11 +622,11 @@ switch ($_GET['action']) {
 
 		if ($user->canEdit()){
 		?>
-			<a href='ajax_forms.php?action=getIssueLogForm&height=250&width=265&modal=true&organizationID=<?php echo $organizationID; ?>' class='thickbox' id='newIssue'><?= _("add new issue");?></a> - 
+			<a href='ajax_forms.php?action=getIssueLogForm&height=250&width=265&modal=true&organizationID=<?php echo $organizationID; ?>' class='thickbox' id='newIssue'><?php echo _("add new issue");?></a> - 
 		<?php
 		}
     ?>
-      <a href='issues_export.php?organizationID=<?php echo $organizationID; ?>'><?= _("export these issues");?></a> - <a href='issues_export.php'><?= _("export all issues");?></a>
+      <a href='issues_export.php?organizationID=<?php echo $organizationID; ?>'><?php echo _("export these issues");?></a> - <a href='issues_export.php'><?php echo _("export all issues");?></a>
     <?php
         break;
 
@@ -653,9 +653,9 @@ switch ($_GET['action']) {
 				if (count($licenseArray) > 0){ ?>
 					<table class='linedFormTable' style='width:440px;'>
 					<tr>
-					<th><?= _("License");?></th>
-					<th><?= _("Consortium");?></th>
-					<th><?= _("Status");?></th>
+					<th><?php echo _("License");?></th>
+					<th><?php echo _("Consortium");?></th>
+					<th><?php echo _("Status");?></th>
 					</tr>
 
 					<?php
@@ -767,17 +767,17 @@ switch ($_GET['action']) {
 			<table class='dataTable' style='width:727px'>
 			<tr>
 			<?php if ($_GET['contactName']) { ?>
-				<th><table class='noBorderTable'><tr><td><?= _("Contact Name(s)");?></td><td class='arrow'><a href='javascript:setOrder("C.name","asc");'><img src='images/arrowup.gif' border=0></a>&nbsp;<a href='javascript:setOrder("C.name","desc");'><img src='images/arrowdown.gif' border=0></a></td></tr></table></th>
-				<th><table class='noBorderTable'><tr><td><?= _("Contact Role(s)");?></td><td class='arrow'><a href='javascript:setOrder("O.name","asc");'><img src='images/arrowup.gif' border=0></a>&nbsp;<a href='javascript:setOrder("O.name","desc");'><img src='images/arrowdown.gif' border=0></a></td></tr></table></th>
-				<th><table class='noBorderTable'><tr><td><?= _("Organization Name");?></td><td class='arrow'><a href='javascript:setOrder("O.name","asc");'><img src='images/arrowup.gif' border=0></a>&nbsp;<a href='javascript:setOrder("O.name","desc");'><img src='images/arrowdown.gif' border=0></a></td></tr></table></th>
-				<th><table class='noBorderTable'><tr><td><?= _("Parent Organization");?></td><td class='arrow'><a href='javascript:setOrder("OP.name","asc");'><img src='images/arrowup.gif' border=0></a>&nbsp;<a href='javascript:setOrder("OP.name","desc");'><img src='images/arrowdown.gif' border=0></a></td></tr></table></th>
-				<th><table class='noBorderTable'><tr><td><?= _("Organization Role(s)");?></td><td class='arrow'><a href='javascript:setOrder("orgRoles","asc");'><img src='images/arrowup.gif' border=0></a>&nbsp;<a href='javascript:setOrder("orgRoles","desc");'><img src='images/arrowdown.gif' border=0></a></td></tr></table></th>
+				<th><table class='noBorderTable'><tr><td><?php echo _("Contact Name(s)");?></td><td class='arrow'><a href='javascript:setOrder("C.name","asc");'><img src='images/arrowup.gif' border=0></a>&nbsp;<a href='javascript:setOrder("C.name","desc");'><img src='images/arrowdown.gif' border=0></a></td></tr></table></th>
+				<th><table class='noBorderTable'><tr><td><?php echo _("Contact Role(s)");?></td><td class='arrow'><a href='javascript:setOrder("O.name","asc");'><img src='images/arrowup.gif' border=0></a>&nbsp;<a href='javascript:setOrder("O.name","desc");'><img src='images/arrowdown.gif' border=0></a></td></tr></table></th>
+				<th><table class='noBorderTable'><tr><td><?php echo _("Organization Name");?></td><td class='arrow'><a href='javascript:setOrder("O.name","asc");'><img src='images/arrowup.gif' border=0></a>&nbsp;<a href='javascript:setOrder("O.name","desc");'><img src='images/arrowdown.gif' border=0></a></td></tr></table></th>
+				<th><table class='noBorderTable'><tr><td><?php echo _("Parent Organization");?></td><td class='arrow'><a href='javascript:setOrder("OP.name","asc");'><img src='images/arrowup.gif' border=0></a>&nbsp;<a href='javascript:setOrder("OP.name","desc");'><img src='images/arrowdown.gif' border=0></a></td></tr></table></th>
+				<th><table class='noBorderTable'><tr><td><?php echo _("Organization Role(s)");?></td><td class='arrow'><a href='javascript:setOrder("orgRoles","asc");'><img src='images/arrowup.gif' border=0></a>&nbsp;<a href='javascript:setOrder("orgRoles","desc");'><img src='images/arrowdown.gif' border=0></a></td></tr></table></th>
 
 			<?php } else{ ?>
-				<th><table class='noBorderTable'><tr><td><?= _("Organization Name");?></td><td class='arrow'><a href='javascript:setOrder("O.name","asc");'><img src='images/arrowup.gif' border=0></a>&nbsp;<a href='javascript:setOrder("O.name","desc");'><img src='images/arrowdown.gif' border=0></a></td></tr></table></th>
-				<th><table class='noBorderTable'><tr><td><?= _("Alias");?></td><td class='arrow'><a href='javascript:setOrder("Aliases","asc");'><img src='images/arrowup.gif' border=0></a>&nbsp;<a href='javascript:setOrder("Aliases","desc");'><img src='images/arrowdown.gif' border=0></a></td></tr></table></th>
-				<th><table class='noBorderTable'><tr><td><?= _("Parent Organization");?></td><td class='arrow'><a href='javascript:setOrder("OP.name","asc");'><img src='images/arrowup.gif' border=0></a>&nbsp;<a href='javascript:setOrder("OP.name","desc");'><img src='images/arrowdown.gif' border=0></a></td></tr></table></th>
-				<th><table class='noBorderTable'><tr><td><?= _("Role(s)");?></td><td class='arrow'><a href='javascript:setOrder("orgRoles","asc");'><img src='images/arrowup.gif' border=0></a>&nbsp;<a href='javascript:setOrder("orgRoles","desc");'><img src='images/arrowdown.gif' border=0></a></td></tr></table></th>
+				<th><table class='noBorderTable'><tr><td><?php echo _("Organization Name");?></td><td class='arrow'><a href='javascript:setOrder("O.name","asc");'><img src='images/arrowup.gif' border=0></a>&nbsp;<a href='javascript:setOrder("O.name","desc");'><img src='images/arrowdown.gif' border=0></a></td></tr></table></th>
+				<th><table class='noBorderTable'><tr><td><?php echo _("Alias");?></td><td class='arrow'><a href='javascript:setOrder("Aliases","asc");'><img src='images/arrowup.gif' border=0></a>&nbsp;<a href='javascript:setOrder("Aliases","desc");'><img src='images/arrowdown.gif' border=0></a></td></tr></table></th>
+				<th><table class='noBorderTable'><tr><td><?php echo _("Parent Organization");?></td><td class='arrow'><a href='javascript:setOrder("OP.name","asc");'><img src='images/arrowup.gif' border=0></a>&nbsp;<a href='javascript:setOrder("OP.name","desc");'><img src='images/arrowdown.gif' border=0></a></td></tr></table></th>
+				<th><table class='noBorderTable'><tr><td><?php echo _("Role(s)");?></td><td class='arrow'><a href='javascript:setOrder("orgRoles","asc");'><img src='images/arrowup.gif' border=0></a>&nbsp;<a href='javascript:setOrder("orgRoles","desc");'><img src='images/arrowdown.gif' border=0></a></td></tr></table></th>
 			<?php } ?>
 			</tr>
 
@@ -864,7 +864,7 @@ switch ($_GET['action']) {
 				}
 				?>
 			</select>
-			<span class='smallText'><?= _("records per page");?></span>
+			<span class='smallText'><?php echo _("records per page");?></span>
 			</td>
 			</tr>
 			</table>

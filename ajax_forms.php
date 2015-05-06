@@ -69,13 +69,13 @@ switch ($_GET['action']) {
 		</tr>
 
 		<tr>
-		<td style='vertical-align:top;text-align:right;'><label for='organizationName'><b><?= _("Name:");?></b></label></td>
+		<td style='vertical-align:top;text-align:right;'><label for='organizationName'><b><?php echo _("Name:");?></b></label></td>
 		<td><input type='text' id='organizationName' name='organizationName' value = "<?php echo htmlentities($organization->name); ?>" style='width:220px;' /><span id='span_errors' style='color:red'></span></td>
 		</tr>
 
 		<?php if (count($parentOrganizationArray) > 0){ ?>
 			<tr>
-			<td style='vertical-align:top;text-align:right;'><label for='parentOrganization'><b><?= _("Parent:");?></b></label></td>
+			<td style='vertical-align:top;text-align:right;'><label for='parentOrganization'><b><?php echo _("Parent:");?></b></label></td>
 			<td>
 			<?php
 			foreach ($parentOrganizationArray as $parentOrganization){
@@ -89,7 +89,7 @@ switch ($_GET['action']) {
 		}else{
 		?>
 			<tr>
-			<td style='vertical-align:top;text-align:right;'><label for='parentOrganization'><b><?= _("Parent:");?></b></label></td>
+			<td style='vertical-align:top;text-align:right;'><label for='parentOrganization'><b><?php echo _("Parent:");?></b></label></td>
 			<td>
 			<input type='text' id='parentOrganization' name='parentOrganization' value = '' style='width:220px;' />
 			<input type='hidden' id='parentOrganizationID' name='parentOrganizationID' value=''>
@@ -98,13 +98,13 @@ switch ($_GET['action']) {
 		<?php } ?>
 
 		<tr>
-		<td style='vertical-align:top;text-align:right;'><label for='companyURL'><b><?= _("Company URL:");?></b></label></td>
+		<td style='vertical-align:top;text-align:right;'><label for='companyURL'><b><?php echo _("Company URL:");?></b></label></td>
 		<td><input type='text' id='companyURL' name='companyURL' value = '<?php if (!$organizationID) { echo "http://"; } else { echo $organization->companyURL; } ?>' style='width:220px' />
 		</td>
 		</tr>
 
 		<tr>
-		<td style='vertical-align:top;text-align:right;'><label for='orgRoles'><b><?= _("Role(s):");?></b></label></td>
+		<td style='vertical-align:top;text-align:right;'><label for='orgRoles'><b><?php echo _("Role(s):");?></b></label></td>
 		<td>
 
 			<table>
@@ -136,12 +136,12 @@ switch ($_GET['action']) {
 		</tr>
 
 		<tr>
-		<td style='vertical-align:top;text-align:right;'><label for='accountDetailText'><b><?= _("Account Details:");?></b></label></td>
+		<td style='vertical-align:top;text-align:right;'><label for='accountDetailText'><b><?php echo _("Account Details:");?></b></label></td>
 		<td><textarea rows='3' id='accountDetailText' name='accountDetailText' style='width:220px'><?php echo $organization->accountDetailText; ?></textarea></td>
 		</tr>
 
 		<tr>
-		<td style='vertical-align:top;text-align:right;'><label for='noteText'><b><?= _("Notes:");?></b></label></td>
+		<td style='vertical-align:top;text-align:right;'><label for='noteText'><b><?php echo _("Notes:");?></b></label></td>
 		<td><textarea rows='3' id='noteText' name='noteText' style='width:220px'><?php echo $organization->noteText; ?></textarea></td>
 		</tr>
 
@@ -151,8 +151,8 @@ switch ($_GET['action']) {
 		<td style="padding-top:8px;padding-right:8px;text-align:left;">
 			<table class='noBorderTable' style='width:100%;'>
 				<tr>
-					<td style='text-align:left'><input type='button' value='<?= _("submit");?>' name='submitOrganizationChanges' id ='submitOrganizationChanges'></td>
-					<td style='text-align:right'><input type='button' value='<?= _("cancel");?>' onclick="tb_remove()"></td>
+					<td style='text-align:left'><input type='button' value='<?php echo _("submit");?>' name='submitOrganizationChanges' id ='submitOrganizationChanges'></td>
+					<td style='text-align:right'><input type='button' value='<?php echo _("cancel");?>' onclick="tb_remove()"></td>
 				</tr>
 			</table>
 		</td>
@@ -199,7 +199,7 @@ switch ($_GET['action']) {
 		</tr>
 
 		<tr>
-		<td><label for='aliasTypeID'><b><?= _("Alias Type");?></b></label></td>
+		<td><label for='aliasTypeID'><b><?php echo _("Alias Type");?></b></label></td>
 		<td>
 		<select name='aliasTypeID' id='aliasTypeID'>
 		<?php
@@ -216,7 +216,7 @@ switch ($_GET['action']) {
 		</tr>
 
 		<tr>
-		<td><label for='aliasName'><b><?= _("Name");?></b></label></td>
+		<td><label for='aliasName'><b><?php echo _("Name");?></b></label></td>
 		<td>
 		<input type='text' id='aliasName' name='aliasName' value = "<?php echo $alias->name; ?>" style='width:195px' /><span id='span_error_aliasName'</span>
 		</td>
@@ -228,8 +228,8 @@ switch ($_GET['action']) {
 		<td style="padding-top:8px;padding-right:8px;text-align:left;">
 			<table class='noBorderTable' style='width:100%;'>
 				<tr>
-					<td style='text-align:left'><input type='button' value='<?= _("submit");?>' name='submitAliasForm' id ='submitAliasForm'></td>
-					<td style='text-align:right'><input type='button' value='<?= _("cancel");?>' onclick="tb_remove()"></td>
+					<td style='text-align:left'><input type='button' value='<?php echo _("submit");?>' name='submitAliasForm' id ='submitAliasForm'></td>
+					<td style='text-align:right'><input type='button' value='<?php echo _("cancel");?>' onclick="tb_remove()"></td>
 				</tr>
 			</table>
 		</td>
@@ -289,49 +289,49 @@ switch ($_GET['action']) {
 		</tr>
 
 		<tr>
-		<td style='text-align:right'><label for='contactName'><b><?= _("Name:");?></b></label></td>
+		<td style='text-align:right'><label for='contactName'><b><?php echo _("Name:");?></b></label></td>
 		<td>
 		<input type='text' id='contactName' name='contactName' value = "<?php echo $contact->name; ?>" style='width:150px' /><span id='span_error_contactName' style='color:red'>
 		</td>
 		</tr>
 
 		<tr>
-		<td style='text-align:right'><label for='contactTitle'><b><?= _("Title:");?></b></label></td>
+		<td style='text-align:right'><label for='contactTitle'><b><?php echo _("Title:");?></b></label></td>
 		<td>
 		<input type='text' id='contactTitle' name='contactTitle' value = '<?php echo $contact->title; ?>' style='width:150px' />
 		</td>
 		</tr>
 
 		<tr>
-		<td style='text-align:right'><label for='phoneNumber'><b><?= _("Phone:");?></b></label></td>
+		<td style='text-align:right'><label for='phoneNumber'><b><?php echo _("Phone:");?></b></label></td>
 		<td>
 		<input type='text' id='phoneNumber' name='phoneNumber' value = '<?php echo $contact->phoneNumber; ?>' style='width:150px' />
 		</td>
 		</tr>
 
 		<tr>
-		<td style='text-align:right'><label for='altPhoneNumber'><b><?= _("Alt Phone:");?></b></label></td>
+		<td style='text-align:right'><label for='altPhoneNumber'><b><?php echo _("Alt Phone:");?></b></label></td>
 		<td>
 		<input type='text' id='altPhoneNumber' name='altPhoneNumber' value = '<?php echo $contact->altPhoneNumber; ?>' style='width:150px' />
 		</td>
 		</tr>
 
 		<tr>
-		<td style='text-align:right'><label for='faxNumber'><b>Fax:</b></label></td>
+		<td style='text-align:right'><label for='faxNumber'><b><?php echo _("Fax:");?></b></label></td>
 		<td>
 		<input type='text' id='faxNumber' name='faxNumber' value = '<?php echo $contact->faxNumber; ?>' style='width:150px' />
 		</td>
 		</tr>
 
 		<tr>
-		<td style='text-align:right'><label for='emailAddress'><b>Email:</b></label></td>
+		<td style='text-align:right'><label for='emailAddress'><b><?php echo _("Email:");?></b></label></td>
 		<td>
 		<input type='text' id='emailAddress' name='emailAddress' value = '<?php echo $contact->emailAddress; ?>' style='width:150px' />
 		</td>
 		</tr>
 
 		<tr>
-		<td style='text-align:right'><label for='invalidInd'><b><?= _("Archived:");?></b></label></td>
+		<td style='text-align:right'><label for='invalidInd'><b><?php echo _("Archived:");?></b></label></td>
 		<td>
 		<input type='checkbox' id='invalidInd' name='invalidInd' <?php echo $invalidChecked; ?> />
 		</td>
@@ -339,14 +339,14 @@ switch ($_GET['action']) {
 
 
 		<tr>
-		<td style='vertical-align:top;text-align:right'><label for='addressText'><b><?= _("Address:");?></b></label></td>
+		<td style='vertical-align:top;text-align:right'><label for='addressText'><b><?php echo _("Address:");?></b></label></td>
 		<td><textarea rows='3' id='addressText' name='addressText' style='width:150px;'><?php echo $contact->addressText; ?></textarea></td>
 		</tr>
 
 
 
 		<tr>
-		<td style='vertical-align:top;text-align:right;'><label for='orgRoles'><b><?= _("Role(s):");?></b></label></td>
+		<td style='vertical-align:top;text-align:right;'><label for='orgRoles'><b><?php echo _("Role(s):");?></b></label></td>
 		<td>
 
 			<table>
@@ -383,7 +383,7 @@ switch ($_GET['action']) {
 
 
 		<tr>
-		<td style='vertical-align:top;text-align:right'><label for='noteText'><b><?= _("Notes:");?></b></label></td>
+		<td style='vertical-align:top;text-align:right'><label for='noteText'><b><?php echo _("Notes:");?></b></label></td>
 		<td><textarea cols='36' rows='6' id='noteText' name='noteText' style='width:250px;'><?php echo $contact->noteText; ?></textarea></td>
 		</tr>
 
@@ -392,8 +392,8 @@ switch ($_GET['action']) {
 		<td style="padding-top:8px;padding-right:8px;">
 			<table class='noBorderTable' style='width:100%;'>
 				<tr>
-					<td style='text-align:left'><input type='button' value='<?= _("submit");?>' name='submitContactForm' id ='submitContactForm'></td>
-					<td style='text-align:right'><input type='button' value='<?= _("cancel");?>' onclick="tb_remove()"></td>
+					<td style='text-align:left'><input type='button' value='<?php echo _("submit");?>' name='submitContactForm' id ='submitContactForm'></td>
+					<td style='text-align:right'><input type='button' value='<?php echo _("cancel");?>' onclick="tb_remove()"></td>
 				</tr>
 			</table>
 		</td>
@@ -441,7 +441,7 @@ switch ($_GET['action']) {
 		</tr>
 
 		<tr>
-		<td style='vertical-align:top;text-align:right;'><label for='externalLoginTypeID'><b><?= _("Login Type:");?></b></label></td>
+		<td style='vertical-align:top;text-align:right;'><label for='externalLoginTypeID'><b><?php echo _("Login Type:");?></b></label></td>
 		<td>
 		<select name='externalLoginTypeID' id='externalLoginTypeID'>
 		<?php
@@ -458,35 +458,35 @@ switch ($_GET['action']) {
 		</tr>
 
 		<tr>
-		<td style='vertical-align:top;text-align:right;'><label for='loginURL'><b>URL:</b></label></td>
+		<td style='vertical-align:top;text-align:right;'><label for='loginURL'><b><?php echo _("URL:");?></b></label></td>
 		<td>
 		<input type='text' id='loginURL' name='loginURL' value = '<?php echo $externalLogin->loginURL; ?>' style='width:200px' />
 		</td>
 		</tr>
 
 		<tr>
-		<td style='vertical-align:top;text-align:right;'><label for='emailAddress'><b><?= _("Local Account Email:");?></b></label></td>
+		<td style='vertical-align:top;text-align:right;'><label for='emailAddress'><b><?php echo _("Local Account Email:");?></b></label></td>
 		<td>
 		<input type='text' id='emailAddress' name='emailAddress' value = '<?php echo $externalLogin->emailAddress; ?>' style='width:200px' />
 		</td>
 		</tr>
 
 		<tr>
-		<td style='vertical-align:top;text-align:right;'><label for='username'><b><?= _("Username:");?></b></label></td>
+		<td style='vertical-align:top;text-align:right;'><label for='username'><b><?php echo _("Username:");?></b></label></td>
 		<td>
 		<input type='text' id='username' name='username' value = '<?php echo $externalLogin->username; ?>' style='width:200px' />
 		</td>
 		</tr>
 
 		<tr>
-		<td style='vertical-align:top;text-align:right;'><label for='password'><b><?= _("Password:");?></b></label></td>
+		<td style='vertical-align:top;text-align:right;'><label for='password'><b><?php echo _("Password:");?></b></label></td>
 		<td>
 		<input type='text' id='password' name='password' value = '<?php echo $externalLogin->password; ?>' style='width:200px' />
 		</td>
 		</tr>
 
 		<tr>
-		<td style='vertical-align:top;text-align:right;'><label for='noteText'><b><?= _("Notes:");?></b></label></td>
+		<td style='vertical-align:top;text-align:right;'><label for='noteText'><b><?php echo _("Notes:");?></b></label></td>
 		<td><textarea rows='3' id='noteText' name='noteText' style='width:200px'><?php echo $externalLogin->noteText; ?></textarea></td>
 		</td>
 		</tr>
@@ -497,8 +497,8 @@ switch ($_GET['action']) {
 		<td style="padding-top:8px;padding-right:8px;">
 			<table class='noBorderTable' style='width:100%;'>
 				<tr>
-					<td style='text-align:left'><input type='button' value='<?= _("submit");?>' name='submitExternalLoginForm' id ='submitExternalLoginForm'></td>
-					<td style='text-align:right'><input type='button' value='<?= _("cancel");?>' onclick="tb_remove()"></td>
+					<td style='text-align:left'><input type='button' value='<?php echo _("submit");?>' name='submitExternalLoginForm' id ='submitExternalLoginForm'></td>
+					<td style='text-align:right'><input type='button' value='<?php echo _("cancel");?>' onclick="tb_remove()"></td>
 				</tr>
 			</table>
 		</td>
@@ -554,7 +554,7 @@ switch ($_GET['action']) {
 		</tr>
     <tr>
 
-		<td style='vertical-align:top;text-align:right;'><label for='issueLogTypeID'><b><?= _("Type:");?></b></label></td>
+		<td style='vertical-align:top;text-align:right;'><label for='issueLogTypeID'><b><?php echo _("Type:");?></b></label></td>
     <td>
       <select name='issueLogTypeID' id='issueLogTypeID'>
       <option value=''></option>
@@ -572,14 +572,14 @@ switch ($_GET['action']) {
     </tr>
 
 		<tr>
-		<td style='vertical-align:top;text-align:right;'><label for='issueStartDate'><b><?= _("Start date:");?></b></label></td>
+		<td style='vertical-align:top;text-align:right;'><label for='issueStartDate'><b><?php echo _("Start date:");?></b></label></td>
 		<td>
 		<input class='date-pick' id='issueStartDate' name='issueStartDate' style='width:80px' value='<?php echo $issueStartDate; ?>' />
 		</td>
 		</tr>
 
     <tr>
-		<td style='vertical-align:top;text-align:right;'><label for='issueDate'><b><?= _("End date:");?></b></label></td>
+		<td style='vertical-align:top;text-align:right;'><label for='issueDate'><b><?php echo _("End date:");?></b></label></td>
 		<td>
 		<input class='date-pick' id='issueEndDate' name='issueEndDate' style='width:80px' value='<?php echo $issueEndDate; ?>' />
 		</td>
@@ -587,7 +587,7 @@ switch ($_GET['action']) {
 
 
 		<tr>
-		<td style='vertical-align:top;text-align:right;'><label for='noteText'><b><?= _("Notes:");?></b></label></td>
+		<td style='vertical-align:top;text-align:right;'><label for='noteText'><b><?php echo _("Notes:");?></b></label></td>
 		<td><textarea rows='3' id='noteText' name='noteText' style='width:200px'><?php echo $issueLog->noteText; ?></textarea></td>
 		</td>
 		</tr>
@@ -597,8 +597,8 @@ switch ($_GET['action']) {
 		<td style="padding-top:8px;padding-right:8px;">
 			<table class='noBorderTable' style='width:100%;'>
 				<tr>
-					<td style='text-align:left'><input type='button' value='<?= _("submit");?>' name='submitIssueLogForm' id ='submitIssueLogForm'></td>
-					<td style='text-align:right'><input type='button' value='<?= _("cancel");?>' onclick="tb_remove()"></td>
+					<td style='text-align:left'><input type='button' value='<?php echo _("submit");?>' name='submitIssueLogForm' id ='submitIssueLogForm'></td>
+					<td style='text-align:right'><input type='button' value='<?php echo _("cancel");?>' onclick="tb_remove()"></td>
 				</tr>
 			</table>
 		</td>
@@ -648,7 +648,7 @@ switch ($_GET['action']) {
 			<?php
 
 		}else{
-			echo "(none found)";
+			echo _("(none found)");
 		}
 
 		break;
@@ -680,7 +680,7 @@ switch ($_GET['action']) {
 		</td>
 		</tr>
 		<tr>
-		<td colspan='2'><p><a href='#' onclick='window.parent.tb_remove(); return false'><?= _("close");?></a></td>
+		<td colspan='2'><p><a href='#' onclick='window.parent.tb_remove(); return false'><?php echo _("close");?></a></td>
 		</tr>
 		</table>
 		</div>
@@ -727,10 +727,10 @@ switch ($_GET['action']) {
 			?>
 			<table class='dataTable' style='width:550px'>
 				<tr>
-				<th align='left'><?= _("Login ID");?></th>
-				<th align='left'><?= _("First Name");?></th>
-				<th align='left'><?= _("Last Name");?></th>
-				<th align='left'><?= _("Privilege");?></th>
+				<th align='left'><?php echo _("Login ID");?></th>
+				<th align='left'><?php echo _("First Name");?></th>
+				<th align='left'><?php echo _("Last Name");?></th>
+				<th align='left'><?php echo _("Privilege");?></th>
 				<th>&nbsp;</th>
 				<th>&nbsp;</th>
 				</tr>
@@ -780,10 +780,10 @@ switch ($_GET['action']) {
 		<div id='div_updateForm'>
 		<table class="thickboxTable" style="background-image:url('images/title.gif');background-repeat:no-repeat;width:240px;padding:2px;">
 		<tr><td colspan='2'><span class='headerText'><?php echo $update._(" User"); ?></span><br /><br /></td></tr>
-		<tr><td><label for='loginID'><b><?= _("Login ID");?></b></label</td><td><?php if (!$loginID) { ?><input type='text' id='loginID' name='loginID' value='<?php echo $loginID; ?>' style='width:150px;'/> <?php } else { echo $loginID; } ?></td></tr>
-		<tr><td><label for='firstName'><b><?= _("First Name");?></b></label</td><td><input type='text' id='firstName' name='firstName' value="<?php echo $user->firstName; ?>" style='width:150px;'/></td></tr>
-		<tr><td><label for='lastName'><b><?= _("Last Name");?></b></label</td><td><input type='text' id='lastName' name='lastName' value="<?php echo $user->lastName; ?>" style='width:150px;'/></td></tr>
-		<tr><td><label for='privilegeID'><b><?= _("Privilege");?></b></label</td>
+		<tr><td><label for='loginID'><b><?php echo _("Login ID");?></b></label</td><td><?php if (!$loginID) { ?><input type='text' id='loginID' name='loginID' value='<?php echo $loginID; ?>' style='width:150px;'/> <?php } else { echo $loginID; } ?></td></tr>
+		<tr><td><label for='firstName'><b><?php echo _("First Name");?></b></label</td><td><input type='text' id='firstName' name='firstName' value="<?php echo $user->firstName; ?>" style='width:150px;'/></td></tr>
+		<tr><td><label for='lastName'><b><?php echo _("Last Name");?></b></label</td><td><input type='text' id='lastName' name='lastName' value="<?php echo $user->lastName; ?>" style='width:150px;'/></td></tr>
+		<tr><td><label for='privilegeID'><b><?php echo _("Privilege");?></b></label</td>
 		<td>
 		<select name='privilegeID' id='privilegeID' style='width:155px'>
 		<option value=''></option>
@@ -806,7 +806,7 @@ switch ($_GET['action']) {
 
 		<tr>
 		<td style="padding-top:18px;"><input type='button' value='<?php echo $update; ?>' onclick='javascript:window.parent.submitUserData("<?php echo $loginID; ?>");'></td>
-		<td style="padding-top:18px;padding-right:8px;text-align:right;"><input type='button' value='<?= _("cancel");?>' onclick="window.parent.tb_remove(); return false"></td>
+		<td style="padding-top:18px;padding-right:8px;text-align:right;"><input type='button' value='<?php echo _("cancel");?>' onclick="window.parent.tb_remove(); return false"></td>
 		</tr>
 		</table>
 		</div>
