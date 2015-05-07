@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
-"POT-Creation-Date: 2015-05-06 17:14+0100\n"
-"PO-Revision-Date: 2015-05-06 17:14+0100\n"
+"POT-Creation-Date: 2015-05-07 13:31+0100\n"
+"PO-Revision-Date: 2015-05-07 13:31+0100\n"
 "Last-Translator: Cesar <hernandez.antonio.cesar19@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -432,7 +432,7 @@ msgstr "par "
 
 #: ajax_htmldata.php:596 ajax_htmldata.php:727
 msgid " to "
-msgstr " sur "
+msgstr " - "
 
 #: ajax_htmldata.php:598
 msgid "start: "
@@ -522,7 +522,7 @@ msgstr "Nom de l'organisation"
 
 #: ajax_htmldata.php:773 ajax_htmldata.php:779
 msgid "Parent Organization"
-msgstr "Organisation du parent"
+msgstr "Organisation père"
 
 #: ajax_htmldata.php:774
 msgid "Organization Role(s)"
