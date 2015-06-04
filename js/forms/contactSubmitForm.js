@@ -107,27 +107,18 @@ function submitContact(){
 
  
  function validateForm (){
- 	myReturn=0;
 	
 	contactRolesList ='';
 	$(".check_roles:checked").each(function(id) {
 	      contactRolesList += $(this).val() + ",";
 	}); 
-	
- 	if (contactRolesList == ''){
+	if (!validateRequired('contactName','<br />Name must be entered to continue.')) {
+        return false;
+    }else if (contactRolesList == ''){
  	    $("#span_error_contactRole").html('Please choose at least one role.');
- 	    myReturn=1;
+ 	    return false;
  	} else {
  	    $("#span_error_contactRole").html('');
+        return true;
 	}
-
-	if ($("#contactType").val() == "named"){
- 		if (!validateRequired('contactName','<br />Name must be entered to continue.')) myReturn=1;	
- 	}
- 
- 	if (myReturn == 1){
-		return false; 	
- 	}else{
- 		return true;
- 	}
 }

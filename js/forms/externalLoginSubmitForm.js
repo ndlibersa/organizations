@@ -52,27 +52,38 @@ $(document).ready(function(){
 	 
  });
  
+// Validate External Login form
 
-
+function validateExternalLogin() {
+    if($("#username").val() == ''){
+        $("#span_errors").html('<br />Please enter an username to continue');
+        $("#username").focus();
+        return false;
+    }else if($("#password").val() == ''){
+        $("#span_errors").html('<br />For security, please enter a password to continue');
+        $("#password").focus();
+        return false;
+    }else{
+        return true;
+    }
+}
 
 function submitExternalLogin(){
-	$('#submitExternalLoginForm').attr("disabled", "disabled"); 
-	  $.ajax({
-		 type:       "POST",
-		 url:        "ajax_processing.php?action=submitExternalLogin",
-		 cache:      false,
-		 data:       { externalLoginID: $("#editExternalLoginID").val(), organizationID: $("#editOrganizationID").val(), externalLoginTypeID: $("#externalLoginTypeID").val(), loginURL: $("#loginURL").val(), emailAddress: $("#emailAddress").val(), username: $("#username").val(), password: $("#password").val(), noteText: $("#noteText").val() },
-		 success:    function(html) {
-			if (html.length > 1){
-				$("#span_errors").html(html);
-				$("#submitExternalLoginForm").removeAttr("disabled");
-			}else{
-				window.parent.tb_remove();
-				window.parent.updateAccount();
-				return false;
-			}			
-		 }
-
-
-	 });
+    if(validateExternalLogin() === true){
+        $.ajax({
+            type:       "POST",
+            url:        "ajax_processing.php?action=submitExternalLogin",
+            cache:      false,
+            data:       { externalLoginID: $("#editExternalLoginID").val(), organizationID: $("#editOrganizationID").val(), externalLoginTypeID: $("#externalLoginTypeID").val(), loginURL: $("#loginURL").val(), emailAddress: $("#emailAddress").val(), username: $("#username").val(), password: $("#password").val(), noteText: $("#noteText").val() },
+            success:    function(html) {
+                if (html.length > 1){
+                    $("#span_errors").html(html);
+                }else{
+                    window.parent.tb_remove();
+                    window.parent.updateAccount();
+                    return false;
+                }			
+            }
+        });
+    }
 }
