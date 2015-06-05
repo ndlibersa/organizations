@@ -100,20 +100,31 @@
 
  }
 
- function updateData(className, updateId){
-	$.ajax({
-          type:       "GET",
-          url:        "ajax_processing.php",
-          cache:      false,
-          data:       "action=updateData&className=" + className + "&updateId=" + updateId + "&shortName=" + $('#updateVal').val(),
-          success:    function(html) { 
-          updateForm(className);
-          window.parent.tb_remove();
-          }
-       });
+function updateData(className, updateId){
+    if(validateUpdateData() === true){
+        $.ajax({
+            type:       "GET",
+            url:        "ajax_processing.php",
+            cache:      false,
+            data:       "action=updateData&className=" + className + "&updateId=" + updateId + "&shortName=" + $('#updateVal').val(),
+            success:    function(html) { 
+                updateForm(className);
+                window.parent.tb_remove();
+            }
+        });
+    }
+}
 
- }
-
+// Validate updateData
+function validateUpdateData(){
+    if($("#updateVal").val() == ''){
+        $("#span_errors").html('Error - Please enter a value');
+        $("#updateVal").focus();
+        return false;
+    }else{
+        return true;
+    }
+}
 
  function deleteData(className, deleteId){
  
