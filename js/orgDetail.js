@@ -154,9 +154,19 @@
 
 	});
 
-	$("#createContact").live("click",function(e) {
+	$("#getCreateContactForm").live("click",function(e) {
 		e.preventDefault();
 		getInlineContactForm();
+	});
+
+	$("#createContact").live("click",function(e) {
+		e.preventDefault();
+		var roles = new Array();
+		$(".check_roles:checked").each(function() {
+			roles.push($(this).val());
+		});
+		createOrganizationContact({"organizationID":$("#sourceOrganizationID").val(),"name":$("#contactName").val(),"emailAddress":$("#emailAddress").val(),"contactRoles":roles});
+		//create the contact and update the contact list
 	});
 
 	$("#addEmail").live("click", function(e) {
@@ -286,6 +296,18 @@ function updateAccount(){
 
   });
 
+}
+
+function createOrganizationContact(contact) {
+	contact.contactRoles = contact.contactRoles.join();
+	$.ajax({
+		type:       "POST",
+		url:        "ajax_processing.php?action=submitContact",
+		cache:      false,
+		data:       contact,
+		success:    function(res) {
+		}
+	});
 }
 
 function getInlineContactForm() {

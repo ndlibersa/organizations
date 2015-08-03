@@ -269,7 +269,8 @@ switch ($_GET['action']) {
 						<span class='smallText'>" . $contactRoleIns['shortName'] . "</span>
 					 </div>";
 			}
-			echo '</div>';
+			echo '</div>
+				  <input type="button" id="createContact" value="Create" />';
 		}
 	break;
     case 'getContactForm':
@@ -576,7 +577,7 @@ switch ($_GET['action']) {
 ?>
 
 <form id='newIssueForm'>
-	<input type="hidden" name="sourceOrganizationID" value="<?php echo $organizationID;?>" />
+	<input type="hidden" id="sourceOrganizationID" name="sourceOrganizationID" value="<?php echo $organizationID;?>" />
 	<table class="thickboxTable" style="width:98%;background-image:url('images/title.gif');background-repeat:no-repeat;">
 		<tr>
 			<td colspan="2">
@@ -608,7 +609,7 @@ switch ($_GET['action']) {
 		<tr>
 			<td></td>
 			<td>
-				<a id="createContact" href="#">add contact</a>
+				<a id="getCreateContactForm" href="#">add contact</a>
 				<div id="inlineContact"></div>
 			</td>
 		</tr>
