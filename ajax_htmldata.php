@@ -539,10 +539,7 @@ switch ($_GET['action']) {
     	$organizationID = $_GET['organizationID'];
     	$organization = new Organization(new NamedArguments(array('primaryKey' => $organizationID)));
 
-$test = new Issue(new NamedArguments());
-echo '<pre>';
-print_r($test);
-echo '</pre>';
+
  		//get external logins
  		$sanitizedInstance = array();
  		$issueLogArray = array();
