@@ -21,6 +21,51 @@
 include_once 'directory.php';
 include_once 'user.php';
 
+//shared html template for organization and resource issues
+function generateIssueHTML($issue,$associatedEntities=null) {
+	$html = "
+	<div class=\"issue\">";
+	if (!$issue->dateClosed) {
+		$html .= "
+		<a class=\"thickbox closeIssueBtn\" href=\"ajax_forms.php?action=getCloseIssueForm&issueID={$issue->issueID}&height=120&width=345&modal=true\">close</a>";
+	}
+	$html .= "
+	  	<dl>
+	  		<dt>Date reported:</dt> 
+	  		<dd>{$issue->dateCreated}</dd>
+	  		
+	  		<dt>Contact(s):</dt> 
+	  		<dd>";
+	$contacts = $issue->getContacts();
+	if ($contacts) {
+		$html .= "<ul class=\"contactList\">";
+		foreach($contacts as $contact) {
+			$html .= "<li><a href=\"mailto:".urlencode($contact['emailAddress'])."?Subject=RE: {$issue->subjectText}\">{$contact['name']}</a></li>";
+		}
+		$html .= "</ul>";
+	}
+
+
+	$html .= "	</dd> 
+	  		<dt>Applies to:</dt> 
+	  		<dd>";
+	if ($associatedEntities) {
+		$temp ='';
+		foreach ($associatedEntities as $entity) {
+			$temp .= " {$entity['name']},";
+		}
+		$html .= rtrim($temp,',');
+	}
+	$html .= "</dd> 
+	  		<dt>Subject:</dt> 
+	  		<dd>{$issue->subjectText}</dd> 
+	  		
+	  		<dt class=\"block\">Body:</dt> 
+	  		<dd>{$issue->bodyText}</dd>
+	  	</dl>
+	</div>";
+	return $html;
+}
 
 switch ($_GET['action']) {
 
@@ -533,9 +578,8 @@ switch ($_GET['action']) {
 
 	case 'getResourceIssueDetails':
     	$organizationID = $_GET['organizationID'];
-    	$organization = new Organization(new NamedArguments(array('primaryKey' => $organizationID)));
 
-		$getIssuesFormData = "action=getIssuesList&organizationID=".$organizationID;
+		$getIssuesFormData = "action=getResourceIssuesList&organizationID=".$organizationID;
 		$exportUrl = "export_issues.php?organizationID={$organizationID}";
 
 ?>
@@ -548,7 +592,7 @@ switch ($_GET['action']) {
 			</tr>
 			<tr>
 				<td>
-					<a href="<?php echo $getIssuesFormData; ?>" class="issuesBtn" id="openIssuesBtn">view open issue</a> 
+					<a href="<?php echo $getIssuesFormData; ?>" class="issuesBtn" id="openIssuesBtn">view open issues</a> 
 					<a target="_blank" href="<?php echo $exportUrl;?>"><img src="images/xls.gif" /></a>
 					<div class="issueList" id="openIssues" style="display:none;"></div>
 				</td>
@@ -563,7 +607,21 @@ switch ($_GET['action']) {
 		</table>
 <?php
 	break;
+	case 'getResourceIssuesList':
+    	$organizationID = $_GET['organizationID'];
+		$archivedFlag = (!empty($_GET['archived']) && $_GET['archived'] == 1) ? true:false;
+		$organization = new Organization(new NamedArguments(array('primaryKey' => $organizationID)));
+		$orgIssues = $organization->getIssues($archivedFlag);
 
+		if(count($orgIssues) > 0) {
+			foreach ($orgIssues as $issue) {
+				echo generateIssueHTML($issue,array(array("name"=>$organization->name,"id"=>$organization->organizationID,"entityType"=>1)));
+			}
+		} else {
+			echo "<br><p>There are no organization level issues.</p><br>";
+		}
+
+	break;
     case 'getIssueDetails':
     	$organizationID = $_GET['organizationID'];
     	$organization = new Organization(new NamedArguments(array('primaryKey' => $organizationID)));

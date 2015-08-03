@@ -121,7 +121,10 @@
 		$('.date-pick').datePicker({startDate:'01/01/1996'});
 	});
 
-
+	$(".issuesBtn").live("click", function(e) {
+		e.preventDefault();
+		getResourceIssues($(this));
+	});
 
  });
  
@@ -254,6 +257,20 @@ function updateResourceIssues(){
 
 
   });
+}
+
+function getResourceIssues(element) {
+	var data = element.attr("href");
+	$.ajax({
+		url:        "ajax_htmldata.php",
+		data: 		data,
+		cache:      false,
+		success:    function(html) {
+			element.siblings(".issueList").html(html).slideToggle(250);
+			tb_reinit();
+		}
+	});
+	
 }
  
 function updateIssues(){

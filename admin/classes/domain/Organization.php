@@ -265,13 +265,11 @@ class Organization extends DatabaseObject {
 
 	public function getIssues(){
 		$query = "SELECT i.* 
-				  FROM Issue i
-				  LEFT JOIN IssueRelationship ir ON ir.issueID=i.issueID
-				  WHERE ir.entityID={$this->organizationID}";
+				  FROM `{$this->db->config->settings->resourcesDatabaseName}`.Issue i
+				  LEFT JOIN `{$this->db->config->settings->resourcesDatabaseName}`.IssueRelationship ir ON ir.issueID=i.issueID
+				  WHERE ir.entityID={$this->organizationID} AND ir.entityTypeID=1";
 		$result = $this->db->processQuery($query, 'assoc');
-
 		$objects = array();
-
 		//need to do this since it could be that there's only one request and this is how the dbservice returns result
 		if (isset($result['issueID'])){
 			$object = new Issue(new NamedArguments(array('primaryKey' => $result['issueID'])));

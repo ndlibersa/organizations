@@ -16,32 +16,24 @@ class Issue extends DatabaseObject {
 		parent::init($arguments);
 	}
 
-	public function getContacts(){
-		$query = "SELECT c.contactID 
+	public function getContacts() {
+		$query = "SELECT ic.contactID,c.name,c.emailAddress
 				FROM `{$this->dbName}`.IssueContact ic
-				LEFT JOIN Contact c ON c.contactID=ic.contactID 
+				LEFT JOIN `{$this->db->config->database->name}`.Contact c ON c.contactID=ic.contactID 
 				WHERE ic.issueID=".$this->issueID;
 		$result = $this->db->processQuery($query, 'assoc');
-
 		$objects = array();
 
-		//need to do this since it could be that there's only one request and this is how the dbservice returns result
 		if (isset($result['contactID'])){
-			$object = new Contact(new NamedArguments(array('primaryKey' => $result['contactID'])));
-			array_push($objects, $object);
-		}else{
-			foreach ($result as $row) {
-				$object = new Contact(new NamedArguments(array('primaryKey' => $row['contactID'])));
-				array_push($objects, $object);
-			}
+			return array($result);
+		} else {
+			return $result;
 		}
-		return $objects;
 	}
 
 	public function getAssociatedOrganization() {
-		$issueDB = $this->db->config->settings->resourcesDatabaseName;
 		$query = "SELECT o.organizationID 
-				  FROM `{$this->dbName}`.`{$issueDB}`.IssueRelationship ir
+				  FROM `{$this->dbName}`.IssueRelationship ir
 				  LEFT JOIN Organization o ON o.organizationID=ir.entityID
 				  WHERE ir.issueID={$this->issueID}";
 		$result = $this->db->processQuery($query, 'assoc');
