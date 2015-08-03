@@ -580,7 +580,7 @@ switch ($_GET['action']) {
     	$organizationID = $_GET['organizationID'];
 
 		$getIssuesFormData = "action=getResourceIssuesList&organizationID=".$organizationID;
-		$exportUrl = "export_issues.php?organizationID={$organizationID}";
+		$exportUrl = "export_resourceissues.php?organizationID={$organizationID}";
 
 ?>
 		<table class='linedFormTable issueTable'>

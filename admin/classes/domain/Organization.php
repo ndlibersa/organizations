@@ -289,6 +289,42 @@ class Organization extends DatabaseObject {
 		return $objects;
 	}
 
+	public function getExportableIssues($archivedOnly=false){
+		$orgDB = $this->db->config->database->name;
+		$resourceDB = $this->db->config->settings->resourcesDatabaseName;
+		$query = "SELECT i.*,(SELECT GROUP_CONCAT(CONCAT(sc.name,' - ',sc.emailAddress) SEPARATOR ', ')
+								FROM `{$resourceDB}`.IssueContact sic 
+								LEFT JOIN `{$orgDB}`.Contact sc ON sc.contactID=sic.contactID
+								WHERE sic.issueID=i.issueID) AS `contacts`,
+							 (SELECT GROUP_CONCAT(se.name SEPARATOR ', ')
+								FROM `{$resourceDB}`.IssueRelationship sir 
+								LEFT JOIN `{$orgDB}`.Organization se ON (se.organizationID=sir.entityID AND sir.entityTypeID=1)
+								WHERE sir.issueID=i.issueID) AS `appliesto`,
+							 (SELECT GROUP_CONCAT(sie.email SEPARATOR ', ')
+								FROM `{$resourceDB}`.IssueEmail sie 
+								WHERE sie.issueID=i.issueID) AS `CCs`
+				  FROM `{$resourceDB}`.Issue i
+				  LEFT JOIN `{$resourceDB}`.IssueRelationship ir ON ir.issueID=i.issueID
+				  WHERE ir.entityID={$this->organizationID} AND ir.entityTypeID=1";
+
+		if ($archivedOnly) {
+			$query .= " AND i.dateClosed IS NOT NULL";
+		} else {
+			$query .= " AND i.dateClosed IS NULL";
+		}
+		$query .= "	ORDER BY i.dateCreated DESC";
+		$result = $this->db->processQuery($query, 'assoc');
+
+		$objects = array();
+
+		//need to do this since it could be that there's only one request and this is how the dbservice returns result
+		if (isset($result['issueID'])){
+			return array($result);
+		}else{
+			return $result;
+		}
+	}
+
 	//returns array of issue log objects
 	public function getIssueLog(){
 
