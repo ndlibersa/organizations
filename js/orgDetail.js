@@ -121,9 +121,39 @@
 		$('.date-pick').datePicker({startDate:'01/01/1996'});
 	});
 
+	$("#submitNewResourceIssue").live("click", function(e) {
+		e.preventDefault();
+		submitNewResourceIssue();
+	});
+
 	$(".issuesBtn").live("click", function(e) {
 		e.preventDefault();
 		getResourceIssues($(this));
+	});
+
+	$(".issueResources").live("click", function() {
+
+		$(".issueResources").attr("checked", false);
+		$(this).attr("checked", true);
+
+		if($(this).attr("id") == "otherResources") {
+			$("#resourceIDs").fadeIn(250)
+		} else {
+			$("#resourceIDs").fadeOut(250)
+		}
+
+	});
+
+	$("#addEmail").live("click", function(e) {
+		e.preventDefault();
+		$("#currentEmails").append($("#inputEmail").val()+", ");
+		currentVal = $("#ccEmails").val();
+		if (!currentVal) {
+			$("#ccEmails").val($("#inputEmail").val());
+		} else {
+			$("#ccEmails").val(currentVal+','+$("#inputEmail").val());
+		}
+		$("#inputEmail").val('');
 	});
 
  });
@@ -241,6 +271,20 @@ function updateAccount(){
 
   });
 
+}
+
+function submitNewResourceIssue() {
+	$.ajax({
+		type:       "POST",
+		url:        "ajax_processing.php?action=insertResourceIssue",
+		cache:      false,
+		data:       $("#newIssueForm").serialize(),
+		success:    function(res) {
+			console.log(res);
+			updateIssues();
+			tb_remove()
+		}
+	});
 }
 
 function updateResourceIssues(){

@@ -423,7 +423,6 @@ class Organization extends DatabaseObject {
 								WHERE ROL.organizationID = '" . $this->organizationID . "' "
 								. $whereOptions . "
 								ORDER BY 4,2;";
-
 		$result = $this->db->processQuery($query, 'assoc');
 		//this is because processQuery has a bad habit of mixed return values
 		//TODO: change this, maybe, someday
