@@ -27,6 +27,8 @@ Database changes include:
     * Add view account tab indicator to User (for a future code-only upgrade)
 
 
-For install this upgrade, you must run the file 'upgrade.php' located in the install directory, write the host, database name, user and password to connect to the database and that's all, the upgrade will be installed.
+To install this upgrade, simple run the file 'upgrade.php' located in the
+install directory and enter the database information. The database changes
+will be installed automatically.
 
 The MySQL workbench and data model have both been updated with this upgrade.
