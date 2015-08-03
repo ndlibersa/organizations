@@ -516,7 +516,7 @@ div.issueList .issue {
 	width: 85%;
 }
 
-div.issueList a.closeIssueBtn {
+div.issueList a.closeResourceIssueBtn {
 	float: right;
 }
 
@@ -554,6 +554,7 @@ form#newIssueForm #resourceIDs {
 	min-height: 140px;
 	display: none;
 }
+
 
 
 table.linedFormTable {	

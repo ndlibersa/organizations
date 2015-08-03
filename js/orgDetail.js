@@ -127,6 +127,10 @@
 		$('.date-pick').datePicker({startDate:'01/01/1996'});
 	});
 
+	$("#submitCloseResourceIssue").live("click", function() {
+		submitCloseResourceIssue();
+	});
+
 	$("#submitNewResourceIssue").live("click", function(e) {
 		e.preventDefault();
 		submitNewResourceIssue();
@@ -307,6 +311,25 @@ function updateResourceIssues(){
 
 
   });
+}
+
+function submitCloseResourceIssue() {
+	$('#submitCloseIssue').attr("disabled", "disabled"); 
+	$.ajax({
+		type:       "POST",
+		url:        "ajax_processing.php?action=submitCloseResourceIssue",
+		cache:      false,
+		data:       { "issueID": $("#issueID").val(), "resolutionText":$("#resolutionText").val() },
+		success:    function(html) {
+			if (html.length > 1) {
+				$("#submitCloseIssue").removeAttr("disabled");
+			} else {
+				tb_remove();
+				updateIssues();
+				return false;
+			}			
+		}
+	});
 }
 
 function getResourceIssues(element) {

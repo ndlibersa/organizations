@@ -207,7 +207,19 @@ switch ($_GET['action']) {
 		}
 
         break;
-
+	case 'submitCloseResourceIssue':
+		if (!empty($_POST['issueID'])){
+			$issueID = $_POST['issueID'];
+			$issue = new Issue(new NamedArguments(array('primaryKey' => $issueID)));
+			$issue->resolutionText = $_POST['resolutionText'];
+			$issue->dateClosed = date("Y-m-d H:i:s");
+			try {
+				$issue->save();
+			} catch (Exception $e) {
+				echo $e->getMessage();
+			}
+		}
+	break;
 	case 'insertResourceIssue':
 		$formDataArray = $_POST["issue"];
 		$resourceIDArray = $_POST["resourceIDs"];
