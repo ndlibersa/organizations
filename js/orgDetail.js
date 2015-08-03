@@ -36,6 +36,7 @@
 			$('#div_contacts').hide();
 			$('#div_account').hide();
 			$('#div_issues').hide();
+			$('#div_resourceissues').hide();
 			$('#div_licenses').hide();
 		}
 		return false;
@@ -49,6 +50,7 @@
 			$('#div_contacts').hide();
 			$('#div_account').hide();
 			$('#div_issues').hide();
+			$('#div_resourceissues').hide();
 			$('#div_licenses').hide();
 		}
 		return false;
@@ -62,6 +64,7 @@
 			$('#div_contacts').show();
 			$('#div_account').hide();
 			$('#div_issues').hide();
+			$('#div_resourceissues').hide();
 			$('#div_licenses').hide();
 		}
 		return false;
@@ -74,6 +77,7 @@
 			$('#div_contacts').hide();
 			$('#div_account').show();
 			$('#div_issues').hide();
+			$('#div_resourceissues').hide();
 			$('#div_licenses').hide();
 		}
 		return false;
@@ -86,6 +90,7 @@
 			$('#div_contacts').hide();
 			$('#div_account').hide();
 			$('#div_issues').show();
+			$('#div_resourceissues').hide();
 			$('#div_licenses').hide();
 		}
 		return false;
@@ -111,6 +116,7 @@
 			$('#div_contacts').hide();
 			$('#div_account').hide();
 			$('#div_issues').hide();
+			$('#div_resourceissues').hide();
 			$('#div_licenses').show();
 		}
 		return false;

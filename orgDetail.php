@@ -256,7 +256,7 @@ if ($organization->name){
 						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showContacts'>Contacts</a></span></div>
 						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showAccount'>Accounts</a></span></div>
 						<div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showIssues'>Issues</a></div>
-						<div class='sidemenuunselected' style='position: relative; width: 99px'><span class='link'>Res. Issues</span></div>
+						<div class='sidemenuselected' style='position: relative; width: 99px'><span class='link'>Res. Issues</span></div>
 						<?php if ($showLicensing == "Y") { ?><div class='sidemenuunselected'><span class='link'><a href='javascript:void(0)' class='showLicenses'>Licenses</a></span><br /><span class='smallGreyText' style='clear:right; margin-left:8px;'>&nbsp;(<?php if ($numLicenses == "1") { echo $numLicenses . " record"; }else{ echo $numLicenses . " records"; } ?>)</span></div><?php } ?>
 					</td>
 					<td class='mainContent'>
