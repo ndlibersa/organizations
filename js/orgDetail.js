@@ -154,6 +154,11 @@
 
 	});
 
+	$("#createContact").live("click",function(e) {
+		e.preventDefault();
+		getInlineContactForm();
+	});
+
 	$("#addEmail").live("click", function(e) {
 		e.preventDefault();
 		$("#currentEmails").append($("#inputEmail").val()+", ");
@@ -281,6 +286,19 @@ function updateAccount(){
 
   });
 
+}
+
+function getInlineContactForm() {
+	
+	$.ajax({
+		 type:       "GET",
+		 url:        "ajax_forms.php",
+		 cache:      false,
+		 data:       "action=getInlineContactForm",
+		 success:    function(html) {
+			$("#inlineContact").html(html)
+		 }
+	  });
 }
 
 function submitNewResourceIssue() {

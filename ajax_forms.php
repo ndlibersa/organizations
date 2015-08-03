@@ -249,8 +249,29 @@ switch ($_GET['action']) {
 
 
 
-
-
+    case 'getInlineContactForm':
+		//get all contact roles for output in drop down
+		$contactRoleArray = array();
+		$contactRoleObj = new ContactRole();
+		$contactRoleArray = $contactRoleObj->allAsArray();
+?>
+		<label for="contactName">Name</label>
+		<input type='text' id='contactName' name='contactName' /><br />
+		<label for="emailAddress">Email</label>
+		<input type='text' id='emailAddress' name='emailAddress' />
+<?php
+		if (count($contactRoleArray) > 0){
+			echo '<div style="width:50%">
+					<label style="display:block;" for="'.$contactRoleIns['contactRoleID'].'">Roles</label>';
+			foreach ($contactRoleArray as $contactRoleIns){
+				echo "<div style=\"display:inline-block;vertical-align:middle;margin: 0px 10px\">
+						<input class='check_roles' type='checkbox' name='" . $contactRoleIns['contactRoleID'] . "' id='" . $contactRoleIns['contactRoleID'] . "' value='" . $contactRoleIns['contactRoleID'] . "' />   
+						<span class='smallText'>" . $contactRoleIns['shortName'] . "</span>
+					 </div>";
+			}
+			echo '</div>';
+		}
+	break;
     case 'getContactForm':
     	$organizationID = $_GET['organizationID'];
     	if (isset($_GET['contactID'])) $contactID = $_GET['contactID']; else $contactID = '';
@@ -582,6 +603,13 @@ switch ($_GET['action']) {
 ?>
 				</select>
 				<span id='span_error_contactName' class='smallDarkRedText'>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<a id="createContact" href="#">add contact</a>
+				<div id="inlineContact"></div>
 			</td>
 		</tr>
 		<tr>
