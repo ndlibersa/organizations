@@ -263,11 +263,17 @@ class Organization extends DatabaseObject {
 		return $objects;
 	}
 
-	public function getIssues(){
+	public function getIssues($archivedOnly=false) {
 		$query = "SELECT i.* 
 				  FROM `{$this->db->config->settings->resourcesDatabaseName}`.Issue i
 				  LEFT JOIN `{$this->db->config->settings->resourcesDatabaseName}`.IssueRelationship ir ON ir.issueID=i.issueID
 				  WHERE ir.entityID={$this->organizationID} AND ir.entityTypeID=1";
+		if ($archivedOnly) {
+			$query .= " AND i.dateClosed IS NOT NULL";
+		} else {
+			$query .= " AND i.dateClosed IS NULL";
+		}
+		$query .= "	ORDER BY i.dateCreated DESC";
 		$result = $this->db->processQuery($query, 'assoc');
 		$objects = array();
 		//need to do this since it could be that there's only one request and this is how the dbservice returns result
