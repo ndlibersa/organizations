@@ -306,6 +306,15 @@ function createOrganizationContact(contact) {
 		cache:      false,
 		data:       contact,
 		success:    function(res) {
+			$.ajax({
+				type:       "GET",
+				url:        "ajax_htmldata.php",
+				cache:      false,
+				data:       "action=getOrganizationContacts&organizationID="+contact.organizationID,
+				success:    function(html) {
+					$("#contactIDs").html(html);
+				}
+			});
 		}
 	});
 }

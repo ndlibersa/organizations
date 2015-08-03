@@ -69,7 +69,16 @@ function generateIssueHTML($issue,$associatedEntities=null) {
 
 switch ($_GET['action']) {
 
-
+	case 'getOrganizationContacts':
+    	$organizationID = $_GET['organizationID'];
+    	$organization = new Organization(new NamedArguments(array('primaryKey' => $organizationID)));
+		$contactObjArray = $organization->getUnarchivedContacts();
+		if (count($contactObjArray) > 0) {
+			foreach ($contactObjArray as $contact) {
+				echo "<option value=\"{$contact->contactID}\">{$contact->name}</option>";
+			}
+		}
+	break;
     case 'getOrganizationDetails':
     	$organizationID = $_GET['organizationID'];
     	$organization = new Organization(new NamedArguments(array('primaryKey' => $organizationID)));
