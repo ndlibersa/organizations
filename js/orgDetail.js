@@ -22,6 +22,7 @@
  	updateArchivedContacts(0);
  	updateAccount();
  	updateIssues();
+ 	updateResourceIssues();
  	updateLicenses();
  
 
@@ -90,6 +91,18 @@
 		return false;
 	 });
 
+	  $(".showResourceIssues").click(function () {
+		if (viewAll == 0){
+			$('#div_organization').hide();
+			$('#div_aliases').hide();
+			$('#div_contacts').hide();
+			$('#div_account').hide();
+			$('#div_issues').hide();
+			$('#div_resourceissues').show();
+			$('#div_licenses').hide();
+		}
+		return false;
+	 });
 
 	  $(".showLicenses").click(function () {
 		if (viewAll == 0){
@@ -227,6 +240,21 @@ function updateAccount(){
 
 }
 
+function updateResourceIssues(){
+  $("#div_resourceissueDetails").append("<img src='images/circle.gif'>  Refreshing Contents...");
+ $.ajax({
+	 type:       "GET",
+	 url:        "ajax_htmldata.php",
+	 cache:      false,
+	 data:       "action=getResourceIssueDetails&organizationID=" + $("#organizationID").val(),
+	 success:    function(html) {
+		$("#div_resourceissueDetails").html(html);
+		tb_reinit();
+	 }
+
+
+  });
+}
  
 function updateIssues(){
   $("#div_issueDetails").append("<img src='images/circle.gif'>  Refreshing Contents...");

@@ -531,9 +531,38 @@ switch ($_GET['action']) {
 
         break;
 
+	case 'getResourceIssueDetails':
+    	$organizationID = $_GET['organizationID'];
+    	$organization = new Organization(new NamedArguments(array('primaryKey' => $organizationID)));
 
+		$getIssuesFormData = "action=getIssuesList&organizationID=".$organizationID;
+		$exportUrl = "export_issues.php?organizationID={$organizationID}";
 
-
+?>
+		<table class='linedFormTable issueTable'>
+			<tr>
+				<th>Issues/Problems</th>
+			</tr>
+			<tr>
+				<td><a class="thickbox" href="ajax_forms.php?action=getNewIssueForm&organizationID=<?php echo $organizationID; ?>&modal=true">report new issue</a></td>
+			</tr>
+			<tr>
+				<td>
+					<a href="<?php echo $getIssuesFormData; ?>" class="issuesBtn" id="openIssuesBtn">view open issue</a> 
+					<a target="_blank" href="<?php echo $exportUrl;?>"><img src="images/xls.gif" /></a>
+					<div class="issueList" id="openIssues" style="display:none;"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<a href="<?php echo $getIssuesFormData."&archived=1"; ?>" class="issuesBtn" id="archivedIssuesBtn">view archived issues</a> 
+					<a target="_blank" href="<?php echo $exportUrl;?>&archived=1"><img src="images/xls.gif" /></a>
+					<div class="issueList" id="archivedIssues"></div>
+				</td>
+			</tr>
+		</table>
+<?php
+	break;
 
     case 'getIssueDetails':
     	$organizationID = $_GET['organizationID'];

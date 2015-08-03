@@ -471,10 +471,6 @@ table.borderedFormTable th {
 
 table.borderedFormTable tr {vertical-align: top;}
 
-
-
-
-
 table.borderedHeadTable {	
 	width:947px;
 	border-width:  0 0 1px 1px;
@@ -500,6 +496,63 @@ table.borderedHeadTable td {
 
 table.borderedHeadTable tr {
 	vertical-align:middle;
+}
+
+table.issueTable {
+	width: 100%;
+}
+
+table.issueTable tr th {
+	background:#f5f8fa;
+}
+
+div.issueList {
+	display: none;
+	width: 85%;
+	padding: 0 10px 5px 25px;
+}
+
+div.issueList .issue {
+	width: 85%;
+}
+
+div.issueList a.closeIssueBtn {
+	float: right;
+}
+
+div.issueList dl {
+	margin-top: 15px;
+}
+
+div.issueList dl dt {
+	margin-top: 5px; 
+	font-weight: bold;
+	display: inline;
+}
+
+div.issueList dl dd {
+	display: inline;
+}
+
+div.issueList dl dd:after { 
+	content:"\A"; white-space:pre; 
+}
+
+div.issueList dl dt.block {
+	display: block;
+}
+
+div#closeIssue .text-left {
+	text-align: left;
+}
+
+div#closeIssue .text-right {
+	text-align: right;
+}
+
+form#newIssueForm #resourceIDs {
+	min-height: 140px;
+	display: none;
 }
 
 
