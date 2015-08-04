@@ -261,7 +261,7 @@ switch ($_GET['action']) {
 		<input type='text' id='emailAddress' name='emailAddress' />
 <?php
 		if (count($contactRoleArray) > 0){
-			echo '<div style="width:50%">
+			echo '<div>
 					<label style="display:block;" for="'.$contactRoleIns['contactRoleID'].'">Roles</label>';
 			foreach ($contactRoleArray as $contactRoleIns){
 				echo "<div style=\"display:inline-block;vertical-align:middle;margin: 0px 10px\">
@@ -578,7 +578,7 @@ switch ($_GET['action']) {
 
 <form id='newIssueForm'>
 	<input type="hidden" id="sourceOrganizationID" name="sourceOrganizationID" value="<?php echo $organizationID;?>" />
-	<table class="thickboxTable" style="width:98%;background-image:url('images/title.gif');background-repeat:no-repeat;">
+	<table class="thickboxTable">
 		<tr>
 			<td colspan="2">
 				<h1> Report New Problem</h1>

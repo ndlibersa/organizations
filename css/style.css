@@ -555,6 +555,19 @@ form#newIssueForm #resourceIDs {
 	display: none;
 }
 
+#newIssueForm table.thickboxTable {
+	width: 100%;
+	background-image:url('../images/title.gif');
+	background-repeat:no-repeat;
+}
+
+#newIssueForm table.thickboxTable td:first-child {
+	width: 25%;
+}
+
+#newIssueForm table.thickboxTable td:last-child {
+	width: 75%;
+}
 
 
 table.linedFormTable {	
