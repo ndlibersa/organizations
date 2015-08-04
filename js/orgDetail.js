@@ -308,11 +308,23 @@ function createOrganizationContact(contact) {
 		cache:      false,
 		data:       contact,
 		success:    function(res) {
+
+			var data = {};
+			data.contactIDs = [];
+
+			$("#contactIDs option:selected").each(function() {
+				data.contactIDs.push($(this).val());
+			});
+
+			data.action = "getOrganizationContacts";
+			data.organizationID = contact.organizationID;
+			data.contactIDs.push(res);
+			
 			$.ajax({
 				type:       "GET",
 				url:        "ajax_htmldata.php",
 				cache:      false,
-				data:       "action=getOrganizationContacts&organizationID="+contact.organizationID,
+				data:       $.param(data),
 				success:    function(html) {
 					$("#inlineContact").html(html).slideUp(250, function() {
 						$("#getCreateContactForm").fadeIn(250);

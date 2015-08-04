@@ -169,6 +169,7 @@ switch ($_GET['action']) {
 				}
 			}
 
+			echo $contact->contactID;
 
 		} catch (Exception $e) {
 			echo $e->getMessage();

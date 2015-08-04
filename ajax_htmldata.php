@@ -78,11 +78,14 @@ switch ($_GET['action']) {
 
 	case 'getOrganizationContacts':
     	$organizationID = $_GET['organizationID'];
+    	$contactIDs = $_GET['contactIDs'];
+    	
     	$organization = new Organization(new NamedArguments(array('primaryKey' => $organizationID)));
 		$contactObjArray = $organization->getUnarchivedContacts();
 		if (count($contactObjArray) > 0) {
 			foreach ($contactObjArray as $contact) {
-				echo "<option value=\"{$contact->contactID}\">{$contact->name}</option>";
+				$isSelected = (!empty($contactIDs) && in_array($contact->contactID, $contactIDs)) ? "selected" : "";
+				echo "<option {$isSelected} value=\"{$contact->contactID}\">{$contact->name}</option>";	
 			}
 		}
 	break;
