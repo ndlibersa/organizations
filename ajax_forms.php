@@ -255,16 +255,22 @@ switch ($_GET['action']) {
 		$contactRoleObj = new ContactRole();
 		$contactRoleArray = $contactRoleObj->allAsArray();
 ?>
-		<label for="contactName">Name</label>
-		<input type='text' id='contactName' name='contactName' /><br />
-		<label for="emailAddress">Email</label>
-		<input type='text' id='emailAddress' name='emailAddress' />
+		<div style="display:inline-block;vertical-align:top;width:42%;">
+			<div class="form-element">
+				<label for="contactName">Name</label>
+				<input type='text' id='contactName' name='contactName' /><br />
+			</div>
+			<div class="form-element">
+				<label for="emailAddress">Email</label>
+				<input type='text' id='emailAddress' name='emailAddress' />
+			</div>
+		</div>
 <?php
 		if (count($contactRoleArray) > 0){
-			echo '<div>
+			echo '<div style="display:inline-block;vertical-align:top;width:48%;">
 					<label style="display:block;" for="'.$contactRoleIns['contactRoleID'].'">Roles</label>';
 			foreach ($contactRoleArray as $contactRoleIns){
-				echo "<div style=\"display:inline-block;vertical-align:middle;margin: 0px 10px\">
+				echo "<div class=\"form-element form-element-tight\">
 						<input class='check_roles' type='checkbox' name='" . $contactRoleIns['contactRoleID'] . "' id='" . $contactRoleIns['contactRoleID'] . "' value='" . $contactRoleIns['contactRoleID'] . "' />   
 						<span class='smallText'>" . $contactRoleIns['shortName'] . "</span>
 					 </div>";
