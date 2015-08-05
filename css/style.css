@@ -551,7 +551,6 @@ div#closeIssue .text-right {
 }
 
 form#newIssueForm #resourceIDs {
-	min-height: 140px;
 	display: none;
 }
 #inlineContact {
@@ -592,6 +591,13 @@ form#newIssueForm #resourceIDs {
 
 #newIssueForm .form-element-tight label, #newIssueForm .form-element-tight input {
 	min-width: 10%;
+}
+
+#newIssueForm #contactIDs,
+#newIssueForm #bodyText,
+#newIssueForm #resourceIDs {
+	min-width: 200px;
+	min-height: 50px;
 }
 
 table.linedFormTable {	
