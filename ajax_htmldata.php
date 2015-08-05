@@ -607,7 +607,7 @@ switch ($_GET['action']) {
 				<th>Issues/Problems</th>
 			</tr>
 			<tr>
-				<td><a class="thickbox" href="ajax_forms.php?action=getNewIssueForm&organizationID=<?php echo $organizationID; ?>&modal=true">report new issue</a></td>
+				<td><a id="createIssueBtn" class="thickbox" href="ajax_forms.php?action=getNewIssueForm&organizationID=<?php echo $organizationID; ?>&modal=true">report new issue</a></td>
 			</tr>
 			<tr>
 				<td>

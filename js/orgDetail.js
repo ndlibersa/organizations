@@ -96,6 +96,11 @@
 		return false;
 	 });
 
+
+	$("#createIssueBtn").live("click", function() {
+		$(".issueList").slideUp(250);
+	});
+
 	  $(".showResourceIssues").click(function () {
 		if (viewAll == 0){
 			$('#div_organization').hide();
@@ -319,7 +324,7 @@ function createOrganizationContact(contact) {
 			data.action = "getOrganizationContacts";
 			data.organizationID = contact.organizationID;
 			data.contactIDs.push(res);
-			
+
 			$.ajax({
 				type:       "GET",
 				url:        "ajax_htmldata.php",
