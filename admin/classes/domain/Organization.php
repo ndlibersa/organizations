@@ -289,6 +289,35 @@ class Organization extends DatabaseObject {
 		return $objects;
 	}
 
+	public function getDowntime($archivedOnly=false) {
+		$query = "SELECT d.* 
+			  FROM `{$this->db->config->settings->resourcesDatabaseName}`.Downtime d
+			  WHERE d.entityID={$this->organizationID} 
+			  AND d.entityTypeID=1";
+
+		if ($archivedOnly) {
+			$query .= " AND d.endDate < CURDATE()";
+		} else {
+			$query .= " AND d.endDate >= CURDATE()";
+		}
+		$query .= "	ORDER BY d.dateCreated DESC";
+
+		$result = $this->db->processQuery($query, 'assoc');
+
+		$objects = array();
+		//need to do this since it could be that there's only one request and this is how the dbservice returns result
+		if (isset($result['downtimeID'])) {
+			$object = new Downtime(new NamedArguments(array('primaryKey' => $result['downtimeID'])));
+			array_push($objects, $object);
+		} else {
+			foreach ($result as $row) {
+				$object = new Downtime(new NamedArguments(array('primaryKey' => $row['downtimeID'])));
+				array_push($objects, $object);
+			}
+		}
+		return $objects;
+	}
+
 	public function getExportableIssues($archivedOnly=false){
 		$orgDB = $this->db->config->database->name;
 		$resourceDB = $this->db->config->settings->resourcesDatabaseName;
