@@ -101,6 +101,10 @@
 		$(".issueList").slideUp(250);
 	});
 
+	$("#createDowntimeBtn").live("click", function() {
+		$(".downtimeList").slideUp(250);
+	});
+
 	$(".showResourceIssues").click(function () {
 		if (viewAll == 0){
 			$('#div_organization').hide();
@@ -144,6 +148,11 @@
 	$("#submitNewResourceIssue").live("click", function(e) {
 		e.preventDefault();
 		submitNewResourceIssue();
+	});
+
+	$("#submitNewDowntime").live("click", function(e) {
+		e.preventDefault();
+		submitNewDowntime();
 	});
 
 	$(".issuesBtn").live("click", function(e) {
@@ -366,11 +375,30 @@ function submitNewResourceIssue() {
 		cache:      false,
 		data:       $("#newIssueForm").serialize(),
 		success:    function(res) {
-			console.log(res);
 			updateIssues();
 			tb_remove()
 		}
 	});
+}
+
+function submitNewDowntime() {
+	
+	var data = $("#newDowntimeForm").serialize();
+	data += "&startDate="+$("#startDate").val();
+	data += "&endDate="+$("#endDate").val();
+
+	$.ajax({
+		 type:       "POST",
+		 url:        "ajax_processing.php?action=insertDowntime",
+		 cache:      false,
+		 data:       data,
+		 success:    function(res) {
+			updateIssues();
+			tb_remove()
+		 }
+
+	  });
+
 }
 
 function updateResourceIssues(){

@@ -63,16 +63,18 @@ class Downtime extends DatabaseObject {
 		}
 	}
 
-	public function save() {
+	public function getDowntimeTypesArray() {
+		$query = "SELECT dt.*
+				  FROM `{$this->db->config->settings->resourcesDatabaseName}`.DowntimeType dt";
 
-		//We have added the name attribute after the fact, and here, we are cleaning it up
-		unset($this->attributes["name"]); 
-		unset($this->attributesNames["name"]);
+		$result = $this->db->processQuery($query, "assoc");
+		$names = array();
 
-		unset($this->attributes["subjectText"]); 
-		unset($this->attributesNames["subjectText"]);
+		foreach ($result as $name) {
+			array_push($names, $name);
+		}
 
-		parent::save();
+		return $names;
 	}
 
 }
