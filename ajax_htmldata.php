@@ -630,7 +630,8 @@ switch ($_GET['action']) {
 
 		$getIssuesFormData = "action=getResourceIssuesList&organizationID=".$organizationID;
 		$getDowntimeFormData = "action=getDowntimeList&organizationID=".$organizationID;
-		$exportUrl = "export_resourceissues.php?organizationID={$organizationID}";
+		$exportIssueUrl = "export_resourceissues.php?organizationID={$organizationID}";
+		$exportDowntimeUrl = "export_downtimes.php?organizationID={$organizationID}";
 
 ?>
 		<table class='linedFormTable issueTabTable'>
@@ -643,14 +644,14 @@ switch ($_GET['action']) {
 			<tr>
 				<td>
 					<a href="<?php echo $getIssuesFormData; ?>" class="issuesBtn" id="openIssuesBtn">view open issues</a> 
-					<a target="_blank" href="<?php echo $exportUrl;?>"><img src="images/xls.gif" /></a>
+					<a target="_blank" href="<?php echo $exportIssueUrl;?>"><img src="images/xls.gif" /></a>
 					<div class="issueList" id="openIssues" style="display:none;"></div>
 				</td>
 			</tr>
 			<tr>
 				<td>
 					<a href="<?php echo $getIssuesFormData."&archived=1"; ?>" class="issuesBtn" id="archivedIssuesBtn">view archived issues</a> 
-					<a target="_blank" href="<?php echo $exportUrl;?>&archived=1"><img src="images/xls.gif" /></a>
+					<a target="_blank" href="<?php echo $exportIssueUrl;?>&archived=1"><img src="images/xls.gif" /></a>
 					<div class="issueList" id="archivedIssues"></div>
 				</td>
 			</tr>
@@ -666,14 +667,14 @@ switch ($_GET['action']) {
 			<tr>
 				<td>
 					<a href="<?php echo $getDowntimeFormData; ?>" class="downtimeBtn" id="openDowntimeBtn">view current/upcoming downtime</a> 
-					<a target="_blank" href="<?php echo $exportUrl;?>"><img src="images/xls.gif" /></a>
+					<a target="_blank" href="<?php echo $exportDowntimeUrl;?>"><img src="images/xls.gif" /></a>
 					<div class="downtimeList" id="currentDowntime" style="display:none;"></div>
 				</td>
 			</tr>
 			<tr>
 				<td>
 					<a href="<?php echo $getDowntimeFormData."&archived=1"; ?>" class="downtimeBtn" id="archiveddowntimeBtn">view archived downtime</a> 
-					<a target="_blank" href="<?php echo $exportUrl;?>&archived=1"><img src="images/xls.gif" /></a>
+					<a target="_blank" href="<?php echo $exportDowntimeUrl;?>&archived=1"><img src="images/xls.gif" /></a>
 					<div class="downtimeList" id="archivedDowntime"></div>
 				</td>
 			</tr>
