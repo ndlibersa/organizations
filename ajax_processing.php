@@ -332,6 +332,22 @@ switch ($_GET['action']) {
 		}
 
 	break;
+
+	case 'insertDowntime':
+		$newDowntime = new Downtime();
+		$newDowntime->entityID = $_POST['sourceOrganizationID'];
+		$newDowntime->creatorID = $user->loginID;
+		$newDowntime->downtimeTypeID = $_POST['downtimeType'];
+		$newDowntime->issueID = $_POST['issueID'];
+		$newDowntime->startDate = date('Y-m-d H:i:s', strtotime($_POST['startDate']));
+		$newDowntime->endDate = date('Y-m-d H:i:s', strtotime($_POST['endDate']));
+
+		$newDowntime->dateCreated = date( 'Y-m-d H:i:s');
+		$newDowntime->entityTypeID = 1;
+
+		$newDowntime->save();
+	break;
+
     case 'submitIssueLog':
 		//if this is an existing issue
 		$issueLogID=$_POST['issueLogID'];
