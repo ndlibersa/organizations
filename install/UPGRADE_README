@@ -27,10 +27,8 @@ Database changes include:
     * Add view account tab indicator to User (for a future code-only upgrade)
 
 
-
-For manual installation, you will need to first modify the upgrade_1_1.sql
-script located in this directory to replace _DATABASE_NAME_ with your MySQL
-schema name (e.g. coral_organizations_pprd). Next, run the upgrade_1_1.sql
-script in your MySQL client.
+To install this upgrade, simple run the file 'upgrade.php' located in the
+install directory and enter the database information. The database changes
+will be installed automatically.
 
 The MySQL workbench and data model have both been updated with this upgrade.
