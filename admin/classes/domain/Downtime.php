@@ -40,9 +40,9 @@ class Downtime extends DatabaseObject {
 		//if exists in the database
 		if (isset($this->primaryKey)) {	
 			$query = "SELECT d.*, dt.name, i.subjectText
-				  FROM `{$this->db->config->settings->resourcesDatabaseName}`.Downtime d
-				  LEFT JOIN `{$this->db->config->settings->resourcesDatabaseName}`.DowntimeType dt ON dt.downtimeTypeID=d.downtimeTypeID
-				  LEFT JOIN `{$this->db->config->settings->resourcesDatabaseName}`.Issue i ON i.issueID=d.issueID
+				  FROM `{$this->dbName}`.Downtime d
+				  LEFT JOIN `{$this->dbName}`.DowntimeType dt ON dt.downtimeTypeID=d.downtimeTypeID
+				  LEFT JOIN `{$this->dbName}`.Issue i ON i.issueID=d.issueID
 				  WHERE d.downtimeID={$this->primaryKey}";
 			
 			$result = $this->db->processQuery($query, 'assoc');
@@ -53,6 +53,9 @@ class Downtime extends DatabaseObject {
 			}
 
 		}else{
+
+			//This else block currently will not be used
+
 			// Figure out attributes from existing database
 			$query = "SELECT COLUMN_NAME FROM information_schema.`COLUMNS` WHERE table_schema = '";
 			$query .= $this->db->config->database->name . "' AND table_name = '$this->tableName'";// MySQL-specific
@@ -65,7 +68,7 @@ class Downtime extends DatabaseObject {
 
 	public function getDowntimeTypesArray() {
 		$query = "SELECT dt.*
-				  FROM `{$this->db->config->settings->resourcesDatabaseName}`.DowntimeType dt";
+				  FROM `{$this->dbName}`.DowntimeType dt";
 
 		$result = $this->db->processQuery($query, "assoc");
 		$names = array();
