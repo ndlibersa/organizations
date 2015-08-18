@@ -588,17 +588,18 @@ switch ($_GET['action']) {
 		<tr>
 			<td colspan="2">
 				<h1> Report New Problem</h1>
+				<span class='smallDarkRedText'>* required fields</span>
 			</td>
 		</tr>
 		<tr>
-			<td><label>Organization:</label></td>
+			<td><label>Organization:&nbsp;&nbsp;<span class='bigDarkRedText'>*</span></label></td>
 			<td>
 				<p><?php echo $organization->name; ?></p>
-				<span id='span_error_organizationId' class='smallDarkRedText'>
+				<span id='span_error_organizationId' class='smallDarkRedText'></span>
 			</td>
 		</tr>
 		<tr>
-			<td><label>Contact:</label></td>
+			<td><label>Contact:&nbsp;&nbsp;<span class='bigDarkRedText'>*</span></label></td>
 			<td>
 				<select multiple style="min-height: 60px;" type='text' id='contactIDs' name='contactIDs[]'>
 <?php 
@@ -609,7 +610,7 @@ switch ($_GET['action']) {
 
 ?>
 				</select>
-				<span id='span_error_contactName' class='smallDarkRedText'>
+				<span id='span_error_contactName' class='smallDarkRedText'></span>
 			</td>
 		</tr>
 		<tr>
@@ -623,7 +624,7 @@ switch ($_GET['action']) {
 			<td><label>CC myself:</label></td>
 			<td>
 				<input type='checkbox' id='ccCreator' name='ccCreator' class='changeInput' />
-				<span id='span_error_ccCreator' class='smallDarkRedText'>
+				<span id='span_error_ccCreator' class='smallDarkRedText'></span>
 			</td>
 		</tr>
 		<tr>
@@ -635,25 +636,25 @@ switch ($_GET['action']) {
 					Current CCs: <span id="currentEmails"></span>
 				</p>
 				<input type="hidden" id='ccEmails' name='ccEmails' value='' class='changeInput' />
-				<span id='span_error_contactIDs' class='smallDarkRedText'>
+				<span id='span_error_contactIDs' class='smallDarkRedText'></span>
 			</td>
 		</tr>
 		<tr>
-			<td><label>Subject:</label></td>
+			<td><label>Subject:&nbsp;&nbsp;<span class='bigDarkRedText'>*</span></label></td>
 			<td>
 				<input type='text' id='subjectText' name='issue[subjectText]' value='' class='changeInput' />
-				<span id='span_error_subjectText' class='smallDarkRedText'>
+				<span id='span_error_subjectText' class='smallDarkRedText'></span>
 			</td>
 		</tr>
 		<tr>
-			<td><label>Body:</label></td>
+			<td><label>Body:&nbsp;&nbsp;<span class='bigDarkRedText'>*</span></label></td>
 			<td>
 				<textarea id='bodyText' name='issue[bodyText]' value='' />
-				<span id='span_error_bodyText' class='smallDarkRedText'>
+				<span id='span_error_bodyText' class='smallDarkRedText'></span>
 			</td>
 		</tr>
 		<tr>
-			<td><label>Applies to:</label></td>
+			<td><label>Applies to:&nbsp;&nbsp;<span class='bigDarkRedText'>*</span></label></td>
 			<td>
 				<div>
 					<input type="checkbox" class="issueResources" name="organizationID" value="<?php echo $organization->organizationID;?>" /> <label for="allResources">Applies to all resources of <?php echo $organization->name; ?></label>
@@ -670,7 +671,7 @@ switch ($_GET['action']) {
 		}
 ?>
 				</select>
-				<span id='span_error_resourceIDs' class='smallDarkRedText'>
+				<span id='span_error_resourceIDs' class='smallDarkRedText'></span>
 			</td>
 		</tr>
 	</table>
