@@ -74,6 +74,36 @@ function generateIssueHTML($issue,$associatedEntities=null) {
 	return $html;
 }
 
+//shared html template for organization and resource downtimes
+function generateDowntimeHTML($downtime,$associatedEntities=null) {
+
+	$html = "
+	<div class=\"downtime\">";
+	
+	$html .= "
+	  	<dl>
+	  		<dt>Type:</dt> 
+	  		<dd>{$downtime->name}</dd>
+
+	  		<dt>Downtime Start:</dt> 
+	  		<dd>{$downtime->startDate}</dd>
+
+	  		<dt>Downtime Resolved:</dt> 
+	  		<dd>{$downtime->endDate}</dd>";
+
+	if($downtime->subjectText) {
+		$html .= "
+	  		<dt>Linked issue:</dt> 
+	  		<dd>{$downtime->subjectText}</dd>";
+	}
+
+	$html .= "		
+		</dl>
+	</div>";	
+	
+	return $html;
+}
+
 switch ($_GET['action']) {
 
 	case 'getOrganizationContacts':
@@ -599,10 +629,12 @@ switch ($_GET['action']) {
     	$organizationID = $_GET['organizationID'];
 
 		$getIssuesFormData = "action=getResourceIssuesList&organizationID=".$organizationID;
-		$exportUrl = "export_resourceissues.php?organizationID={$organizationID}";
+		$getDowntimeFormData = "action=getDowntimeList&organizationID=".$organizationID;
+		$exportIssueUrl = "export_resourceissues.php?organizationID={$organizationID}";
+		$exportDowntimeUrl = "export_downtimes.php?organizationID={$organizationID}";
 
 ?>
-		<table class='linedFormTable issueTable'>
+		<table class='linedFormTable issueTabTable'>
 			<tr>
 				<th>Issues/Problems</th>
 			</tr>
@@ -612,15 +644,38 @@ switch ($_GET['action']) {
 			<tr>
 				<td>
 					<a href="<?php echo $getIssuesFormData; ?>" class="issuesBtn" id="openIssuesBtn">view open issues</a> 
-					<a target="_blank" href="<?php echo $exportUrl;?>"><img src="images/xls.gif" /></a>
+					<a target="_blank" href="<?php echo $exportIssueUrl;?>"><img src="images/xls.gif" /></a>
 					<div class="issueList" id="openIssues" style="display:none;"></div>
 				</td>
 			</tr>
 			<tr>
 				<td>
 					<a href="<?php echo $getIssuesFormData."&archived=1"; ?>" class="issuesBtn" id="archivedIssuesBtn">view archived issues</a> 
-					<a target="_blank" href="<?php echo $exportUrl;?>&archived=1"><img src="images/xls.gif" /></a>
+					<a target="_blank" href="<?php echo $exportIssueUrl;?>&archived=1"><img src="images/xls.gif" /></a>
 					<div class="issueList" id="archivedIssues"></div>
+				</td>
+			</tr>
+		</table>
+
+		<table id="downTimeTable" class='linedFormTable issueTabTable'>
+			<tr>
+				<th>Downtime</th>
+			</tr>
+			<tr>
+				<td><a id="createDowntimeBtn" class="thickbox" href="ajax_forms.php?action=getNewDowntimeForm&organizationID=<?php echo $_GET['organizationID']; ?>&height=160&width=390&modal=true">report new Downtime</a></td>
+			</tr>
+			<tr>
+				<td>
+					<a href="<?php echo $getDowntimeFormData; ?>" class="downtimeBtn" id="openDowntimeBtn">view current/upcoming downtime</a> 
+					<a target="_blank" href="<?php echo $exportDowntimeUrl;?>"><img src="images/xls.gif" /></a>
+					<div class="downtimeList" id="currentDowntime" style="display:none;"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<a href="<?php echo $getDowntimeFormData."&archived=1"; ?>" class="downtimeBtn" id="archiveddowntimeBtn">view archived downtime</a> 
+					<a target="_blank" href="<?php echo $exportDowntimeUrl;?>&archived=1"><img src="images/xls.gif" /></a>
+					<div class="downtimeList" id="archivedDowntime"></div>
 				</td>
 			</tr>
 		</table>
@@ -640,6 +695,20 @@ switch ($_GET['action']) {
 			echo "<br><p>There are no organization level issues.</p><br>";
 		}
 
+	break;
+	case 'getDowntimeList':
+		$organizationID = $_GET['organizationID'];
+		$archivedFlag = (!empty($_GET['archived']) && $_GET['archived'] == 1) ? true:false;
+		$organization = new Organization(new NamedArguments(array('primaryKey' => $organizationID)));
+		$orgDowntime = $organization->getDowntime($archivedFlag);
+
+		if(count($orgDowntime) > 0) {
+			foreach ($orgDowntime as $downtime) {
+				echo generateDowntimeHTML($downtime,array(array("name"=>$organization->name,"id"=>$organization->organizationID,"entityType"=>1)));
+			}
+		} else {
+			echo "<br><p>There are no organization level downtimes.</p><br>";
+		}
 	break;
     case 'getIssueDetails':
     	$organizationID = $_GET['organizationID'];
