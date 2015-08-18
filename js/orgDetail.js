@@ -152,7 +152,37 @@
 
 	$("#submitNewDowntime").live("click", function(e) {
 		e.preventDefault();
-		submitNewDowntime();
+		
+		var errors = [];
+
+		console.log($("#startDate").val());
+
+		if($("#startDate").val()=="") {	
+			errors.push({
+				message: "Must set a date.",
+				target: '#span_error_startDate'
+			});
+		} 
+
+		if($("#endDate").val()=="") {	
+			errors.push({
+				message: "Must set a date.",
+				target: '#span_error_endDate'
+			});
+		} 
+
+		if(errors.length == 0) {
+			submitNewDowntime();
+		} else {
+
+			$(".addDowntimeError").html("");
+
+			for(var index in errors) {
+				error = errors[index];
+				$(error.target).html(error.message);
+			}
+		}
+	
 	});
 
 	$(".issuesBtn").live("click", function(e) {
