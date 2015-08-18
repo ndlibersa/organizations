@@ -152,7 +152,37 @@
 
 	$("#submitNewDowntime").live("click", function(e) {
 		e.preventDefault();
-		submitNewDowntime();
+		
+		var errors = [];
+
+		console.log($("#startDate").val());
+
+		if($("#startDate").val()=="") {	
+			errors.push({
+				message: "Must set a date.",
+				target: '#span_error_startDate'
+			});
+		} 
+
+		if($("#endDate").val()=="") {	
+			errors.push({
+				message: "Must set a date.",
+				target: '#span_error_endDate'
+			});
+		} 
+
+		if(errors.length == 0) {
+			submitNewDowntime();
+		} else {
+
+			$(".addDowntimeError").html("");
+
+			for(var index in errors) {
+				error = errors[index];
+				$(error.target).html(error.message);
+			}
+		}
+	
 	});
 
 	$(".issuesBtn").live("click", function(e) {
@@ -526,6 +556,72 @@ function updateLicenses(){
    }
    
    
+   function submitNewResourceIssue() {
+		if(validateNewIssue()) {
+			$.ajax({
+				type:       "POST",
+				url:        "ajax_processing.php?action=insertResourceIssue",
+				cache:      false,
+				data:       $("#newIssueForm").serialize(),
+				success:    function(res) {
+					updateIssues();
+					tb_remove()
+				}
+			});
+		}
+	}
+
+	function validateNewIssue (){
+	 	myReturn=0;
+
+		var organization = $('#sourceOrganizationID').val();
+		var contact = $('#contactIDs').val();
+		var subject = $('#subjectText').val();
+		var body = $('#bodyText').val();
+		var appliesTo = false;
+
+		//also perform same checks on the current record in case add button wasn't clicked
+		// if (title == '' || title == null){
+		// 	$('#span_error_titleText').html('A title must be entered to continue.');
+		// 	myReturn=1;		
+		// }
+
+		if (organization == '' || organization == null) {
+			$('#span_error_organizationId').html('Opening an issue requires a resource to be associated with an organization. Please contact your IT department.');
+			myReturn=1;
+		}
+
+		if (contact == null || contact.length == 0) {
+			$('#span_error_contactName').html('A contact must be selected to continue.');
+			myReturn=1;
+		}
+
+		if (subject == '' || subject == null) {
+			$('#span_error_subjectText').html('A subject must be entered to continue.');
+			myReturn=1;
+		}
+
+		if (body == '' || body == null) {
+			$('#span_error_bodyText').html('A body must be entered to continue.');
+			myReturn=1;
+		}
+
+		$('.resourcesArray').each(function() {
+			if($(this).is(':checked') || $(this).is(':selected')) {
+				appliesTo = true;
+			}
+		});
+
+		if(!appliesTo) {
+			myReturn=1;
+		}
+		
+	 	if (myReturn == 1){
+			return false; 	
+	 	}else{
+	 		return true;
+	 	}
+	}
    
    
    function removeAlias(id){

@@ -51,6 +51,7 @@ span.smallText{color:#3D545D;font-size:92%;}
 span.smallerText{color:#3D545D;font-size:85%;}
 span.redText{color:red}
 span.normalText{color:#3D545D}
+span.smallDarkRedText{font-size:85%;color:#7a0026;}
 span.smallGreyText{font-size:95%;font-weight:normal; color:gray}
 
 img {border:0;}
