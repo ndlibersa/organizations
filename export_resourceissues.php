@@ -18,6 +18,7 @@ header("Content-type: text/csv");
 header("Content-Disposition: attachment; filename=\"issues.csv\"");
 
 if (count($exportIssues) > 0) {
+	ob_clean();
 	$out = fopen('php://output', 'w');
 
 	fputcsv($out,array_keys($exportIssues[0]));
