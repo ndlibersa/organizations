@@ -404,8 +404,6 @@ function submitNewResourceIssue() {
 function submitNewDowntime() {
 	
 	var data = $("#newDowntimeForm").serialize();
-	data += "&startDate="+$("#startDate").val();
-	data += "&endDate="+$("#endDate").val();
 
 	$.ajax({
 		 type:       "POST",
