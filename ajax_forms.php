@@ -590,14 +590,14 @@ switch ($_GET['action']) {
 		<tr>
 			<td colspan="2">
 				<h1> Report New Problem</h1>
-				<span class='smallDarkRedText'>* required fields</span>
+				<span class='error smallDarkRedText'>* required fields</span>
 			</td>
 		</tr>
 		<tr>
 			<td><label>Organization:&nbsp;&nbsp;<span class='bigDarkRedText'>*</span></label></td>
 			<td>
 				<p><?php echo $organization->name; ?></p>
-				<span id='span_error_organizationId' class='smallDarkRedText'></span>
+				<span id='error span_error_organizationId' class='smallDarkRedText'></span>
 			</td>
 		</tr>
 		<tr>
@@ -612,7 +612,7 @@ switch ($_GET['action']) {
 
 ?>
 				</select>
-				<span id='span_error_contactName' class='smallDarkRedText'></span>
+				<span id='span_error_contactName' class='error smallDarkRedText'></span>
 			</td>
 		</tr>
 		<tr>
@@ -626,7 +626,7 @@ switch ($_GET['action']) {
 			<td><label>CC myself:</label></td>
 			<td>
 				<input type='checkbox' id='ccCreator' name='ccCreator' class='changeInput' />
-				<span id='span_error_ccCreator' class='smallDarkRedText'></span>
+				<span id='span_error_ccCreator' class='error smallDarkRedText'></span>
 			</td>
 		</tr>
 		<tr>
@@ -638,21 +638,21 @@ switch ($_GET['action']) {
 					Current CCs: <span id="currentEmails"></span>
 				</p>
 				<input type="hidden" id='ccEmails' name='ccEmails' value='' class='changeInput' />
-				<span id='span_error_contactIDs' class='smallDarkRedText'></span>
+				<span id='span_error_contactIDs' class='error smallDarkRedText'></span>
 			</td>
 		</tr>
 		<tr>
 			<td><label>Subject:&nbsp;&nbsp;<span class='bigDarkRedText'>*</span></label></td>
 			<td>
 				<input type='text' id='subjectText' name='issue[subjectText]' value='' class='changeInput' />
-				<span id='span_error_subjectText' class='smallDarkRedText'></span>
+				<span id='span_error_subjectText' class='error smallDarkRedText'></span>
 			</td>
 		</tr>
 		<tr>
 			<td><label>Body:&nbsp;&nbsp;<span class='bigDarkRedText'>*</span></label></td>
 			<td>
 				<textarea id='bodyText' name='issue[bodyText]' value='' />
-				<span id='span_error_bodyText' class='smallDarkRedText'></span>
+				<span id='span_error_bodyText' class='error smallDarkRedText'></span>
 			</td>
 		</tr>
 		<tr>
@@ -673,7 +673,7 @@ switch ($_GET['action']) {
 		}
 ?>
 				</select>
-				<span id='span_error_entities' class='smallDarkRedText'></span>
+				<span id='span_error_entities' class='error smallDarkRedText'></span>
 			</td>
 		</tr>
 	</table>

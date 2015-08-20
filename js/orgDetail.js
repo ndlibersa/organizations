@@ -577,8 +577,9 @@ function removeOrganization() {
 	}
 
 	function validateNewIssue () {
-	 	myReturn=0;
+		$(".error").html("");
 
+	 	var errorFlag=0;
 		var organization = $('#sourceOrganizationID').val();
 		var contact = $('#contactIDs').val();
 		var subject = $('#subjectText').val();
@@ -587,36 +588,35 @@ function removeOrganization() {
 
 		if (organization == '' || organization == null) {
 			$('#span_error_organizationId').html('Opening an issue requires a resource to be associated with an organization. Please contact your IT department.');
-			myReturn=1;
+			errorFlag=1;
 		}
 
 		if (contact == null || contact.length == 0) {
 			$('#span_error_contactName').html('A contact must be selected to continue.');
-			myReturn=1;
+			errorFlag=1;
 		}
 
 		if (subject == '' || subject == null) {
 			$('#span_error_subjectText').html('A subject must be entered to continue.');
-			myReturn=1;
+			errorFlag=1;
 		}
 
 		if (body == '' || body == null) {
 			$('#span_error_bodyText').html('A body must be entered to continue.');
-			myReturn=1;
+			errorFlag=1;
 		}
 
 		if (!issueOrganizationID) {
 			if($('#resourceIDs option:selected').length <= 0) {
 				$('#span_error_entities').html('An issue must be associated with an organization or resource(s).');
-				myReturn=1;
+				errorFlag=1;
 			}
 		}
 		
-	 	if (myReturn == 1) {
-			return false; 	
-	 	} else {
-	 		return true;
+	 	if (errorFlag == 0) {
+			return true; 	
 	 	}
+		return false;
 	}
    
    
