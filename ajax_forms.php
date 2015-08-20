@@ -744,6 +744,9 @@ switch ($_GET['action']) {
 				</select>
 			</td>
 		</tr>
+<?php
+if ($issues) {
+?>
 		<tr>
 			<td><label>Link to open issue:</label></td>
 			<td>
@@ -757,6 +760,9 @@ switch ($_GET['action']) {
 				</select>
 			</td>
 		</tr>
+<?php
+}
+?>
 		<tr>
 			<td><label>Note:</label></td>
 			<td>
