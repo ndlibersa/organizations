@@ -344,6 +344,7 @@ switch ($_GET['action']) {
 
 		$newDowntime->dateCreated = date( 'Y-m-d H:i:s');
 		$newDowntime->entityTypeID = 1;
+		$newDowntime->note = ($_POST['note']) ? $_POST['note']:null;
 
 		$newDowntime->save();
 	break;
