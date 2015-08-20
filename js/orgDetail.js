@@ -145,8 +145,7 @@
 		submitCloseResourceIssue();
 	});
 
-	$("#submitNewResourceIssue").live("click", function(e) {
-		e.preventDefault();
+	$("#submitNewResourceIssue").live("click", function() {
 		submitNewResourceIssue();
 	});
 
@@ -386,21 +385,6 @@ function getInlineContactForm() {
 	  });
 }
 
-function submitNewResourceIssue() {
-	if(validateNewIssue()) {
-		$.ajax({
-			type:       "POST",
-			url:        "ajax_processing.php?action=insertResourceIssue",
-			cache:      false,
-			data:       $("#newIssueForm").serialize(),
-			success:    function(res) {
-				updateIssues();
-				tb_remove()
-			}
-		});
-	}
-}
-
 function submitNewDowntime() {
 	
 	var data = $("#newDowntimeForm").serialize();
@@ -499,95 +483,43 @@ function updateIssues(){
 
 }
 
-function validateNewIssue (){
- 	myReturn=0;
-
-	var organization = $('#sourceOrganizationID').val();
-	var contact = $('#contactIDs').val();
-	var subject = $('#subjectText').val();
-	var body = $('#bodyText').val();
-	var appliesTo = false;
-
-	//also perform same checks on the current record in case add button wasn't clicked
-	// if (title == '' || title == null){
-	// 	$('#span_error_titleText').html('A title must be entered to continue.');
-	// 	myReturn=1;		
-	// }
-
-	if (organization == '' || organization == null) {
-		$('#span_error_organizationId').html('Opening an issue requires a resource to be associated with an organization. Please contact your IT department.');
-		myReturn=1;
-	}
-
-	if (contact == null || contact.length == 0) {
-		$('#span_error_contactName').html('A contact must be selected to continue.');
-		myReturn=1;
-	}
-
-	if (subject == '' || subject == null) {
-		$('#span_error_subjectText').html('A subject must be entered to continue.');
-		myReturn=1;
-	}
-
-	if (body == '' || body == null) {
-		$('#span_error_bodyText').html('A body must be entered to continue.');
-		myReturn=1;
-	}
-
-	$('.resourcesArray').each(function() {
-		if($(this).is(':checked') || $(this).is(':selected')) {
-			appliesTo = true;
-		}
-	});
-
-	if(!appliesTo) {
-		myReturn=1;
-	}
-	
- 	if (myReturn == 1){
-		return false; 	
- 	}else{
- 		return true;
- 	}
-}
-
 $("#createContact").live("click",function(e) {
-		e.preventDefault();
+	e.preventDefault();
 
-		var errors = [];
+	var errors = [];
 
-		if($("#contactAddName").val() == "") {	
-			errors.push({
-				message: "New contact must have a name.",
-				target: '#span_error_contactAddName'
-			});
-		} 
+	if($("#contactAddName").val() == "") {	
+		errors.push({
+			message: "New contact must have a name.",
+			target: '#span_error_contactAddName'
+		});
+	} 
 
-		if(!validateEmail($("#emailAddress").val())) {	
-			errors.push({
-				message: "CC must be a valid email.",
-				target: '#span_error_contactEmailAddress'
-			});
-		} 
+	if(!validateEmail($("#emailAddress").val())) {	
+		errors.push({
+			message: "CC must be a valid email.",
+			target: '#span_error_contactEmailAddress'
+		});
+	} 
 
-		if(errors.length == 0) {
-			var roles = new Array();
-			$(".check_roles:checked").each(function() {
-				roles.push($(this).val());
-			});
-			//create the contact and update the contact list
-			createOrganizationContact({"organizationID":$("#organizationID").val(),"name":$("#contactAddName").val(),"emailAddress":$("#emailAddress").val(),"contactRoles":roles});
-		} else {
+	if(errors.length == 0) {
+		var roles = new Array();
+		$(".check_roles:checked").each(function() {
+			roles.push($(this).val());
+		});
+		//create the contact and update the contact list
+		createOrganizationContact({"organizationID":$("#organizationID").val(),"name":$("#contactAddName").val(),"emailAddress":$("#emailAddress").val(),"contactRoles":roles});
+	} else {
 
-			$(".addContactError").html("");
+		$(".addContactError").html("");
 
-			for(var index in errors) {
-				error = errors[index];
-				$(error.target).html(error.message);
-			}
-		}	 
-			
-	});
+		for(var index in errors) {
+			error = errors[index];
+			$(error.target).html(error.message);
+		}
+	}	 
+		
+});
 
  
 function updateLicenses(){
@@ -607,10 +539,8 @@ function updateLicenses(){
 
 }
 
-   function removeOrganization(){
-
-	if (($("#numLicenses").val() == 0) || ($("#numLicenses").val() == "")){
-
+function removeOrganization() {
+	if (($("#numLicenses").val() == 0) || ($("#numLicenses").val() == "")) {
 	  if (confirm("Do you really want to delete this organization?") == true) {
 		  $.ajax({
 			 type:       "GET",
@@ -626,13 +556,10 @@ function updateLicenses(){
 
 		 });
 	  }			
-
-
-	}else{
+	} else {
 		alert ("This Organization cannot be deleted because it has at least one License Record associated.");
 	}
-   }
-   
+}
    
    function submitNewResourceIssue() {
 		if(validateNewIssue()) {
@@ -649,20 +576,14 @@ function updateLicenses(){
 		}
 	}
 
-	function validateNewIssue (){
+	function validateNewIssue () {
 	 	myReturn=0;
 
 		var organization = $('#sourceOrganizationID').val();
 		var contact = $('#contactIDs').val();
 		var subject = $('#subjectText').val();
 		var body = $('#bodyText').val();
-		var appliesTo = false;
-
-		//also perform same checks on the current record in case add button wasn't clicked
-		// if (title == '' || title == null){
-		// 	$('#span_error_titleText').html('A title must be entered to continue.');
-		// 	myReturn=1;		
-		// }
+		var issueOrganizationID = $("#organizationID:checked").val();
 
 		if (organization == '' || organization == null) {
 			$('#span_error_organizationId').html('Opening an issue requires a resource to be associated with an organization. Please contact your IT department.');
@@ -684,19 +605,16 @@ function updateLicenses(){
 			myReturn=1;
 		}
 
-		$('.resourcesArray').each(function() {
-			if($(this).is(':checked') || $(this).is(':selected')) {
-				appliesTo = true;
+		if (!issueOrganizationID) {
+			if($('#resourceIDs option:selected').length <= 0) {
+				$('#span_error_entities').html('An issue must be associated with an organization or resource(s).');
+				myReturn=1;
 			}
-		});
-
-		if(!appliesTo) {
-			myReturn=1;
 		}
 		
-	 	if (myReturn == 1){
+	 	if (myReturn == 1) {
 			return false; 	
-	 	}else{
+	 	} else {
 	 		return true;
 	 	}
 	}

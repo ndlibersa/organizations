@@ -659,7 +659,7 @@ switch ($_GET['action']) {
 			<td><label>Applies to:&nbsp;&nbsp;<span class='bigDarkRedText'>*</span></label></td>
 			<td>
 				<div>
-					<input type="checkbox" class="issueResources" name="organizationID" value="<?php echo $organization->organizationID;?>" /> <label for="allResources">Applies to all resources of <?php echo $organization->name; ?></label>
+					<input type="checkbox" class="issueResources" id="organizationID" name="organizationID" value="<?php echo $organization->organizationID;?>" /> <label for="allResources">Applies to all resources of <?php echo $organization->name; ?></label>
 				</div>
 				<div>
 					<input type="checkbox" class="issueResources" id="otherResources" /><label for="otherResources"> Applies to other Resources</label>
@@ -673,7 +673,7 @@ switch ($_GET['action']) {
 		}
 ?>
 				</select>
-				<span id='span_error_resourceIDs' class='smallDarkRedText'></span>
+				<span id='span_error_entities' class='smallDarkRedText'></span>
 			</td>
 		</tr>
 	</table>
