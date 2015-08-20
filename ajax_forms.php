@@ -2,7 +2,7 @@
 
 /*
 **************************************************************************************************************************
-** CORAL Organizations Module v. 1.1
+** CORAL Organizations Module
 **
 ** Copyright (c) 2010 University of Notre Dame
 **
@@ -257,12 +257,14 @@ switch ($_GET['action']) {
 ?>
 		<div style="display:inline-block;vertical-align:top;width:42%;">
 			<div class="form-element">
-				<label for="contactName">Name</label>
-				<input type='text' id='contactName' name='contactName' /><br />
+				<label for="contactAddName">Name</label>
+				<input type='text' id='contactAddName' name='contactName' /><br />
+				<span id='span_error_contactAddName' class='smallDarkRedText'></span>
 			</div>
 			<div class="form-element">
 				<label for="emailAddress">Email</label>
 				<input type='text' id='emailAddress' name='emailAddress' />
+				<span id='span_error_contactEmailAddress' class='smallDarkRedText'></span>
 			</div>
 		</div>
 <?php

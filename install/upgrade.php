@@ -28,15 +28,15 @@ if ($step == "2"){
 	}else{
 
 		//first check connecting to host
-		$link = @mysql_connect("$database_host", "$database_username", "$database_password");
+		$link = @mysqli_connect("$database_host", "$database_username", "$database_password");
 		if (!$link) {
-			$errorMessage[] = "Could not connect to the server '" . $database_host . "'<br />MySQL Error: " . mysql_error();
+			$errorMessage[] = "Could not connect to the server '" . $database_host . "'<br />MySQL Error: " . mysqli_error($link);
 		}else{
 
 			//next check that the database exists
-			$dbcheck = @mysql_select_db("$database_name");
+			$dbcheck = @mysqli_select_db($link, "$database_name");
 			if (!$dbcheck) {
-				$errorMessage[] = "Unable to access the database '" . $database_name . "'.  Please verify it has been created.<br />MySQL Error: " . mysql_error();
+				$errorMessage[] = "Unable to access the database '" . $database_name . "'.  Please verify it has been created.<br />MySQL Error: " . mysqli_error($link);
 			}else{
 				//passed db host, name check, can open/run file now
 				//make sure SQL file exists
@@ -55,12 +55,10 @@ if ($step == "2"){
 					//Process the sql file by statements
 					foreach ($sqlArray as $stmt) {
 					   if (strlen(trim($stmt))>3){
-					   		//replace the DATABASE_NAME parameter with what was actually input
-					   		$stmt = str_replace("_DATABASE_NAME_", $database_name, $stmt);
 
-							$result = mysql_query($stmt);
+							$result = mysqli_query($link, $stmt);
 							if (!$result){
-								$errorMessage[] = mysql_error() . "<br /><br />For statement: " . $stmt;
+								$errorMessage[] = mysqli_error($link) . "<br /><br />For statement: " . $stmt;
 								 break;
 							}
 					    }
@@ -84,12 +82,10 @@ if ($step == "2"){
 						//Process the sql file by statements
 						foreach ($sqlArray as $stmt) {
 						   if (strlen(trim($stmt))>3){
-								//replace the DATABASE_NAME parameter with what was actually input
-								$stmt = str_replace("_DATABASE_NAME_", $database_name, $stmt);
 
-								$result = mysql_query($stmt);
+								$result = mysqli_query($link, $stmt);
 								if (!$result){
-									$errorMessage[] = mysql_error() . "<br /><br />For statement: " . $stmt;
+									$errorMessage[] = mysqli_error($link) . "<br /><br />For statement: " . $stmt;
 									 break;
 								}
 							}

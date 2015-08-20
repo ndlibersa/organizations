@@ -1,6 +1,6 @@
 /*
 **************************************************************************************************************************
-** CORAL Organizations Module v. 1.0
+** CORAL Organizations Module
 **
 ** Copyright (c) 2010 University of Notre Dame
 **
@@ -128,8 +128,6 @@ $(function(){
 
 	
 });
-
-
 
 function validateEmail(email) {
   var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;

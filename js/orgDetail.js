@@ -1,6 +1,6 @@
 /*
 **************************************************************************************************************************
-** CORAL Organizations Module v. 1.0
+** CORAL Organizations Module
 **
 ** Copyright (c) 2010 University of Notre Dame
 **
@@ -155,8 +155,6 @@
 		
 		var errors = [];
 
-		console.log($("#startDate").val());
-
 		if($("#startDate").val()=="") {	
 			errors.push({
 				message: "Must set a date.",
@@ -208,16 +206,6 @@
 		$(this).fadeOut(250, function() {
 			getInlineContactForm();
 		});
-	});
-
-	$("#createContact").live("click",function(e) {
-		e.preventDefault();
-		var roles = new Array();
-		$(".check_roles:checked").each(function() {
-			roles.push($(this).val());
-		});
-		createOrganizationContact({"organizationID":$("#sourceOrganizationID").val(),"name":$("#contactName").val(),"emailAddress":$("#emailAddress").val(),"contactRoles":roles});
-		//create the contact and update the contact list
 	});
 
 	$("#addEmail").live("click", function(e) {
@@ -399,16 +387,18 @@ function getInlineContactForm() {
 }
 
 function submitNewResourceIssue() {
-	$.ajax({
-		type:       "POST",
-		url:        "ajax_processing.php?action=insertResourceIssue",
-		cache:      false,
-		data:       $("#newIssueForm").serialize(),
-		success:    function(res) {
-			updateIssues();
-			tb_remove()
-		}
-	});
+	if(validateNewIssue()) {
+		$.ajax({
+			type:       "POST",
+			url:        "ajax_processing.php?action=insertResourceIssue",
+			cache:      false,
+			data:       $("#newIssueForm").serialize(),
+			success:    function(res) {
+				updateIssues();
+				tb_remove()
+			}
+		});
+	}
 }
 
 function submitNewDowntime() {
@@ -510,6 +500,96 @@ function updateIssues(){
   });
 
 }
+
+function validateNewIssue (){
+ 	myReturn=0;
+
+	var organization = $('#sourceOrganizationID').val();
+	var contact = $('#contactIDs').val();
+	var subject = $('#subjectText').val();
+	var body = $('#bodyText').val();
+	var appliesTo = false;
+
+	//also perform same checks on the current record in case add button wasn't clicked
+	// if (title == '' || title == null){
+	// 	$('#span_error_titleText').html('A title must be entered to continue.');
+	// 	myReturn=1;		
+	// }
+
+	if (organization == '' || organization == null) {
+		$('#span_error_organizationId').html('Opening an issue requires a resource to be associated with an organization. Please contact your IT department.');
+		myReturn=1;
+	}
+
+	if (contact == null || contact.length == 0) {
+		$('#span_error_contactName').html('A contact must be selected to continue.');
+		myReturn=1;
+	}
+
+	if (subject == '' || subject == null) {
+		$('#span_error_subjectText').html('A subject must be entered to continue.');
+		myReturn=1;
+	}
+
+	if (body == '' || body == null) {
+		$('#span_error_bodyText').html('A body must be entered to continue.');
+		myReturn=1;
+	}
+
+	$('.resourcesArray').each(function() {
+		if($(this).is(':checked') || $(this).is(':selected')) {
+			appliesTo = true;
+		}
+	});
+
+	if(!appliesTo) {
+		myReturn=1;
+	}
+	
+ 	if (myReturn == 1){
+		return false; 	
+ 	}else{
+ 		return true;
+ 	}
+}
+
+$("#createContact").live("click",function(e) {
+		e.preventDefault();
+
+		var errors = [];
+
+		if($("#contactAddName").val() == "") {	
+			errors.push({
+				message: "New contact must have a name.",
+				target: '#span_error_contactAddName'
+			});
+		} 
+
+		if(!validateEmail($("#emailAddress").val())) {	
+			errors.push({
+				message: "CC must be a valid email.",
+				target: '#span_error_contactEmailAddress'
+			});
+		} 
+
+		if(errors.length == 0) {
+			var roles = new Array();
+			$(".check_roles:checked").each(function() {
+				roles.push($(this).val());
+			});
+			//create the contact and update the contact list
+			createOrganizationContact({"organizationID":$("#organizationID").val(),"name":$("#contactAddName").val(),"emailAddress":$("#emailAddress").val(),"contactRoles":roles});
+		} else {
+
+			$(".addContactError").html("");
+
+			for(var index in errors) {
+				error = errors[index];
+				$(error.target).html(error.message);
+			}
+		}	 
+			
+	});
 
  
 function updateLicenses(){

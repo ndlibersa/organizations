@@ -53,6 +53,9 @@ span.redText{color:red}
 span.normalText{color:#3D545D}
 span.smallDarkRedText{font-size:85%;color:#7a0026;}
 span.smallGreyText{font-size:95%;font-weight:normal; color:gray}
+span.darkRedText{color:#7a0026;}
+span.bigDarkRedText{font-size:125%; color:#7a0026;}
+span.smallDarkRedText{font-size:85%;color:#7a0026;}
 
 img {border:0;}
 fieldset {border:0;}
