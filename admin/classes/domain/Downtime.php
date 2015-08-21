@@ -39,7 +39,7 @@ class Downtime extends DatabaseObject {
 
 		//if exists in the database
 		if (isset($this->primaryKey)) {	
-			$query = "SELECT d.*, dt.name, i.subjectText
+			$query = "SELECT d.*, dt.shortName, i.subjectText
 				  FROM `{$this->dbName}`.Downtime d
 				  LEFT JOIN `{$this->dbName}`.DowntimeType dt ON dt.downtimeTypeID=d.downtimeTypeID
 				  LEFT JOIN `{$this->dbName}`.Issue i ON i.issueID=d.issueID
