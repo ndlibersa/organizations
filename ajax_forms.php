@@ -700,6 +700,8 @@ switch ($_GET['action']) {
 	$organizationID = $_GET["organizationID"];
 	$organization = new Organization(new NamedArguments(array('primaryKey' => $organizationID))); 
 
+	$issueID = $_GET['issueID'];
+
 	$issues = $organization->getIssues();
 
 	$downtimeObj = new Downtime();
@@ -754,7 +756,7 @@ if ($issues) {
 					<option value="">none</option>
 <?php
 			foreach ($issues as $issue) {
-				echo "<option value=".$issue->issueID.">".$issue->subjectText."</option>";
+				echo "<option".(($issueID == $issue->issueID) ? ' selected':'')." value=".$issue->issueID.">".$issue->subjectText."</option>";
 			}
 ?>
 				</select>

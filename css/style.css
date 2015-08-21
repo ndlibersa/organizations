@@ -527,8 +527,12 @@ div.downtimeList .issue {
 }
 
 div.issueList a.closeResourceIssueBtn,
-div.downtimeList a.closeResourceIssueBtn {
+div.downtimeList a.closeResourceIssueBtn, div.issue a.action {
 	float: right;
+}
+
+div.issue a.action {
+	margin-right: 6px;
 }
 
 div.issueList dl,

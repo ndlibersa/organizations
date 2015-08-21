@@ -27,7 +27,8 @@ function generateIssueHTML($issue,$associatedEntities=null) {
 	<div class=\"issue\">";
 	if (!$issue->dateClosed) {
 		$html .= "
-		<a class=\"thickbox closeResourceIssueBtn\" href=\"ajax_forms.php?action=getCloseResourceIssueForm&issueID={$issue->issueID}&height=120&width=345&modal=true\">close</a>";
+		<a class=\"thickbox action closeResourceIssueBtn\" href=\"ajax_forms.php?action=getCloseResourceIssueForm&issueID={$issue->issueID}&height=120&width=345&modal=true\">close</a>
+		<a class=\"thickbox action\" href=\"ajax_forms.php?action=getNewDowntimeForm&organizationID={$GLOBALS['organizationID']}&issueID={$issue->issueID}&height=200&width=390&modal=true\">downtime</a>";
 	}
 	$html .= "
 	  	<dl>
