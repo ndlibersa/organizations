@@ -625,7 +625,7 @@ switch ($_GET['action']) {
 		<tr>
 			<td><label>CC myself:</label></td>
 			<td>
-				<input type='checkbox' id='ccCreator' name='ccCreator' class='changeInput' />
+				<input type='checkbox' id='ccCreator' name='ccCreator' class='changeInput' checked />
 				<span id='span_error_ccCreator' class='error smallDarkRedText'></span>
 			</td>
 		</tr>
@@ -659,10 +659,10 @@ switch ($_GET['action']) {
 			<td><label>Applies to:&nbsp;&nbsp;<span class='bigDarkRedText'>*</span></label></td>
 			<td>
 				<div>
-					<input type="checkbox" class="issueResources" id="organizationID" name="organizationID" value="<?php echo $organization->organizationID;?>" /> <label for="allResources">Applies to all resources of <?php echo $organization->name; ?></label>
+					<input type="checkbox" class="issueResources" id="organizationID" name="organizationID" value="<?php echo $organization->organizationID;?>" /> <label for="allResources">Applies to all <?php echo $organization->name; ?> resources.</label>
 				</div>
 				<div>
-					<input type="checkbox" class="issueResources" id="otherResources" /><label for="otherResources"> Applies to other Resources</label>
+					<input type="checkbox" class="issueResources" id="otherResources" /><label for="otherResources"> Applies to selected <?php echo $organization->name; ?> resources.</label>
 				</div>
 				<select multiple id="resourceIDs" name="resourceIDs[]">
 <?php
@@ -680,7 +680,7 @@ switch ($_GET['action']) {
 
 	<p> Send me a reminder every 
 		<select name="issue[reminderInterval]">
-			<?php for ($i = 1; $i <= 31; $i++) echo "<option>{$i}</option>"; ?>
+			<?php for ($i = 1; $i <= 31; $i++) echo "<option".(($i==7) ? ' selected':'').">{$i}</option>"; ?>
 		</select> day(s) 
 	</p>
 
