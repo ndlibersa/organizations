@@ -112,9 +112,7 @@ function submitContact(){
 	$(".check_roles:checked").each(function(id) {
 	      contactRolesList += $(this).val() + ",";
 	}); 
-	if (!validateRequired('contactName','<br />Name must be entered to continue.')) {
-        return false;
-    }else if (contactRolesList == ''){
+	if (contactRolesList == ''){
  	    $("#span_error_contactRole").html('Please choose at least one role.');
  	    return false;
  	} else {
