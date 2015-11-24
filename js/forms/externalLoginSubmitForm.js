@@ -56,11 +56,11 @@ $(document).ready(function(){
 
 function validateExternalLogin() {
     if($("#username").val() == ''){
-        $("#span_errors").html('<br />Please enter an username to continue');
+        $("#span_errors").html('<br />Please enter a username');
         $("#username").focus();
         return false;
     }else if($("#password").val() == ''){
-        $("#span_errors").html('<br />For security, please enter a password to continue');
+        $("#span_errors").html('<br />Please enter a password');
         $("#password").focus();
         return false;
     }else{
