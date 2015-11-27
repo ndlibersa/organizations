@@ -30,7 +30,7 @@
 					$("#span_errors").html("");
 					$("#submitOrganizationChanges").removeAttr("disabled");
 				}else{
-				  $("#span_errors").html("<br />This organization already exists!");
+				  $("#span_errors").html("<br />"+_("This organization already exists!"));
 				  $("#submitOrganizationChanges").attr("disabled","disabled");
 
 				}
@@ -106,7 +106,7 @@
  
  function validateForm (){
  	myReturn=0;
- 	if (!validateRequired('organizationName','<br />Name must be entered to continue.')) myReturn=1;
+ 	if (!validateRequired('organizationName',"<br />"+_("Name must be entered to continue."))) myReturn=1;
  	
  
  	if (myReturn == 1){

@@ -51,7 +51,7 @@ if ($step == "3"){
 						//make sure SQL file exists
 						$test_sql_file = "test_create.sql";
 						$sql_file = "create_tables_data.sql";
-
+                        
 						if (!file_exists($test_sql_file)) {
 							$errorMessage[] = "Could not open sql file: " . $test_sql_file . ".  If this file does not exist you must download new install files.";
 						}else{
@@ -101,6 +101,7 @@ if ($step == "3"){
 
 							}
 						}
+                        
 					}
 				}
 			}

@@ -23,7 +23,7 @@ session_start();
 include_once 'directory.php';
 
 //print header
-$pageTitle='Home';
+$pageTitle=_('Home');
 include 'templates/header.php';
 
 //used for creating a "sticky form" for back buttons
@@ -44,8 +44,8 @@ $_SESSION['ref_script']=$currentPage;
 <td style="width:155px;padding-right:10px;">
 	<table class='noBorder'>
 	<tr><td style='text-align:left;width:75px;' align='left'>
-	<span style='font-size:130%;font-weight:bold;'>Search</span><br />
-	<a href='javascript:void(0)' class='newSearch'>new search</a>
+	<span style='font-size:130%;font-weight:bold;'><?php echo _("Search");?></span><br />
+	<a href='javascript:void(0)' class='newSearch'><?php echo _("new search");?></a>
 	</td>
 	<td><div id='div_feedback'>&nbsp;</div>
 	</td></tr>
@@ -54,19 +54,19 @@ $_SESSION['ref_script']=$currentPage;
 	<table class='borderedFormTable' style="width:150px">
 
 	<tr>
-	<td class='searchRow'><label for='searchName'><b>Name (contains)</b></label>
+	<td class='searchRow'><label for='searchName'><b><?php echo _("Name (contains)");?></b></label>
 	<br />
 	<input type='text' name='searchOrganizationName' id='searchOrganizationName' style='width:145px' value="<?php if ($reset != 'Y') echo $_SESSION['org_organizationName']; ?>" /><br />
-	<div id='div_searchName' style='<?php if ((!$_SESSION['org_organizationName']) || ($reset == 'Y')) echo "display:none;"; ?>margin-left:123px;'><input type='button' name='btn_searchOrganizationName' value='go!' class='searchButton' /></div>
+	<div id='div_searchName' style='<?php if ((!$_SESSION['org_organizationName']) || ($reset == 'Y')) echo "display:none;"; ?>margin-left:123px;'><input type='button' name='btn_searchOrganizationName' value='<?php echo _("go!");?>' class='searchButton' /></div>
 	</td>
 	</tr>
 
 
 	<tr>
-	<td class='searchRow'><label for='searchOrganizationRoleID'><b>Role</b></label>
+	<td class='searchRow'><label for='searchOrganizationRoleID'><b><?php echo _("Role");?></b></label>
 	<br />
 	<select name='searchOrganizationRoleID' id='searchOrganizationRoleID' style='width:150px' onchange='javsacript:updateSearch();'>
-	<option value=''>All</option>
+	<option value=''><?php echo _("All");?></option>
 	<?php
 
 		$display = array();
@@ -88,16 +88,16 @@ $_SESSION['ref_script']=$currentPage;
 
 
 	<tr>
-	<td class='searchRow'><label for='searchContact'><b>Contact Name (contains)</b></label>
+	<td class='searchRow'><label for='searchContact'><b><?php echo _("Contact Name (contains)");?></b></label>
 	<br />
 	<input type='text' name='searchContactName' id='searchContactName' style='width:145px' value="<?php if ($reset != 'Y') echo $_SESSION['org_contactName']; ?>" /><br />
-	<div id='div_searchContact' style='<?php if ((!$_SESSION['org_contactName']) || ($reset == 'Y')) echo "display:none;"; ?>margin-left:123px;'><input type='button' name='btn_searchContactName' value='go!' class='searchButton' /></div>
+	<div id='div_searchContact' style='<?php if ((!$_SESSION['org_contactName']) || ($reset == 'Y')) echo "display:none;"; ?>margin-left:123px;'><input type='button' name='btn_searchContactName' value='<?php echo _("go!");?>' class='searchButton' /></div>
 	</td>
 	</tr>
 
 
 	<tr>
-	<td class='searchRow'><label for='searchFirstLetter'><b>Starts with</b></label>
+	<td class='searchRow'><label for='searchFirstLetter'><b><?php echo _("Starts with");?></b></label>
 	<br />
 	<?php
 	$organization = new Organization();
@@ -121,7 +121,7 @@ $_SESSION['ref_script']=$currentPage;
 	</tr>
 
 	</table>
-	&nbsp;<a href='javascript:void(0)' class='newSearch'>new search</a>
+	&nbsp;<a href='javascript:void(0)' class='newSearch'><?php echo _("new search");?></a>
 	</div>
 </td>
 <td>
