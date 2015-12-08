@@ -18,33 +18,41 @@
 $(document).ready(function(){
 	
 	$('.date-pick').datePicker({startDate:'01/01/1996'});
-
-	$("#submitIssueLogForm").click(function () {
-		$('#submitIssueLogForm').attr("disabled", "disabled"); 
-		  $.ajax({
-			 type:       "POST",
-			 url:        "ajax_processing.php?action=submitIssueLog",
-			 cache:      false,
-			 data:       { issueLogID: $("#editIssueLogID").val(), organizationID: $("#editOrganizationID").val(), issueLogTypeID: $("#issueLogTypeID").val(), issueStartDate: $("#issueStartDate").val(), issueEndDate: $("#issueEndDate").val(), noteText: $("#noteText").val() },
-			 success:    function(html) {
-				if (html.length > 1){
-					$("#span_errors").html(html);
-					$("#submitIssueLogForm").removeAttr("disabled");
-				}else{
-					window.parent.tb_remove();
-					window.parent.updateIssues();
-					return false;
-				}			
-			 }
-
-
-		 });
-
-	 });
-
-	 
+    $("#submitIssueLogForm").click(function () {
+        if(validateIssueForm() === true){
+            $.ajax({
+                type:       "POST",
+                url:        "ajax_processing.php?action=submitIssueLog",
+                cache:      false,
+                data:       { issueLogID: $("#editIssueLogID").val(), organizationID: $("#editOrganizationID").val(), issueLogTypeID: $("#issueLogTypeID").val(), issueStartDate: $("#issueStartDate").val(), issueEndDate: $("#issueEndDate").val(), noteText: $("#noteText").val() },
+                success:    function(html) {
+                    if (html.length > 1){
+                        $("#span_errors").html(html);
+                    }else{
+                        window.parent.tb_remove();
+                        window.parent.updateIssues();
+                        return false;
+                    }			
+                }
+            });
+        }
+     });
  });
  
-
-
-
+function validateIssueForm(){
+    if($("#issueLogTypeID").val() == ''){
+        $("#span_errors").html('<br />Please select an issue type');
+        $("#issueLogTypeID").focus();
+        return false;
+    }else if($("#issueStartDate").val() == ''){
+        $("#span_errors").html('<br />Please choose a start date');
+        $("#issueStartDate").focus();
+        return false;
+    }else if($("#issueEndDate").val() == ''){
+        $("#span_errors").html('<br />Please choose an end date');
+        $("#issueEndDate").focus();
+        return false;
+    }else{
+        return true;
+    }
+}

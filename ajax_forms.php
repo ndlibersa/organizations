@@ -218,7 +218,7 @@ switch ($_GET['action']) {
 		<tr>
 		<td><label for='aliasName'><b>Name</b></label></td>
 		<td>
-		<input type='text' id='aliasName' name='aliasName' value = "<?php echo $alias->name; ?>" style='width:195px' /><span id='span_error_aliasName'</span>
+		<input type='text' id='aliasName' name='aliasName' value = "<?php echo $alias->name; ?>" style='width:195px' /><span id='span_error_aliasName'></span>
 		</td>
 		</tr>
 
@@ -321,7 +321,7 @@ switch ($_GET['action']) {
 		<tr>
 		<td style='text-align:right'><label for='contactName'><b>Name:</b></label></td>
 		<td>
-		<input type='text' id='contactName' name='contactName' value = "<?php echo $contact->name; ?>" style='width:150px' /><span id='span_error_contactName' style='color:red'>
+            <input type='text' id='contactName' name='contactName' value = "<?php echo $contact->name; ?>" style='width:150px' /><span id='span_error_contactName' style='color:red'></span>
 		</td>
 		</tr>
 
@@ -518,7 +518,6 @@ switch ($_GET['action']) {
 		<tr>
 		<td style='vertical-align:top;text-align:right;'><label for='noteText'><b>Notes:</b></label></td>
 		<td><textarea rows='3' id='noteText' name='noteText' style='width:200px'><?php echo $externalLogin->noteText; ?></textarea></td>
-		</td>
 		</tr>
 
 
@@ -855,7 +854,6 @@ if ($issues) {
 		<tr>
 		<td style='vertical-align:top;text-align:right;'><label for='noteText'><b>Notes:</b></label></td>
 		<td><textarea rows='3' id='noteText' name='noteText' style='width:200px'><?php echo $issueLog->noteText; ?></textarea></td>
-		</td>
 		</tr>
 
 		<tr style="vertical-align:middle;">
@@ -932,7 +930,7 @@ if ($issues) {
 		<div id='div_updateForm'>
 		<table class="thickboxTable" style="background-image:url('images/title.gif');background-repeat:no-repeat;width:200px;">
 		<tr>
-		<td colspan='2'><br /><span class='headerText'>Update</span><br /></td>
+		<td colspan='2'><br /><span class='headerText'>Update</span><br /><span id='span_errors' style='color:#F00;'></span><br /></td>
 		</tr>
 		<tr>
 		<td>
@@ -1046,10 +1044,10 @@ if ($issues) {
 		<div id='div_updateForm'>
 		<table class="thickboxTable" style="background-image:url('images/title.gif');background-repeat:no-repeat;width:240px;padding:2px;">
 		<tr><td colspan='2'><span class='headerText'><?php echo $update; ?> User</span><br /><br /></td></tr>
-		<tr><td><label for='loginID'><b>Login ID</b></label</td><td><?php if (!$loginID) { ?><input type='text' id='loginID' name='loginID' value='<?php echo $loginID; ?>' style='width:150px;'/> <?php } else { echo $loginID; } ?></td></tr>
-		<tr><td><label for='firstName'><b>First Name</b></label</td><td><input type='text' id='firstName' name='firstName' value="<?php echo $user->firstName; ?>" style='width:150px;'/></td></tr>
-		<tr><td><label for='lastName'><b>Last Name</b></label</td><td><input type='text' id='lastName' name='lastName' value="<?php echo $user->lastName; ?>" style='width:150px;'/></td></tr>
-		<tr><td><label for='privilegeID'><b>Privilege</b></label</td>
+            <tr><td><label for='loginID'><b>Login ID</b></label></td><td><?php if (!$loginID) { ?><input type='text' id='loginID' name='loginID' value='<?php echo $loginID; ?>' style='width:150px;'/> <?php } else { echo $loginID; } ?></td></tr>
+            <tr><td><label for='firstName'><b>First Name</b></label></td><td><input type='text' id='firstName' name='firstName' value="<?php echo $user->firstName; ?>" style='width:150px;'/></td></tr>
+            <tr><td><label for='lastName'><b>Last Name</b></label></td><td><input type='text' id='lastName' name='lastName' value="<?php echo $user->lastName; ?>" style='width:150px;'/></td></tr>
+            <tr><td><label for='privilegeID'><b>Privilege</b></label></td>
 		<td>
 		<select name='privilegeID' id='privilegeID' style='width:155px'>
 		<option value=''></option>

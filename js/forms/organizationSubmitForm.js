@@ -24,9 +24,9 @@
 			 url:        "ajax_processing.php",
 			 cache:      false,
 			 async:	     true,
-			 data:       "action=getExistingOrganizationName&name=" + $("#organizationName").val(),
+			 data:       "action=getExistingOrganizationName&name=" + $("#organizationName").val() + "&organizationID=" + $("#editOrganizationID").val(),
 			 success:    function(exists) {
-				if ((exists == 0) || (exists == $("#editOrganizationID").val())){
+				if (exists == 0){
 					$("#span_errors").html("");
 					$("#submitOrganizationChanges").removeAttr("disabled");
 				}else{

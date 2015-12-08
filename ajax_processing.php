@@ -510,7 +510,7 @@ switch ($_GET['action']) {
 
 	case 'getExistingOrganizationName':
 		$name = $_GET['name'];
-		if (isset($organizationID)) $organizationID = $_GET['organizationID']; else $organizationID = '';
+		if (isset($_GET['organizationID'])) $organizationID = $_GET['organizationID']; else $organizationID = '';
 
 
 		$organization = new Organization();
