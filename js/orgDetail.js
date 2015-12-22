@@ -116,7 +116,7 @@
 var showArchivedContacts = 0;
 
 function updateOrganization(){
-  $("#div_organizationDetails").append("<img src='images/circle.gif'>  Refreshing Contents...");
+  $("#div_organizationDetails").append("<img src='images/circle.gif'>  "+_("Refreshing Contents..."));
   $.ajax({
 	 type:       "GET",
 	 url:        "ajax_htmldata.php",
@@ -150,7 +150,7 @@ function updateOrganizationName(){
  
  
 function updateAliases(){
-  $("#div_aliasDetails").append("<img src='images/circle.gif'>  Refreshing Contents...");
+  $("#div_aliasDetails").append("<img src='images/circle.gif'>  "+_("Refreshing Contents..."));
   $.ajax({
 	 type:       "GET",
 	 url:        "ajax_htmldata.php",
@@ -169,7 +169,7 @@ function updateAliases(){
  
  
 function updateContacts(){
-  $("#div_contactDetails").append("<img src='images/circle.gif'>  Refreshing Contents...");
+  $("#div_contactDetails").append("<img src='images/circle.gif'>  "+_("Refreshing Contents..."));
   $.ajax({
 	 type:       "GET",
 	 url:        "ajax_htmldata.php",
@@ -193,7 +193,7 @@ function updateArchivedContacts(showArchivedPassed){
   }
 
   
-  $("#div_archivedContactDetails").append("<img src='images/circle.gif'>  Refreshing Contents...");
+  $("#div_archivedContactDetails").append("<img src='images/circle.gif'>  "+_("Refreshing Contents..."));
   $.ajax({
 	 type:       "GET",
 	 url:        "ajax_htmldata.php",
@@ -211,7 +211,7 @@ function updateArchivedContacts(showArchivedPassed){
  
  
 function updateAccount(){
-  $("#div_accountDetails").append("<img src='images/circle.gif'>  Refreshing Contents...");
+  $("#div_accountDetails").append("<img src='images/circle.gif'>  "+_("Refreshing Contents..."));
   $.ajax({
 	 type:       "GET",
 	 url:        "ajax_htmldata.php",
@@ -229,7 +229,7 @@ function updateAccount(){
 
  
 function updateIssues(){
-  $("#div_issueDetails").append("<img src='images/circle.gif'>  Refreshing Contents...");
+  $("#div_issueDetails").append("<img src='images/circle.gif'>  "+_("Refreshing Contents..."));
   $.ajax({
 	 type:       "GET",
 	 url:        "ajax_htmldata.php",
@@ -247,7 +247,7 @@ function updateIssues(){
 
  
 function updateLicenses(){
-  $("#div_licenseDetails").append("<img src='images/circle.gif'>  Refreshing Contents...");
+  $("#div_licenseDetails").append("<img src='images/circle.gif'>  "+_("Refreshing Contents..."));
   $.ajax({
 	 type:       "GET",
 	 url:        "ajax_htmldata.php",
@@ -267,7 +267,7 @@ function updateLicenses(){
 
 	if (($("#numLicenses").val() == 0) || ($("#numLicenses").val() == "")){
 
-	  if (confirm("Do you really want to delete this organization?") == true) {
+	  if (confirm(_("Do you really want to delete this organization?")) == true) {
 		  $.ajax({
 			 type:       "GET",
 			 url:        "ajax_processing.php",
@@ -285,7 +285,7 @@ function updateLicenses(){
 
 
 	}else{
-		alert ("This Organization cannot be deleted because it has at least one License Record associated.");
+		alert (_("This Organization cannot be deleted because it has at least one License Record associated."));
 	}
    }
    
@@ -293,7 +293,7 @@ function updateLicenses(){
    
    
    function removeAlias(id){
-	  if (confirm("Do you really want to delete this alias?") == true) {
+	  if (confirm(_("Do you really want to delete this alias?")) == true) {
 		  $.ajax({
 			 type:       "GET",
 			 url:        "ajax_processing.php",
@@ -311,7 +311,7 @@ function updateLicenses(){
 
 
    function removeContact(id){
-	  if (confirm("Do you really want to delete this contact?") == true) {
+	  if (confirm(_("Do you really want to delete this contact?")) == true) {
 		  $.ajax({
 			 type:       "GET",
 			 url:        "ajax_processing.php",
@@ -329,7 +329,7 @@ function updateLicenses(){
    }
 
    function removeExternalLogin(id){
-	  if (confirm("Do you really want to delete this account?") == true) {
+	  if (confirm(_("Do you really want to delete this account?")) == true) {
 		  $.ajax({
 			 type:       "GET",
 			 url:        "ajax_processing.php",
@@ -348,7 +348,7 @@ function updateLicenses(){
 
 
    function removeIssueLog(id){
-	  if (confirm("Do you really want to delete this issue?") == true) {
+	  if (confirm(_("Do you really want to delete this issue?")) == true) {
 		  $.ajax({
 			 type:       "GET",
 			 url:        "ajax_processing.php",
