@@ -112,11 +112,22 @@ function submitContact(){
 	$(".check_roles:checked").each(function(id) {
 	      contactRolesList += $(this).val() + ",";
 	}); 
-	if (contactRolesList == ''){
- 	    $("#span_error_contactRole").html('Please choose at least one role.');
- 	    return false;
+	
+ 	if (contactRolesList == ''){
+ 	    $("#span_error_contactRole").html(_("Please choose at least one role."));
+ 	    myReturn=1;
  	} else {
  	    $("#span_error_contactRole").html('');
         return true;
 	}
+
+	if ($("#contactType").val() == "named"){
+ 		if (!validateRequired('contactName',"<br />"+_("Name must be entered to continue."))) myReturn=1;	
+ 	}
+ 
+ 	if (myReturn == 1){
+		return false; 	
+ 	}else{
+ 		return true;
+ 	}
 }

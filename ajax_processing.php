@@ -400,13 +400,13 @@ switch ($_GET['action']) {
 
 		if ($numberOfChildren > 0){
 			//print out a friendly message...
-			echo "Unable to delete  - this " . strtolower(ereg_replace("[A-Z]", " \\0" , lcfirst($className))) . " is in use.  Please make sure no organizations are set up with this information.";
+			echo _("Unable to delete  - this ") . strtolower(ereg_replace("[A-Z]", " \\0" , lcfirst($className))) . _(" is in use.  Please make sure no organizations are set up with this information.");
 		}else{
 			try {
 				$instance->delete();
 			} catch (Exception $e) {
 				//print out a friendly message...
-				echo "Unable to delete.  Please make sure no organizations are set up with this information.";
+				echo _("Unable to delete.  Please make sure no organizations are set up with this information.");
 			}
 		}
 		echo "</font>";
@@ -419,7 +419,7 @@ switch ($_GET['action']) {
 
 		try {
 			$organization->removeOrganization();
-			echo "Organization successfully deleted.";
+			echo _("Organization successfully deleted.");
 		} catch (Exception $e) {
 			echo $e->getMessage();
 		}
@@ -463,7 +463,7 @@ switch ($_GET['action']) {
 
 		try {
 			$user->save();
-			echo "User successfully saved.";
+			echo _("User successfully saved.");
 		} catch (Exception $e) {
 			echo $e->getMessage();
 		}
@@ -531,7 +531,7 @@ switch ($_GET['action']) {
 
 
 	default:
-       echo "Action " . $action . " not set up!";
+       echo _("Action ") . $action . _(" not set up!");
        break;
 
 

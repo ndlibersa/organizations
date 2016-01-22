@@ -225,7 +225,7 @@
 var showArchivedContacts = 0;
 
 function updateOrganization(){
-  $("#div_organizationDetails").append("<img src='images/circle.gif'>  Refreshing Contents...");
+  $("#div_organizationDetails").append("<img src='images/circle.gif'>  "+_("Refreshing Contents..."));
   $.ajax({
 	 type:       "GET",
 	 url:        "ajax_htmldata.php",
@@ -259,7 +259,7 @@ function updateOrganizationName(){
  
  
 function updateAliases(){
-  $("#div_aliasDetails").append("<img src='images/circle.gif'>  Refreshing Contents...");
+  $("#div_aliasDetails").append("<img src='images/circle.gif'>  "+_("Refreshing Contents..."));
   $.ajax({
 	 type:       "GET",
 	 url:        "ajax_htmldata.php",
@@ -278,7 +278,7 @@ function updateAliases(){
  
  
 function updateContacts(){
-  $("#div_contactDetails").append("<img src='images/circle.gif'>  Refreshing Contents...");
+  $("#div_contactDetails").append("<img src='images/circle.gif'>  "+_("Refreshing Contents..."));
   $.ajax({
 	 type:       "GET",
 	 url:        "ajax_htmldata.php",
@@ -302,7 +302,7 @@ function updateArchivedContacts(showArchivedPassed){
   }
 
   
-  $("#div_archivedContactDetails").append("<img src='images/circle.gif'>  Refreshing Contents...");
+  $("#div_archivedContactDetails").append("<img src='images/circle.gif'>  "+_("Refreshing Contents..."));
   $.ajax({
 	 type:       "GET",
 	 url:        "ajax_htmldata.php",
@@ -320,7 +320,7 @@ function updateArchivedContacts(showArchivedPassed){
  
  
 function updateAccount(){
-  $("#div_accountDetails").append("<img src='images/circle.gif'>  Refreshing Contents...");
+  $("#div_accountDetails").append("<img src='images/circle.gif'>  "+_("Refreshing Contents..."));
   $.ajax({
 	 type:       "GET",
 	 url:        "ajax_htmldata.php",
@@ -467,7 +467,7 @@ function getDowntime(element) {
 }
  
 function updateIssues(){
-  $("#div_issueDetails").append("<img src='images/circle.gif'>  Refreshing Contents...");
+  $("#div_issueDetails").append("<img src='images/circle.gif'>  "+_("Refreshing Contents..."));
   $.ajax({
 	 type:       "GET",
 	 url:        "ajax_htmldata.php",
@@ -523,7 +523,7 @@ $("#createContact").live("click",function(e) {
 
  
 function updateLicenses(){
-  $("#div_licenseDetails").append("<img src='images/circle.gif'>  Refreshing Contents...");
+  $("#div_licenseDetails").append("<img src='images/circle.gif'>  "+_("Refreshing Contents..."));
   $.ajax({
 	 type:       "GET",
 	 url:        "ajax_htmldata.php",
@@ -541,7 +541,7 @@ function updateLicenses(){
 
 function removeOrganization() {
 	if (($("#numLicenses").val() == 0) || ($("#numLicenses").val() == "")) {
-	  if (confirm("Do you really want to delete this organization?") == true) {
+	  if (confirm(_("Do you really want to delete this organization?")) == true) {
 		  $.ajax({
 			 type:       "GET",
 			 url:        "ajax_processing.php",
@@ -551,143 +551,140 @@ function removeOrganization() {
 				 //post return message to index
 				postwith('index.php',{message:html});
 			 }
-
-
-
 		 });
 	  }			
 	} else {
-		alert ("This Organization cannot be deleted because it has at least one License Record associated.");
+		alert (_("This Organization cannot be deleted because it has at least one License Record associated."));
 	}
 }
    
-   function submitNewResourceIssue() {
-		if(validateNewIssue()) {
-			$.ajax({
-				type:       "POST",
-				url:        "ajax_processing.php?action=insertResourceIssue",
-				cache:      false,
-				data:       $("#newIssueForm").serialize(),
-				success:    function(res) {
-					updateIssues();
-					tb_remove()
-				}
-			});
-		}
-	}
-
-	function validateNewIssue () {
-		$(".error").html("");
-
-	 	var errorFlag=0;
-		var organization = $('#sourceOrganizationID').val();
-		var contact = $('#contactIDs').val();
-		var subject = $('#subjectText').val();
-		var body = $('#bodyText').val();
-		var issueOrganizationID = $("#organizationID:checked").val();
-
-		if (organization == '' || organization == null) {
-			$('#span_error_organizationId').html('Opening an issue requires a resource to be associated with an organization. Please contact your IT department.');
-			errorFlag=1;
-		}
-
-		if (contact == null || contact.length == 0) {
-			$('#span_error_contactName').html('A contact must be selected to continue.');
-			errorFlag=1;
-		}
-
-		if (subject == '' || subject == null) {
-			$('#span_error_subjectText').html('A subject must be entered to continue.');
-			errorFlag=1;
-		}
-
-		if (body == '' || body == null) {
-			$('#span_error_bodyText').html('A body must be entered to continue.');
-			errorFlag=1;
-		}
-
-		if (!issueOrganizationID) {
-			if($('#resourceIDs option:selected').length <= 0) {
-				$('#span_error_entities').html('An issue must be associated with an organization or resource(s).');
-				errorFlag=1;
-			}
-		}
-		
-	 	if (errorFlag == 0) {
-			return true; 	
-	 	}
-		return false;
-	}
-   
-   
-   function removeAlias(id){
-	  if (confirm("Do you really want to delete this alias?") == true) {
-		  $.ajax({
-			 type:       "GET",
-			 url:        "ajax_processing.php",
-			 cache:      false,
-			 data:       "action=deleteInstance&class=Alias&id=" + id,
-			 success:    function(html) {
-				updateAliases();
-			 }
-
-
-		 });
-	  }
-
-   }
-
-
-   function removeContact(id){
-	  if (confirm("Do you really want to delete this contact?") == true) {
-		  $.ajax({
-			 type:       "GET",
-			 url:        "ajax_processing.php",
-			 cache:      false,
-			 data:       "action=deleteInstance&class=Contact&id=" + id,
-			 success:    function(html) {
-				updateContacts();
- 				updateArchivedContacts();
-			 }
-
-
-		 });
-	  }
-
-   }
-
-   function removeExternalLogin(id){
-	  if (confirm("Do you really want to delete this account?") == true) {
-		  $.ajax({
-			 type:       "GET",
-			 url:        "ajax_processing.php",
-			 cache:      false,
-			 data:       "action=deleteInstance&class=ExternalLogin&id=" + id,
-			 success:    function(html) {
-				updateAccount();
-			 }
-
-
-		 });
-	  }
-
-   }
-
-
-
-   function removeIssueLog(id){
-	  if (confirm("Do you really want to delete this issue?") == true) {
-		  $.ajax({
-			 type:       "GET",
-			 url:        "ajax_processing.php",
-			 cache:      false,
-			 data:       "action=deleteInstance&class=IssueLog&id=" + id,
-			 success:    function(html) {
+function submitNewResourceIssue() {
+	if(validateNewIssue()) {
+		$.ajax({
+			type:       "POST",
+			url:        "ajax_processing.php?action=insertResourceIssue",
+			cache:      false,
+			data:       $("#newIssueForm").serialize(),
+			success:    function(res) {
 				updateIssues();
-			 }
+				tb_remove()
+			}
+		});
+	}
+}
+
+function validateNewIssue () {
+	$(".error").html("");
+
+ 	var errorFlag=0;
+	var organization = $('#sourceOrganizationID').val();
+	var contact = $('#contactIDs').val();
+	var subject = $('#subjectText').val();
+	var body = $('#bodyText').val();
+	var issueOrganizationID = $("#organizationID:checked").val();
+
+	if (organization == '' || organization == null) {
+		$('#span_error_organizationId').html('Opening an issue requires a resource to be associated with an organization. Please contact your IT department.');
+		errorFlag=1;
+	}
+
+	if (contact == null || contact.length == 0) {
+		$('#span_error_contactName').html('A contact must be selected to continue.');
+		errorFlag=1;
+	}
+
+	if (subject == '' || subject == null) {
+		$('#span_error_subjectText').html('A subject must be entered to continue.');
+		errorFlag=1;
+	}
+
+	if (body == '' || body == null) {
+		$('#span_error_bodyText').html('A body must be entered to continue.');
+		errorFlag=1;
+	}
+
+	if (!issueOrganizationID) {
+		if($('#resourceIDs option:selected').length <= 0) {
+			$('#span_error_entities').html('An issue must be associated with an organization or resource(s).');
+			errorFlag=1;
+		}
+	}
+	
+ 	if (errorFlag == 0) {
+		return true; 	
+ 	}
+	return false;
+}
+   
+   
+function removeAlias(id){
+  if (confirm(_("Do you really want to delete this alias?")) == true) {
+	  $.ajax({
+		 type:       "GET",
+		 url:        "ajax_processing.php",
+		 cache:      false,
+		 data:       "action=deleteInstance&class=Alias&id=" + id,
+		 success:    function(html) {
+			updateAliases();
+		 }
 
 
-		 });
-	  }
+	 });
+  }
 
-   }
+}
+
+
+function removeContact(id){
+  if (confirm(_("Do you really want to delete this contact?")) == true) {
+	  $.ajax({
+		 type:       "GET",
+		 url:        "ajax_processing.php",
+		 cache:      false,
+		 data:       "action=deleteInstance&class=Contact&id=" + id,
+		 success:    function(html) {
+			updateContacts();
+				updateArchivedContacts();
+		 }
+
+
+	 });
+  }
+
+}
+
+function removeExternalLogin(id){
+  if (confirm(_("Do you really want to delete this account?")) == true) {
+	  $.ajax({
+		 type:       "GET",
+		 url:        "ajax_processing.php",
+		 cache:      false,
+		 data:       "action=deleteInstance&class=ExternalLogin&id=" + id,
+		 success:    function(html) {
+			updateAccount();
+		 }
+
+
+	 });
+  }
+
+}
+
+
+
+function removeIssueLog(id){
+  if (confirm(_("Do you really want to delete this issue?")) == true) {
+	  $.ajax({
+		 type:       "GET",
+		 url:        "ajax_processing.php",
+		 cache:      false,
+		 data:       "action=deleteInstance&class=IssueLog&id=" + id,
+		 success:    function(html) {
+			updateIssues();
+		 }
+
+
+	 });
+  }
+
+}
