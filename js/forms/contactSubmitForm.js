@@ -87,10 +87,10 @@ function submitContact(){
 			 cache:      false,
 			 data:       { contactID: $("#editContactID").val(), organizationID: $("#editOrganizationID").val(), name: $("#contactName").val(), title: $("#contactTitle").val(), addressText: $("#addressText").val(), phoneNumber: $("#phoneNumber").val(), altPhoneNumber: $("#altPhoneNumber").val(), faxNumber: $("#faxNumber").val(), emailAddress: $("#emailAddress").val(), archiveInd: getCheckboxValue('invalidInd'), noteText: $("#noteText").val(),  contactRoles: contactRolesList },
 			 success:    function(html) {
-				if (html.length > 1){
+				if (!parseInt(html)){
 					$("#span_errors").html(html);
 					$("#submitContactForm").removeAttr("disabled");
-				}else{
+				} else {
 					window.parent.tb_remove();
 					window.parent.updateContacts();
 					window.parent.updateArchivedContacts();

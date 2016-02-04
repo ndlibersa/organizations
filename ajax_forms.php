@@ -249,8 +249,38 @@ switch ($_GET['action']) {
 
 
 
-
-
+    case 'getInlineContactForm':
+		//get all contact roles for output in drop down
+		$contactRoleArray = array();
+		$contactRoleObj = new ContactRole();
+		$contactRoleArray = $contactRoleObj->allAsArray();
+?>
+		<div style="display:inline-block;vertical-align:top;width:42%;">
+			<div class="form-element">
+				<label for="contactAddName">Name</label>
+				<input type='text' id='contactAddName' name='contactName' /><br />
+				<span id='span_error_contactAddName' class='smallDarkRedText'></span>
+			</div>
+			<div class="form-element">
+				<label for="emailAddress">Email</label>
+				<input type='text' id='emailAddress' name='emailAddress' />
+				<span id='span_error_contactEmailAddress' class='smallDarkRedText'></span>
+			</div>
+		</div>
+<?php
+		if (count($contactRoleArray) > 0){
+			echo '<div style="display:inline-block;vertical-align:top;width:48%;">
+					<label style="display:block;" for="'.$contactRoleIns['contactRoleID'].'">Roles</label>';
+			foreach ($contactRoleArray as $contactRoleIns){
+				echo "<div class=\"form-element form-element-tight\">
+						<input class='check_roles' type='checkbox' name='" . $contactRoleIns['contactRoleID'] . "' id='" . $contactRoleIns['contactRoleID'] . "' value='" . $contactRoleIns['contactRoleID'] . "' />   
+						<span class='smallText'>" . $contactRoleIns['shortName'] . "</span>
+					 </div>";
+			}
+			echo '</div>
+				  <input type="button" id="createContact" value="Create" />';
+		}
+	break;
     case 'getContactForm':
     	$organizationID = $_GET['organizationID'];
     	if (isset($_GET['contactID'])) $contactID = $_GET['contactID']; else $contactID = '';
@@ -515,9 +545,245 @@ switch ($_GET['action']) {
 
         break;
 
+	case 'getCloseResourceIssueForm':
+		$issueID = $_GET['issueID'];
+?>
+		<div id="closeIssue">
+			<form>
+				<input type="hidden" id="issueID" name="issueID" value="<?php echo $issueID; ?>">
+				<table class="thickboxTable" style="width:98%;background-image:url('images/title.gif');background-repeat:no-repeat;">
+					<tr>
+						<td colspan='2'>
+							<span id='headerText' class='headerText'>Issue Resolution</span><br />
+						</td>
+					</tr>
+					<tr>
+						<td colspan='2'>
+							<label for="resolutionText">Resolution:</label>
+							<textarea id="resolutionText" name="resolutionText"></textarea>
+						</td>
+					</tr>
+				</table>
+				<table class='noBorderTable' style='width:125px;'>
+					<tr>
+						<td class="text-left"><input type="button" value="submit" name="submitCloseResourceIssue" id="submitCloseResourceIssue"></td>
+						<td class='text-right'><input type='button' value='cancel' onclick="tb_remove();"></td>
+					</tr>
+				</table>
 
+			</form>
+		</div>
+<?php
+	break;
+	case 'getNewIssueForm':
+		$organizationID = $_GET["organizationID"];
 
+		$organization = new Organization(new NamedArguments(array('primaryKey' => $organizationID))); 
+		$organizationContactsArray = $organization->getContacts();
+		$organizationResourcesArray = $organization->getResources(5);
+?>
 
+<form id='newIssueForm'>
+	<input type="hidden" id="sourceOrganizationID" name="sourceOrganizationID" value="<?php echo $organizationID;?>" />
+	<table class="thickboxTable">
+		<tr>
+			<td colspan="2">
+				<h1> Report New Problem</h1>
+				<span class='error smallDarkRedText'>* required fields</span>
+			</td>
+		</tr>
+		<tr>
+			<td><label>Organization:&nbsp;&nbsp;<span class='bigDarkRedText'>*</span></label></td>
+			<td>
+				<p><?php echo $organization->name; ?></p>
+				<span id='error span_error_organizationId' class='smallDarkRedText'></span>
+			</td>
+		</tr>
+		<tr>
+			<td><label>Contact:&nbsp;&nbsp;<span class='bigDarkRedText'>*</span></label></td>
+			<td>
+				<select multiple style="min-height: 60px;" type='text' id='contactIDs' name='contactIDs[]'>
+<?php 
+
+		foreach ($organizationContactsArray as $contact) {
+			echo "		<option value=\"{$contact->contactID}\">{$contact->name}</option>";
+		}
+
+?>
+				</select>
+				<span id='span_error_contactName' class='error smallDarkRedText'></span>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<a id="getCreateContactForm" href="#">add contact</a>
+				<div id="inlineContact"></div>
+			</td>
+		</tr>
+		<tr>
+			<td><label>CC myself:</label></td>
+			<td>
+				<input type='checkbox' id='ccCreator' name='ccCreator' class='changeInput' checked />
+				<span id='span_error_ccCreator' class='error smallDarkRedText'></span>
+			</td>
+		</tr>
+		<tr>
+			<td><label>CC:</label></td>
+			<td>
+				<input type="text" id="inputEmail" name="inputEmail" />
+				<input type="button" id="addEmail" name="addEmail" value="Add" />
+				<p>
+					Current CCs: <span id="currentEmails"></span>
+				</p>
+				<input type="hidden" id='ccEmails' name='ccEmails' value='' class='changeInput' />
+				<span id='span_error_contactIDs' class='error smallDarkRedText'></span>
+			</td>
+		</tr>
+		<tr>
+			<td><label>Subject:&nbsp;&nbsp;<span class='bigDarkRedText'>*</span></label></td>
+			<td>
+				<input type='text' id='subjectText' name='issue[subjectText]' value='' class='changeInput' />
+				<span id='span_error_subjectText' class='error smallDarkRedText'></span>
+			</td>
+		</tr>
+		<tr>
+			<td><label>Body:&nbsp;&nbsp;<span class='bigDarkRedText'>*</span></label></td>
+			<td>
+				<textarea id='bodyText' name='issue[bodyText]' value='' />
+				<span id='span_error_bodyText' class='error smallDarkRedText'></span>
+			</td>
+		</tr>
+		<tr>
+			<td><label>Applies to:&nbsp;&nbsp;<span class='bigDarkRedText'>*</span></label></td>
+			<td>
+				<div>
+					<input type="checkbox" class="issueResources" id="organizationID" name="organizationID" value="<?php echo $organization->organizationID;?>" /> <label for="allResources">Applies to all <?php echo $organization->name; ?> resources.</label>
+				</div>
+				<div>
+					<input type="checkbox" class="issueResources" id="otherResources" /><label for="otherResources"> Applies to selected <?php echo $organization->name; ?> resources.</label>
+				</div>
+				<select multiple id="resourceIDs" name="resourceIDs[]">
+<?php
+		if (!empty($organizationResourcesArray)) {
+			foreach ($organizationResourcesArray as $resource) {
+				echo "		<option value=\"{$resource['resourceID']}\">{$resource['titleText']}</option>";
+			}
+		}
+?>
+				</select>
+				<span id='span_error_entities' class='error smallDarkRedText'></span>
+			</td>
+		</tr>
+	</table>
+
+	<p> Send me a reminder every 
+		<select name="issue[reminderInterval]">
+			<?php for ($i = 1; $i <= 31; $i++) echo "<option".(($i==7) ? ' selected':'').">{$i}</option>"; ?>
+		</select> day(s) 
+	</p>
+
+	<table class='noBorderTable' style='width:125px;'>
+		<tr>
+			<td style='text-align:left'><input type='button' value='submit' name='submitNewResourceIssue' id='submitNewResourceIssue'></td>
+			<td style='text-align:right'><input type='button' value='cancel' onclick="tb_remove();"></td>
+		</tr>
+	</table>
+
+</form>
+
+<?php
+	break;
+		case 'getNewDowntimeForm':
+
+	$organizationID = $_GET["organizationID"];
+	$organization = new Organization(new NamedArguments(array('primaryKey' => $organizationID))); 
+
+	$issueID = $_GET['issueID'];
+
+	$issues = $organization->getIssues();
+
+	$downtimeObj = new Downtime();
+	$downtimeTypeNames = $downtimeObj->getDowntimeTypesArray();
+
+	$defaultStart = date("Y-m-d\TH:i");
+	$defaultEnd = date("Y-m-d\TH:i", strtotime("+1 day"));
+
+?>
+
+<form id='newDowntimeForm'>
+	<input type="hidden" name="sourceOrganizationID" value="<?php echo $organization->organizationID;?>" />
+	<table class="thickboxTable" style="width:98%;background-image:url('images/title.gif');background-repeat:no-repeat;">
+		<tr>
+			<td colspan="2">
+				<h1> Resource Downtime Report</h1>
+			</td>
+		</tr>
+		<tr>
+			<td><label>Downtime Start:</label></td>
+			<td>
+				<input value="<?php echo $defaultStart; ?>" type="datetime-local" name="startDate" id="startDate" />
+				<span id='span_error_startDate' class='smallDarkRedText addDowntimeError'></span>
+			</td>
+		</tr>
+		<tr>
+			<td><label>Downtime Resolution:</label></td>
+			<td>
+				<input value="<?php echo $defaultEnd; ?>"  type="datetime-local" name="endDate" id="endDate" />
+				<span id='span_error_endDate' class='smallDarkRedText addDowntimeError'></span>
+			</td>
+		</tr>
+		<tr>
+			<td><label>Problem Type:</label></td>
+			<td>
+				<select class="downtimeType" name="downtimeType">
+<?php
+			foreach ($downtimeTypeNames as $downtimeType) {
+				echo "<option value=".$downtimeType["downtimeTypeID"].">".$downtimeType["shortName"]."</option>";
+			}
+?>
+				</select>
+			</td>
+		</tr>
+<?php
+if ($issues) {
+?>
+		<tr>
+			<td><label>Link to open issue:</label></td>
+			<td>
+				<select class="issueID" name="issueID">
+					<option value="">none</option>
+<?php
+			foreach ($issues as $issue) {
+				echo "<option".(($issueID == $issue->issueID) ? ' selected':'')." value=".$issue->issueID.">".$issue->subjectText."</option>";
+			}
+?>
+				</select>
+			</td>
+		</tr>
+<?php
+}
+?>
+		<tr>
+			<td><label>Note:</label></td>
+			<td>
+				<textarea name="note"></textarea>
+			</td>
+		</tr>
+	</table>
+
+	<table class='noBorderTable' style='width:125px;'>
+		<tr>
+			<td style='text-align:left'><input type='button' value='submit' name='submitNewDowntime' id='submitNewDowntime'></td>
+			<td style='text-align:right'><input type='button' value='cancel' onclick="tb_remove();"></td>
+		</tr>
+	</table>
+
+</form>
+
+<?php
+
+	break;
     case 'getIssueLogForm':
     	$organizationID = $_GET['organizationID'];
     	if (isset($_GET['issueLogID'])) $issueLogID = $_GET['issueLogID']; else $issueLogID = '';

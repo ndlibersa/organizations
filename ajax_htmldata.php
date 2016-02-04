@@ -21,10 +21,109 @@
 include_once 'directory.php';
 include_once 'user.php';
 
+//shared html template for organization and resource issues
+function generateIssueHTML($issue,$associatedEntities=null) {
+	$html = "
+	<div class=\"issue\">";
+	if (!$issue->dateClosed) {
+		$html .= "
+		<a class=\"thickbox action closeResourceIssueBtn\" href=\"ajax_forms.php?action=getCloseResourceIssueForm&issueID={$issue->issueID}&height=120&width=345&modal=true\">close</a>
+		<a class=\"thickbox action\" href=\"ajax_forms.php?action=getNewDowntimeForm&organizationID={$GLOBALS['organizationID']}&issueID={$issue->issueID}&height=200&width=390&modal=true\">downtime</a>";
+	}
+	$html .= "
+	  	<dl>
+	  		<dt>Date reported:</dt> 
+	  		<dd>{$issue->dateCreated}</dd>";
+	if ($issue->dateClosed) {
+	  	
+		$html .= "<dt>Date closed:</dt>
+	  		<dd>{$issue->dateClosed}</dd>
+	  		<dt>Resolution</dt>
+	  		<dd>{$issue->resolutionText}</dd>";
+	  	}
+	  		
+	$html .= "<dt>Contact(s):</dt> 
+	  		<dd>";
+	$contacts = $issue->getContacts();
+	if ($contacts) {
+		$html .= "<ul class=\"contactList\">";
+		foreach($contacts as $contact) {
+			$html .= "<li><a href=\"mailto:".urlencode($contact['emailAddress'])."?Subject=RE: {$issue->subjectText}\">{$contact['name']}</a></li>";
+		}
+		$html .= "</ul>";
+	}
+
+
+	$html .= "	</dd> 
+	  		<dt>Applies to:</dt> 
+	  		<dd>";
+	if ($associatedEntities) {
+		$temp ='';
+		foreach ($associatedEntities as $entity) {
+			$temp .= " {$entity['name']},";
+		}
+		$html .= rtrim($temp,',');
+	}
+	$html .= "</dd> 
+	  		<dt>Subject:</dt> 
+	  		<dd>{$issue->subjectText}</dd> 
+	  		
+	  		<dt class=\"block\">Body:</dt> 
+	  		<dd>{$issue->bodyText}</dd>
+	  	</dl>
+	</div>";
+	return $html;
+}
+
+//shared html template for organization and resource downtimes
+function generateDowntimeHTML($downtime,$associatedEntities=null) {
+
+	$html = "
+	<div class=\"downtime\">";
+	
+	$html .= "
+	  	<dl>
+	  		<dt>Type:</dt> 
+	  		<dd>{$downtime->shortName}</dd>
+
+	  		<dt>Downtime Start:</dt> 
+	  		<dd>{$downtime->startDate}</dd>
+
+	  		<dt>Downtime Resolved:</dt> 
+	  		<dd>{$downtime->endDate}</dd>";
+
+	if($downtime->subjectText) {
+		$html .= "
+	  		<dt>Linked issue:</dt> 
+	  		<dd>{$downtime->subjectText}</dd>";
+	}
+	if ($downtime->note) {
+		$html .= "
+	  		<dt>Note:</dt> 
+	  		<dd>{$downtime->note}</dd>";
+	}
+	$html .= "		
+		</dl>
+	</div>";	
+	
+	return $html;
+}
 
 switch ($_GET['action']) {
 
-
+	case 'getOrganizationContacts':
+    	$organizationID = $_GET['organizationID'];
+    	$contactIDs = $_GET['contactIDs'];
+    	
+    	$organization = new Organization(new NamedArguments(array('primaryKey' => $organizationID)));
+		$contactObjArray = $organization->getUnarchivedContacts();
+		if (count($contactObjArray) > 0) {
+			foreach ($contactObjArray as $contact) {
+				$isSelected = (!empty($contactIDs) && in_array($contact->contactID, $contactIDs)) ? "selected" : "";
+				echo "<option {$isSelected} value=\"{$contact->contactID}\">{$contact->name}</option>";	
+			}
+		}
+	break;
     case 'getOrganizationDetails':
     	$organizationID = $_GET['organizationID'];
     	$organization = new Organization(new NamedArguments(array('primaryKey' => $organizationID)));
@@ -531,10 +630,91 @@ switch ($_GET['action']) {
 
         break;
 
+	case 'getResourceIssueDetails':
+    	$organizationID = $_GET['organizationID'];
 
+		$getIssuesFormData = "action=getResourceIssuesList&organizationID=".$organizationID;
+		$getDowntimeFormData = "action=getDowntimeList&organizationID=".$organizationID;
+		$exportIssueUrl = "export_resourceissues.php?organizationID={$organizationID}";
+		$exportDowntimeUrl = "export_downtimes.php?organizationID={$organizationID}";
 
+?>
+		<table class='linedFormTable issueTabTable'>
+			<tr>
+				<th>Issues/Problems</th>
+			</tr>
+			<tr>
+				<td><a id="createIssueBtn" class="thickbox" href="ajax_forms.php?action=getNewIssueForm&organizationID=<?php echo $organizationID; ?>&modal=true">report new issue</a></td>
+			</tr>
+			<tr>
+				<td>
+					<a href="<?php echo $getIssuesFormData; ?>" class="issuesBtn" id="openIssuesBtn">view open issues</a> 
+					<a target="_blank" href="<?php echo $exportIssueUrl;?>"><img src="images/xls.gif" /></a>
+					<div class="issueList" id="openIssues" style="display:none;"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<a href="<?php echo $getIssuesFormData."&archived=1"; ?>" class="issuesBtn" id="archivedIssuesBtn">view archived issues</a> 
+					<a target="_blank" href="<?php echo $exportIssueUrl;?>&archived=1"><img src="images/xls.gif" /></a>
+					<div class="issueList" id="archivedIssues"></div>
+				</td>
+			</tr>
+		</table>
 
+		<table id="downTimeTable" class='linedFormTable issueTabTable'>
+			<tr>
+				<th>Downtime</th>
+			</tr>
+			<tr>
+				<td><a id="createDowntimeBtn" class="thickbox" href="ajax_forms.php?action=getNewDowntimeForm&organizationID=<?php echo $_GET['organizationID']; ?>&height=200&width=390&modal=true">report new Downtime</a></td>
+			</tr>
+			<tr>
+				<td>
+					<a href="<?php echo $getDowntimeFormData; ?>" class="downtimeBtn" id="openDowntimeBtn">view current/upcoming downtime</a> 
+					<a target="_blank" href="<?php echo $exportDowntimeUrl;?>"><img src="images/xls.gif" /></a>
+					<div class="downtimeList" id="currentDowntime" style="display:none;"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<a href="<?php echo $getDowntimeFormData."&archived=1"; ?>" class="downtimeBtn" id="archiveddowntimeBtn">view archived downtime</a> 
+					<a target="_blank" href="<?php echo $exportDowntimeUrl;?>&archived=1"><img src="images/xls.gif" /></a>
+					<div class="downtimeList" id="archivedDowntime"></div>
+				</td>
+			</tr>
+		</table>
+<?php
+	break;
+	case 'getResourceIssuesList':
+    	$organizationID = $_GET['organizationID'];
+		$archivedFlag = (!empty($_GET['archived']) && $_GET['archived'] == 1) ? true:false;
+		$organization = new Organization(new NamedArguments(array('primaryKey' => $organizationID)));
+		$orgIssues = $organization->getIssues($archivedFlag);
 
+		if(count($orgIssues) > 0) {
+			foreach ($orgIssues as $issue) {
+				echo generateIssueHTML($issue,array(array("name"=>$organization->name,"id"=>$organization->organizationID,"entityType"=>1)));
+			}
+		} else {
+			echo "<br><p>There are no organization level issues.</p><br>";
+		}
+
+	break;
+	case 'getDowntimeList':
+		$organizationID = $_GET['organizationID'];
+		$archivedFlag = (!empty($_GET['archived']) && $_GET['archived'] == 1) ? true:false;
+		$organization = new Organization(new NamedArguments(array('primaryKey' => $organizationID)));
+		$orgDowntime = $organization->getDowntime($archivedFlag);
+
+		if(count($orgDowntime) > 0) {
+			foreach ($orgDowntime as $downtime) {
+				echo generateDowntimeHTML($downtime,array(array("name"=>$organization->name,"id"=>$organization->organizationID,"entityType"=>1)));
+			}
+		} else {
+			echo "<br><p>There are no organization level downtimes.</p><br>";
+		}
+	break;
     case 'getIssueDetails':
     	$organizationID = $_GET['organizationID'];
     	$organization = new Organization(new NamedArguments(array('primaryKey' => $organizationID)));

@@ -23,6 +23,7 @@ class DatabaseObject extends DynamicObject {
 
 	protected $tableName;
 	protected $collectiveName;
+	protected $dbName;
 
 	protected $primaryKeyName;
 	protected $primaryKey;
@@ -33,6 +34,7 @@ class DatabaseObject extends DynamicObject {
 
 	protected function init(NamedArguments $arguments) {
 		$arguments->setDefaultValueForArgumentName('tableName', get_class($this));
+
 		$this->tableName = $arguments->tableName;
 
 		$defaultCollectiveName = lcfirst($arguments->tableName) . 's';
@@ -45,6 +47,10 @@ class DatabaseObject extends DynamicObject {
 
 		$this->primaryKey = $arguments->primaryKey;
 		$this->db = new DBService;
+
+		$arguments->setDefaultValueForArgumentName('dbName',$this->db->config->database->name);
+		$this->dbName = $arguments->dbName;
+
 		$this->defineAttributes();
 		$this->overridePrimaryKeyName();
 		$this->load();
@@ -59,7 +65,7 @@ class DatabaseObject extends DynamicObject {
 	protected function defineAttributes() {
 		// Figure out attributes from existing database
 		$query = "SELECT COLUMN_NAME, IS_NULLABLE FROM information_schema.`COLUMNS` WHERE table_schema = '";
-		$query .= $this->db->config->database->name . "' AND table_name = '$this->tableName'";// MySQL-specific
+		$query .= $this->dbName. "' AND table_name = '$this->tableName'";// MySQL-specific
 		foreach ($this->db->processQuery($query) as $result) {
 			$attributeName = $result[0];
 			$isNullable = $result[1];
@@ -77,7 +83,7 @@ class DatabaseObject extends DynamicObject {
 	public function valueForKey($key) {
 		if (array_key_exists($key, $this->attributeNames)) {
 			if (!array_key_exists($key, $this->attributes)) {
-				$query = "SELECT `$key` FROM `$this->tableName` WHERE `$this->primaryKeyName` = '$this->primaryKey' LIMIT 1";
+				$query = "SELECT `$key` FROM `$this->dbName`.`$this->tableName` WHERE `$this->primaryKeyName` = '$this->primaryKey' LIMIT 1";
 				$result = $this->db->processQuery($query);
 				$this->attributes[$key] = stripslashes($result[0]);
 			}
@@ -103,7 +109,7 @@ class DatabaseObject extends DynamicObject {
 
 
 	public function delete() {
-		$query = "DELETE FROM `$this->tableName` WHERE  `$this->primaryKeyName` = '$this->primaryKey'";
+		$query = "DELETE FROM `$this->dbName`.`$this->tableName` WHERE  `$this->primaryKeyName` = '$this->primaryKey'";
 		return $this->db->processQuery($query);
 	}
 
@@ -126,18 +132,18 @@ class DatabaseObject extends DynamicObject {
 		$set = implode(', ', $pairs);
 		if (isset($this->primaryKey)) {
 			// Update object
-			$query = "UPDATE `$this->tableName` SET $set WHERE `$this->primaryKeyName` = '$this->primaryKey'";
+			$query = "UPDATE `$this->dbName`.`$this->tableName` SET $set WHERE `$this->primaryKeyName` = '$this->primaryKey'";
 			$this->db->processQuery($query);
 		} else {
 			// Insert object
-			$query = "INSERT INTO `$this->tableName` SET $set";
+			$query = "INSERT INTO `$this->dbName`.`$this->tableName` SET $set";
 			$this->primaryKey = $this->db->processQuery($query);
 		}
 	}
 
 
 	public function all() {
-		$query = "SELECT * FROM `$this->tableName` ORDER BY 2, 1";
+		$query = "SELECT * FROM `$this->dbName`.`$this->tableName` ORDER BY 2, 1";
 		$result = $this->db->processQuery($query);
 		$objects = array();
 		foreach ($result as $row) {
@@ -151,7 +157,7 @@ class DatabaseObject extends DynamicObject {
 
 
 	public function allAsArray() {
-		$query = "SELECT * FROM `$this->tableName` ORDER BY 2, 1";
+		$query = "SELECT * FROM `$this->dbName`.`$this->tableName` ORDER BY 2, 1";
 		$result = $this->db->processQuery($query, 'assoc');
 
 		$resultArray = array();
@@ -181,7 +187,7 @@ class DatabaseObject extends DynamicObject {
 
 		//if exists in the database
 		if (isset($this->primaryKey)) {
-			$query = "SELECT * FROM `$this->tableName` WHERE `$this->primaryKeyName` = '$this->primaryKey'";
+			$query = "SELECT * FROM `$this->dbName`.`$this->tableName` WHERE `$this->primaryKeyName` = '$this->primaryKey'";
 			$result = $this->db->processQuery($query, 'assoc');
 
 			foreach (array_keys($result) as $attributeName) {
