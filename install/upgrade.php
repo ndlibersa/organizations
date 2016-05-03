@@ -2,7 +2,7 @@
 //this script runs the upgrade process in 3 steps
 //for the next upgrade the file to be run will need to be detected.
 
-$sql_file = "upgrade_1_1.sql";
+$sql_file = "upgrade_1.3.sql";
 
 //take "step" variable to determine which step the current is
 $step = $_POST['step'];
@@ -124,12 +124,15 @@ if ($step == "2"){
 
 <?php if(!$step){ ?>
 
-	<h3>Welcome to the CORAL Organizations upgrade for Version 1.1!</h3>
-	This upgrade will connect to MySQL and run the CORAL Organizations structure changes. No changes to the configuration file are required.  Database structure changes include:
+	<h3>Welcome to the CORAL Organizations upgrade for Version 1.3!</h3>
+	This upgrade will connect to MySQL and run the CORAL Organizations structure changes. If you want to use the new Issues features in Resources module version 1.4, then you need to add the following line to the Organizations configuration file:
+    <ul>
+        <li>resourcesIssues=Y</li>
+    </ul>
+    Database changes for this version include:
 	<ul>
-		<li>Adding address field to contact and removing state and country fields</li>
-		<li>Update the address field to contain the previously used state and country data</li>
-		<li>Add view account tab indicator to User (for a future code-only upgrade)</li>
+		<li>Altering the IssueLog table to match the new IssueLog table in Resources v. 1.4</li>
+		<li>Adding the IssueLogType table</li>
 	</ul>
 
 	<br />
@@ -138,7 +141,7 @@ if ($step == "2"){
 	<br /><br />
 	To get started you should have:
 	<ul>
-		<li>Your MySQL Schema created for CORAL Organizations Module</li>
+		<li>Your CORAL Organizations Module upgraded to version 1.1 or higher</li>
 		<li>Host, username and password for MySQL with permissions to alter tables</li>
 	</ul>
 

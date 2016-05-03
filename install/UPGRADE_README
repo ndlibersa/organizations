@@ -5,17 +5,21 @@ The following file contains notes on specific upgrades.  For full instructions
 on how to run an upgrade, refer to the technical documentation available at
 http://coral-erm.org/documentation.
 
-UPGRADING FROM CORAL ORGANIZATIONS VERSION 1.2 TO 1.4
+UPGRADING FROM CORAL ORGANIZATIONS VERSION 1.2 TO 1.3
 -----------------------------------------------------
 
-No database changes are required for this upgrade.  The Organization module was verstioned to 1.4 to 
-compliment the Issues feature added to the Resources module.  In order to to use the
-Resource module Issues feature.  You need to update both your Resources and Organization module to 1.4.
-After upgrading your resources module to at least 1.4 and you will need to set the following value 
-in your configuration.ini file. Any other value for this variable will cause the 
-Organizations module to continue to use the Issue Log native to the Organizations module:
+This version of the Organization module includes database changes that
+compliment the Issues feature added to the Resources module version 1.4.  In
+order to to use the Resource module Issues feature, you need to update the
+Resources module to 1.4 and set the following value in the Organizations
+configuration.ini file. Any other value for this variable will cause the
+Organizations module to use the Issue Log native to the Organizations module:
 
     * resourcesIssues=Y 
+
+To install this upgrade, simply run the file 'upgrade.php' located in the
+install directory and enter the database information. The database changes
+will be installed automatically.
 
 UPGRADING FROM CORAL ORGANIZATIONS VERSION 1.1 TO 1.2
 -----------------------------------------------------
@@ -39,7 +43,7 @@ Database changes include:
     * Add view account tab indicator to User (for a future code-only upgrade)
 
 
-To install this upgrade, simple run the file 'upgrade.php' located in the
+To install this upgrade, simply run the file 'upgrade.php' located in the
 install directory and enter the database information. The database changes
 will be installed automatically.
 
